@@ -1,5 +1,6 @@
 #include "ScoreRenderer.h"
 #include <QFontDatabase>
+#include <QGraphicsScene>
 #include <QGraphicsTextItem>
 
 ScoreRenderer::ScoreRenderer(QGraphicsScene* scene)
@@ -25,8 +26,8 @@ void ScoreRenderer::displayScore(QGraphicsTextItem* score, const double scale) c
     if (!score) return;
     score->setDefaultTextColor(Qt::white);
 
-    int id = QFontDatabase::addApplicationFont("../fonts/bit5x3.ttf");
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    const int id = QFontDatabase::addApplicationFont("../fonts/bit5x3.ttf");
+    const QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 
     QFont font(family);
     font.setPointSizeF(m_scene->sceneRect().height() / 10.0);
