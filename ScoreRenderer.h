@@ -1,7 +1,8 @@
 #ifndef SCORERENDERER_H
 #define SCORERENDERER_H
 
-#include "PlayerRenderer.h"
+#include <QGraphicsTextItem>
+#include <QResizeEvent>
 
 
 class ScoreRenderer {
