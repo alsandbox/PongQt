@@ -19,7 +19,9 @@ add_executable(Pong main.cpp
         ScoreRenderer.cpp
         ScoreRenderer.h
         PlayerRenderer.cpp
-        PlayerRenderer.h)
+        PlayerRenderer.h
+        BallRenderer.cpp
+        BallRenderer.h)
 target_link_libraries(Pong
         Qt::Core
         Qt::Gui
