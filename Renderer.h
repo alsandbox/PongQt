@@ -2,6 +2,8 @@
 #define RENDERER_H
 
 #include <QGraphicsTextItem>
+
+#include "BallRenderer.h"
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
@@ -18,6 +20,7 @@ private:
 
     std::unique_ptr<PlayerRenderer> playerRenderer;
     std::unique_ptr<ScoreRenderer> scoreRenderer;
+    std::unique_ptr<BallRenderer> ballRenderer;
 };
 
 
