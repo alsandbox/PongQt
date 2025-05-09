@@ -30,7 +30,7 @@ void PlayerRenderer::displayPlayer(QGraphicsRectItem* player, const bool isLeft)
     const QRectF rect = m_scene->sceneRect();
 
     const double width = rect.width() * 0.01;;
-    const double height = rect.height() * 0.18;
+    const double height = rect.height() * 0.1;
     const double yPos = (rect.height() - height) / 2;
     const double xPos = isLeft ? rect.left() + margin: rect.right() - width - margin;
 
