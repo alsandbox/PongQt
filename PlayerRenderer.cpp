@@ -1,11 +1,23 @@
 #include "PlayerRenderer.h"
+#include "PlayerItem.h"
+#include "Renderer.h"
+
+#include <QWidget>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
+#include <QKeyEvent>
 
-PlayerRenderer::PlayerRenderer(QGraphicsScene *scene)
+
+PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer* renderer)
     : m_scene(scene) {
-    rightPlayer = std::make_unique<QGraphicsRectItem>();
-    leftPlayer = std::make_unique<QGraphicsRectItem>();
+    leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S);
+    rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down);
+
+    renderer = dynamic_cast<Renderer*>(m_scene->views().first());
+    if (renderer) {
+        renderer->setLeftPlayer(leftPlayer.get());
+        renderer->setRightPlayer(rightPlayer.get());
+    }
 }
 
 void PlayerRenderer::resizeEvent(QResizeEvent* event) {

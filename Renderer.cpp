@@ -2,13 +2,14 @@
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
+
 Renderer::Renderer(QGraphicsScene *scene, QWidget* parent) : QGraphicsView(scene, parent) {
     setScene(scene);
     setBackgroundBrush(Qt::black);
     setRenderHint(QPainter::Antialiasing);
-    setResizeAnchor(QGraphicsView::AnchorViewCenter);
+    setResizeAnchor(AnchorViewCenter);
     fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
-    playerRenderer = std::make_unique<PlayerRenderer>(scene);
+    playerRenderer = std::make_unique<PlayerRenderer>(scene, this);
     scoreRenderer = std::make_unique<ScoreRenderer>(scene);
     ballRenderer = std::make_unique<BallRenderer>(scene);
 }
@@ -30,7 +31,28 @@ void Renderer::resizeEvent(QResizeEvent* event){
 
     fitInView(scene()->sceneRect(), Qt::IgnoreAspectRatio);
 }
+void Renderer::keyPressEvent(QKeyEvent* event) {
+    if (leftPlayer) {
+        if (event->key() == Qt::Key_W) leftPlayer->moveBy(0, -10);
+        if (event->key() == Qt::Key_S) leftPlayer->moveBy(0, 10);
+    }
+    if (rightPlayer) {
+        if (event->key() == Qt::Key_Up) rightPlayer->moveBy(0, -10);
+        if (event->key() == Qt::Key_Down) rightPlayer->moveBy(0, 10);
+    }
+}
 
+void Renderer::keyReleaseEvent(QKeyEvent* event) {
+    QGraphicsView::keyReleaseEvent(event);
+}
+
+void Renderer::setLeftPlayer(PlayerItem* player) {
+    leftPlayer = player;
+}
+
+void Renderer::setRightPlayer(PlayerItem* player) {
+    rightPlayer = player;
+}
 void Renderer::displayLine(const QRectF &rect) {
     if (!lineItem) {
         QPen pen(Qt::white);

@@ -1,12 +1,12 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <QGraphicsTextItem>
-
 #include "BallRenderer.h"
+#include "PlayerItem.h"
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
+class PlayerRenderer;
 
 class Renderer : public QGraphicsView {
     Q_OBJECT
@@ -14,6 +14,10 @@ public:
     explicit Renderer(QGraphicsScene* scene, QWidget* parent = nullptr);
     void resizeEvent(QResizeEvent* event) override;
     void displayLine(const QRectF &rect);
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
+    void setLeftPlayer(PlayerItem* player);
+    void setRightPlayer(PlayerItem* player);
 
 private:
     QGraphicsLineItem* lineItem = nullptr;
@@ -21,6 +25,9 @@ private:
     std::unique_ptr<PlayerRenderer> playerRenderer;
     std::unique_ptr<ScoreRenderer> scoreRenderer;
     std::unique_ptr<BallRenderer> ballRenderer;
+
+    PlayerItem* leftPlayer = nullptr;
+    PlayerItem* rightPlayer = nullptr;
 };
 
 
