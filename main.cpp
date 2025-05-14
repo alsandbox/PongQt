@@ -1,8 +1,6 @@
 #include <QApplication>
-
 #include "PlayerRenderer.h"
 #include "Renderer.h"
-#include "ScoreRenderer.h"
 
 
 int main(int argc, char *argv[]) {
