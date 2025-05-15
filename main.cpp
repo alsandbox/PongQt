@@ -9,5 +9,5 @@ int main(int argc, char *argv[]) {
     Renderer renderer(&scene);
     renderer.show();
 
-    return a.exec();
+    return QApplication::exec();
 }
