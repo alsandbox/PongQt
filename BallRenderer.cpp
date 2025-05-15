@@ -21,8 +21,8 @@ void BallRenderer::displayBall(const QSize newSize) const {
     const int ballSize = std::min(newSize.width(), newSize.height()) / 30;
 
     ball->setRect(
-        (newSize.width() - ballSize) / 3,
-        (newSize.height() - ballSize) / 2,
+        (newSize.width() - ballSize) / 3.0,
+        (newSize.height() - ballSize) / 2.0,
         ballSize,
         ballSize
     );
