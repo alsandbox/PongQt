@@ -10,8 +10,8 @@
 
 PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer* renderer)
     : m_scene(scene) {
-    leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S);
-    rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down);
+    leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
+    rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
 
     renderer = dynamic_cast<Renderer*>(m_scene->views().first());
     if (renderer) {

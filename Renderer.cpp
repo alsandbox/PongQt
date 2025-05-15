@@ -30,16 +30,15 @@ void Renderer::resizeEvent(QResizeEvent* event){
     displayLine(rect);
 
     fitInView(scene()->sceneRect(), Qt::IgnoreAspectRatio);
+    leftPlayer->setBounds(scene()->sceneRect());
+    rightPlayer->setBounds(scene()->sceneRect());
 }
+
 void Renderer::keyPressEvent(QKeyEvent* event) {
-    if (leftPlayer) {
-        if (event->key() == Qt::Key_W) leftPlayer->moveBy(0, -10);
-        if (event->key() == Qt::Key_S) leftPlayer->moveBy(0, 10);
-    }
-    if (rightPlayer) {
-        if (event->key() == Qt::Key_Up) rightPlayer->moveBy(0, -10);
-        if (event->key() == Qt::Key_Down) rightPlayer->moveBy(0, 10);
-    }
+    if (leftPlayer)
+        leftPlayer->keyPressEvent(event);
+    if (rightPlayer)
+        rightPlayer->keyPressEvent(event);
 }
 
 void Renderer::keyReleaseEvent(QKeyEvent* event) {
