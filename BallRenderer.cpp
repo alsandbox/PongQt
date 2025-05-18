@@ -5,6 +5,7 @@ BallRenderer::BallRenderer(QGraphicsScene *scene)
 : m_scene(scene) {
     ball = std::make_unique<QGraphicsEllipseItem>();
     m_scene->addItem(ball.get());
+    ball->setPos(1, 1);
 }
 
 void BallRenderer::setBounds(const QRectF& bounds) {
@@ -24,10 +25,7 @@ void BallRenderer::displayBall(const QSize newSize) const {
     ball->setBrush(brush);
     const int ballSize = std::min(newSize.width(), newSize.height()) / 30;
 
-    ball->setRect(
-        (newSize.width() - ballSize) / 3.0,
-        (newSize.height() - ballSize) / 2.0,
-        ballSize,
-        ballSize
-    );
+    const QPointF currentPos = ball->pos();
+    ball->setRect(0, 0, ballSize, ballSize);
+    ball->setPos(currentPos);
 }
