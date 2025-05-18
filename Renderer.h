@@ -1,6 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include "BallMovement.h"
 #include "BallRenderer.h"
 #include "PlayerItem.h"
 #include "PlayerRenderer.h"
@@ -24,7 +25,8 @@ private:
 
     std::unique_ptr<PlayerRenderer> playerRenderer;
     std::unique_ptr<ScoreRenderer> scoreRenderer;
-    std::unique_ptr<BallRenderer> ballRenderer;
+    std::shared_ptr<BallRenderer> ballRenderer;
+    std::unique_ptr<BallMovement> ballMovement;
 
     PlayerItem* leftPlayer = nullptr;
     PlayerItem* rightPlayer = nullptr;

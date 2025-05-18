@@ -23,7 +23,11 @@ add_executable(Pong main.cpp
         BallRenderer.cpp
         BallRenderer.h
         PlayerItem.cpp
-        PlayerItem.h)
+        PlayerItem.h
+        BallMovement.cpp
+        BallMovement.h
+        IBoundable.cpp
+        IBoundable.h)
 target_link_libraries(Pong
         Qt::Core
         Qt::Gui

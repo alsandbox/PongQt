@@ -11,7 +11,9 @@ Renderer::Renderer(QGraphicsScene *scene, QWidget* parent) : QGraphicsView(scene
     fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     playerRenderer = std::make_unique<PlayerRenderer>(scene, this);
     scoreRenderer = std::make_unique<ScoreRenderer>(scene);
-    ballRenderer = std::make_unique<BallRenderer>(scene);
+    ballRenderer = std::make_shared<BallRenderer>(scene);
+    ballMovement = std::make_unique<BallMovement>(ballRenderer, scene, leftPlayer, rightPlayer);
+    ballMovement->updateFrame();
 }
 
 void Renderer::resizeEvent(QResizeEvent* event){
@@ -24,8 +26,10 @@ void Renderer::resizeEvent(QResizeEvent* event){
         playerRenderer->resizeEvent(event);
     if (scoreRenderer)
         scoreRenderer->resizeEvent(event);
-    if (ballRenderer)
+    if (ballRenderer) {
         ballRenderer->resizeEvent(event);
+        ballMovement->setBounds(scene()->sceneRect());
+    }
 
     displayLine(rect);
 
