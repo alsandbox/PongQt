@@ -2,13 +2,14 @@
 #define PLAYERITEM_H
 #include <QGraphicsRectItem>
 
+#include "IBoundable.h"
 
-class PlayerItem : public QGraphicsRectItem {
+
+class PlayerItem : public QGraphicsRectItem, public IBoundable {
 public:
     PlayerItem(Qt::Key upKey, Qt::Key downKey, QGraphicsScene *scene);
-    void setBounds(const QRectF& bounds);
+    void setBounds(const QRectF& bounds) override;
     void keyPressEvent(QKeyEvent* event) override;
-
 
 private:
     Qt::Key m_upKey;
