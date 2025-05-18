@@ -7,6 +7,10 @@ BallRenderer::BallRenderer(QGraphicsScene *scene)
     m_scene->addItem(ball.get());
 }
 
+void BallRenderer::setBounds(const QRectF& bounds) {
+    m_bounds = bounds;
+}
+
 void BallRenderer::resizeEvent(const QResizeEvent* event) const {
     const QSize newSize = event->size();
     displayBall(newSize);
