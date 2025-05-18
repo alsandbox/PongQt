@@ -4,7 +4,7 @@
 
 BallMovement::BallMovement(const std::shared_ptr<BallRenderer>& ball, QGraphicsScene *scene, const PlayerItem* leftPlayer, const PlayerItem* rightPlayer)
     : m_ball(ball), m_scene(scene), m_leftPlayer(leftPlayer), m_rightPlayer(rightPlayer) {
-    ball->setBounds(m_scene->height());
+    m_ball->setBounds(scene()->sceneRect());
     m_direction = QPointF(3, 5);
     m_speed = 3.0;
     qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
