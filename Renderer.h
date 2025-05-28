@@ -27,6 +27,7 @@ private:
     std::shared_ptr<BallRenderer> ballRenderer;
     std::unique_ptr<BallMovement> ballMovement;
 
+    std::shared_ptr<ScoreManager> scoreManager;
     PlayerItem* leftPlayer = nullptr;
     PlayerItem* rightPlayer = nullptr;
 };

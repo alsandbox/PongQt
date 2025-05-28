@@ -29,7 +29,9 @@ add_executable(Pong main.cpp
         IBoundable.cpp
         IBoundable.h
         LineRenderer.cpp
-        LineRenderer.h)
+        LineRenderer.h
+        ScoreManager.cpp
+        ScoreManager.h)
 target_link_libraries(Pong
         Qt::Core
         Qt::Gui

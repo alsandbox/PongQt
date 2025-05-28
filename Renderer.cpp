@@ -14,6 +14,7 @@ Renderer::Renderer(QGraphicsScene *scene, QWidget* parent) : QGraphicsView(scene
     scoreRenderer = std::make_unique<ScoreRenderer>(scene);
     ballRenderer = std::make_shared<BallRenderer>(scene, lineRenderer);
     ballMovement = std::make_unique<BallMovement>(ballRenderer, scene, leftPlayer, rightPlayer);
+    scoreManager = std::make_shared<ScoreManager>(scoreRenderer);
     ballMovement->updateFrame();
 }
 
