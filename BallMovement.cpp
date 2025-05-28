@@ -73,7 +73,6 @@ bool BallMovement::handleOutOfBounds(qreal ballLeft, qreal ballRight) {
 
 void BallMovement::detectPlayer() {
     if (m_ball->getBall()->collidesWithItem(m_leftPlayer) || m_ball->getBall()->collidesWithItem(m_rightPlayer)) {
-        m_direction.setY(-m_direction.y());
         m_direction.setX(-m_direction.x());
     }
 }
