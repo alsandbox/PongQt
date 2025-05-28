@@ -12,6 +12,8 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ball, const std:
     m_speed = 4.0;
     const qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
     m_direction /= length;
+    m_timer = new QTimer(this);
+}
 
 void BallMovement::resizeEvent(QResizeEvent* event) {
     m_size = event->size();
@@ -77,9 +79,7 @@ void BallMovement::detectPlayer() {
     }
 }
 
-
 void BallMovement::updateFrame() {
-    m_timer = new QTimer(this);
     connect(m_timer, &QTimer::timeout, this, &BallMovement::moveBall);
     m_timer->start(16);
 }
