@@ -12,19 +12,20 @@
 class BallMovement : public QObject, public IBoundable {
     Q_OBJECT
 public:
-    BallMovement(const std::shared_ptr<BallRenderer>& ball, QGraphicsScene *scene, const PlayerItem* leftPlayer, const PlayerItem*  rightPlayer);
     BallMovement(const std::shared_ptr<BallRenderer> &ball, const std::shared_ptr<ScoreManager> &scoreManager, const PlayerItem *leftPlayer,
                  const PlayerItem *rightPlayer);
+    void resizeEvent(QResizeEvent* event);
     void moveBall();
     void setBounds(const QRectF& bounds) override;
     void detectPlayer();
+    bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
 
 public slots:
     void updateFrame();
 
+
 private:
-    std::shared_ptr<BallRenderer> m_ball  = nullptr;
-    QGraphicsScene * m_scene;
+    std::shared_ptr<BallRenderer> m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     QRectF m_bounds{};
     QPointF m_direction;
@@ -32,6 +33,8 @@ private:
     QTimer* m_timer = nullptr;
     const PlayerItem* m_leftPlayer;
     const PlayerItem* m_rightPlayer;
+    QSize m_size;
+    bool m_waitingToRespawn = false;
 };
 
 

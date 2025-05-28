@@ -1,6 +1,7 @@
 #include <QTimer>
 #include "BallMovement.h"
 #include <cmath>
+#include <qcoreapplication.h>
 
 #include "ScoreManager.h"
 
@@ -12,6 +13,9 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ball, const std:
     qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
     const qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
     m_direction /= length;
+
+void BallMovement::resizeEvent(QResizeEvent* event) {
+    m_size = event->size();
 }
 
 void BallMovement::setBounds(const QRectF& bounds) {
@@ -32,12 +36,40 @@ void BallMovement::moveBall() {
     if (ballBottom > m_bounds.bottom() || ballTop <= 0) {
         m_direction.setY(-m_direction.y());
     }
-    if (ballLeft > m_bounds.left() && ballRight > m_bounds.right() + m_ball->getBall()->boundingRect().width() * 2) {
-        m_timer->stop();
+
+    if (handleOutOfBounds(ballLeft, ballRight)){
+        return;
     }
 
     m_ball->getBall()->setPos(newPos);
     detectPlayer();
+}
+
+bool BallMovement::handleOutOfBounds(qreal ballLeft, qreal ballRight) {
+    if (m_waitingToRespawn) return true;
+
+    const qreal buffer = m_ball->getBall()->boundingRect().width();
+
+    if (ballRight < m_bounds.left() - buffer) {
+        m_scoreManager->addPoint(ScoreSide::Right, 1);
+        m_waitingToRespawn = true;
+        QTimer::singleShot(1000, [this]() {
+            m_ball->spawnBall(m_size);
+            m_waitingToRespawn = false;
+        });
+        return true;
+    }
+
+    if (ballLeft > m_bounds.right() + buffer) {
+        m_scoreManager->addPoint(ScoreSide::Left, 1);
+        m_waitingToRespawn = true;
+        QTimer::singleShot(1000, [this]() {
+            m_ball->spawnBall(m_size);
+            m_waitingToRespawn = false;
+        });
+        return true;
+    }
+    return false;
 }
 
 void BallMovement::detectPlayer() {
