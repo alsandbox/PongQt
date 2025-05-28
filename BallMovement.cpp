@@ -9,8 +9,7 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ball, const std:
                            const PlayerItem *leftPlayer, const PlayerItem *rightPlayer)
     : m_ball(ball), m_scoreManager(scoreManager), m_leftPlayer(leftPlayer), m_rightPlayer(rightPlayer) {
     m_direction = QPointF(3, 5);
-    m_speed = 3.0;
-    qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
+    m_speed = 4.0;
     const qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
     m_direction /= length;
 
