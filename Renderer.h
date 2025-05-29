@@ -23,10 +23,9 @@ public:
 private:
     std::shared_ptr<LineRenderer> lineRenderer;
     std::unique_ptr<PlayerRenderer> playerRenderer;
-    std::unique_ptr<ScoreRenderer> scoreRenderer;
+    std::shared_ptr<ScoreRenderer> scoreRenderer;
     std::shared_ptr<BallRenderer> ballRenderer;
-    std::unique_ptr<BallMovement> ballMovement;
-
+    std::shared_ptr<BallMovement> ballMovement;
     std::shared_ptr<ScoreManager> scoreManager;
     PlayerItem* leftPlayer = nullptr;
     PlayerItem* rightPlayer = nullptr;
