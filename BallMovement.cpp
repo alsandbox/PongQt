@@ -15,7 +15,7 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ball, const std:
     m_timer = new QTimer(this);
 }
 
-void BallMovement::resizeEvent(QResizeEvent* event) {
+void BallMovement::resizeEvent(const QResizeEvent* event) {
     m_size = event->size();
 }
 
@@ -46,7 +46,7 @@ void BallMovement::moveBall() {
     detectPlayer();
 }
 
-bool BallMovement::handleOutOfBounds(qreal ballLeft, qreal ballRight) {
+bool BallMovement::handleOutOfBounds(const qreal ballLeft, const qreal ballRight) {
     if (m_waitingToRespawn) return true;
 
     const qreal buffer = m_ball->getBall()->boundingRect().width();
