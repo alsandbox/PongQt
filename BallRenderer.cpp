@@ -15,7 +15,7 @@ void BallRenderer::spawnBall(const QSize newSize) {
     QLineF line = m_line->getLine()->line();
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(line.y1(),  line.y2());
+    std::uniform_int_distribution<> distrib(line.y1() + m_buffer,  line.y2() - m_buffer);
     ball->setPos(line.x1(), distrib(gen));
 }
 
@@ -26,7 +26,6 @@ void BallRenderer::setBounds(const QRectF& bounds) {
 void BallRenderer::resizeEvent(const QResizeEvent* event) {
     newSize = event->size();
     spawnBall(newSize);
-
 }
 
 void BallRenderer::displayBall(const QSize newSize) const {

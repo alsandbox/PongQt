@@ -24,6 +24,7 @@ private:
     QRectF m_bounds{};
     QRectF m_lineBounds{};
     QSize newSize{};
+    int m_buffer = 50;
 };
 
 
