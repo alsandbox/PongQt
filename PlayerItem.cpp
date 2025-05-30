@@ -15,14 +15,20 @@ void PlayerItem::setBounds(const QRectF& bounds) {
 }
 
 void PlayerItem::keyPressEvent(QKeyEvent* event) {
-    QPointF newPos = pos();
+    m_prevPos = pos();
+
+    QPointF newPos = m_prevPos;
 
     if (event->key() == m_upKey)
-        newPos.ry() -= 15;
+        newPos.ry() -= m_moveStep;
     else if (event->key() == m_downKey)
-        newPos.ry() += 15;
+        newPos.ry() += m_moveStep;
 
     const QRectF itemRect = boundingRect().translated(newPos);
-    if (m_bounds.contains(itemRect))
+    if (m_bounds.contains(itemRect)) {
         setPos(newPos);
+        m_verticalSpeed = newPos.y() - m_prevPos.y();
+    } else {
+        m_verticalSpeed = 0;
+    }
 }
