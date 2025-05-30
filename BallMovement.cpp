@@ -24,7 +24,7 @@ void BallMovement::setBounds(const QRectF& bounds) {
 }
 
 void BallMovement::moveBall() {
-    QPointF velocity = m_direction * m_speed;
+    const QPointF velocity = m_direction.toPointF() * m_speed;
 
     QPointF newPos = m_ball->getBall()->pos();
     newPos += velocity;
@@ -74,9 +74,25 @@ bool BallMovement::handleOutOfBounds(const qreal ballLeft, const qreal ballRight
 }
 
 void BallMovement::detectPlayer() {
+    const qreal playerSpeed = addPlayerSpeed();
     if (m_ball->getBall()->collidesWithItem(m_leftPlayer) || m_ball->getBall()->collidesWithItem(m_rightPlayer)) {
+        constexpr qreal factor = 0.3;
         m_direction.setX(-m_direction.x());
+        m_direction.setY(m_direction.y() + playerSpeed * factor);
+        m_direction = m_direction.normalized();
     }
+}
+
+qreal BallMovement::addPlayerSpeed() const {
+    qreal speed = 0;
+    if (m_ball->getBall()->collidesWithItem(m_leftPlayer)) {
+        speed = m_leftPlayer->getVerticalSpeed();
+    }
+    if (m_ball->getBall()->collidesWithItem(m_rightPlayer)) {
+        speed = m_rightPlayer->getVerticalSpeed();
+    }
+
+    return speed;
 }
 
 void BallMovement::updateFrame() {

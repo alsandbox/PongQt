@@ -19,6 +19,7 @@ public:
     void setBounds(const QRectF& bounds) override;
     void detectPlayer();
     bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
+    qreal addPlayerSpeed() const;
 
 public slots:
     void updateFrame();
