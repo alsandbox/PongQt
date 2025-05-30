@@ -1,25 +1,30 @@
 #ifndef SCORERENDERER_H
 #define SCORERENDERER_H
 
+#include <qfont.h>
 #include <QGraphicsTextItem>
 #include <QResizeEvent>
 
+enum class ScoreSide { Left, Right };
+
+struct ScoreItem {
+    std::unique_ptr<QGraphicsTextItem> item;
+    double scale;
+    bool added = false;
+};
 
 class ScoreRenderer {
     public:
     explicit ScoreRenderer(QGraphicsScene *scene);
-    void updateText(const QString& newText) const {
-        //rightScore->setPlainText(newText);
-    }
+    void updateText(ScoreSide side, const QString& text) const;
     void resizeEvent(QResizeEvent* event);
-    void displayScore(QGraphicsTextItem* score, const double scale) const;
+    void displayScore(const ScoreItem& score);
 
 private:
-    std::unique_ptr<QGraphicsTextItem> rightScore = nullptr;
-    std::unique_ptr<QGraphicsTextItem> leftScore = nullptr;
-    bool leftScoreAdded = false;
-    bool rightScoreAdded = false;
+    ScoreItem leftScoreItem { nullptr, 0.20 };
+    ScoreItem rightScoreItem { nullptr, 0.75 };
     QGraphicsScene* m_scene = nullptr;
+    QFont m_font;
 };
 
 
