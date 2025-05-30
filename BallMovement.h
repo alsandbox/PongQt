@@ -28,7 +28,7 @@ private:
     std::shared_ptr<BallRenderer> m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     QRectF m_bounds{};
-    QPointF m_direction;
+    QVector2D m_direction;
     qreal m_speed;
     QTimer* m_timer = nullptr;
     const PlayerItem* m_leftPlayer;
