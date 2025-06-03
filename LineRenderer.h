@@ -9,12 +9,12 @@ class LineRenderer : public QGraphicsLineItem{
     public:
     explicit LineRenderer(QGraphicsScene *scene);
     void resizeEvent(QResizeEvent* event, const QRectF& rect);
-    void displayLine(const QRectF &rect);
     [[nodiscard]] QGraphicsLineItem* getLine() const {
         return lineItem;
     }
 
     private:
+    void displayLine(const QRectF &rect);
     QGraphicsLineItem* lineItem = nullptr;
     QGraphicsScene* m_scene = nullptr;
 };
