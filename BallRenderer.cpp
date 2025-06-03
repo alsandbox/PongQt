@@ -1,22 +1,21 @@
 #include "BallRenderer.h"
 
 #include <QGraphicsEllipseItem>
-#include <random>
-
+#include <QRandomGenerator>
 
 BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer)
-: m_scene(scene), m_line(lineRenderer) {
+    : m_scene(scene), m_line(lineRenderer){
     ball = std::make_unique<QGraphicsEllipseItem>();
     m_scene->addItem(ball.get());
 }
 
-void BallRenderer::spawnBall(const QSize newSize) {
+void BallRenderer::spawnBall(const QSize newSize) const {
     displayBall(newSize);
-    QLineF line = m_line->getLine()->line();
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(line.y1() + m_buffer,  line.y2() - m_buffer);
-    ball->setPos(line.x1(), distrib(gen));
+    const QLineF line = m_line->getLine()->line();
+    const int m_min = static_cast<int>(line.y1() + m_buffer);
+    const int m_max = static_cast<int>(line.y2() - m_buffer) + 1;
+    const int randomValue = QRandomGenerator::global()->bounded(m_min, m_max);
+    ball->setPos(line.x1(), randomValue);
 }
 
 void BallRenderer::setBounds(const QRectF& bounds) {

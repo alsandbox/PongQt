@@ -9,7 +9,7 @@ class BallRenderer : public QObject, public QGraphicsEllipseItem, public IBounda
     Q_OBJECT
 public:
     explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer);
-    void spawnBall(QSize newSize);
+    void spawnBall(QSize newSize) const;
     void resizeEvent(const QResizeEvent* event);
     void displayBall(QSize newSize) const;
     void setBounds(const QRectF& bounds) override;
