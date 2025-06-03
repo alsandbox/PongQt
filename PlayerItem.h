@@ -17,7 +17,8 @@ private:
     Qt::Key m_downKey;
     QGraphicsScene* m_scene = nullptr;
     QRectF m_bounds;
-    int m_moveStep = 15;
+    int m_moveStep = 3;
+    float m_speed = 10.0f;
     QPointF m_prevPos;
     qreal m_verticalSpeed;
 };

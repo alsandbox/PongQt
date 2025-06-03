@@ -20,9 +20,9 @@ void PlayerItem::keyPressEvent(QKeyEvent* event) {
     QPointF newPos = m_prevPos;
 
     if (event->key() == m_upKey)
-        newPos.ry() -= m_moveStep;
+        newPos.ry() -= m_moveStep * m_speed;
     else if (event->key() == m_downKey)
-        newPos.ry() += m_moveStep;
+        newPos.ry() += m_moveStep * m_speed;
 
     const QRectF itemRect = boundingRect().translated(newPos);
     if (m_bounds.contains(itemRect)) {
