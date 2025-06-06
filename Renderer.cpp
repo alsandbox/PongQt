@@ -10,13 +10,6 @@ Renderer::Renderer(QGraphicsScene* scene, QWidget* parent)
     setResizeAnchor(AnchorViewCenter);
     fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 
-    lineRenderer = std::make_shared<LineRenderer>(scene);
-    playerRenderer = std::make_unique<PlayerRenderer>(scene, this);
-    scoreRenderer = std::make_shared<ScoreRenderer>(scene);
-    ballRenderer = std::make_shared<BallRenderer>(scene, lineRenderer);
-    scoreManager = std::make_shared<ScoreManager>(scoreRenderer);
-    ballMovement = std::make_shared<BallMovement>(ballRenderer, scoreManager, leftPlayer, rightPlayer);
-    ballMovement->updateFrame();
     m_lineRenderer = std::make_shared<LineRenderer>(scene);
     m_physicsManager = std::make_shared<PhysicsManager>();
     m_playerRenderer = std::make_unique<PlayerRenderer>(scene, this, m_physicsManager);
@@ -29,7 +22,7 @@ Renderer::Renderer(QGraphicsScene* scene, QWidget* parent)
 void Renderer::resizeEvent(QResizeEvent* event) {
     QGraphicsView::resizeEvent(event);
 
-    QRectF rect(QPointF(0, 0), QSizeF(size()));
+    const QRectF rect(QPointF(0, 0), QSizeF(size()));
     scene()->setSceneRect(rect);
 
     if (m_lineRenderer)
@@ -47,10 +40,6 @@ void Renderer::resizeEvent(QResizeEvent* event) {
 
     fitInView(rect, Qt::IgnoreAspectRatio);
 
-    if (leftPlayer)
-        leftPlayer->setBounds(rect);
-    if (rightPlayer)
-        rightPlayer->setBounds(rect);
     if (m_leftPlayer){
         qreal allowedOut = m_leftPlayer->boundingRect().height();
         QRectF extendedBounds = rect.adjusted(-allowedOut, -allowedOut, allowedOut, allowedOut);
