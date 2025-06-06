@@ -12,6 +12,7 @@ find_package(Qt5 COMPONENTS
         Gui
         Widgets
         REQUIRED)
+find_package(box2d CONFIG REQUIRED)
 
 add_executable(Pong main.cpp
         Renderer.cpp
@@ -31,8 +32,11 @@ add_executable(Pong main.cpp
         LineRenderer.cpp
         LineRenderer.h
         ScoreManager.cpp
-        ScoreManager.h)
+        ScoreManager.h
+        PhysicsManager.cpp
+        PhysicsManager.h)
 target_link_libraries(Pong
+        PRIVATE box2d::box2d
         Qt::Core
         Qt::Gui
         Qt::Widgets
