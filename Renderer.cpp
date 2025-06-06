@@ -17,6 +17,13 @@ Renderer::Renderer(QGraphicsScene* scene, QWidget* parent)
     scoreManager = std::make_shared<ScoreManager>(scoreRenderer);
     ballMovement = std::make_shared<BallMovement>(ballRenderer, scoreManager, leftPlayer, rightPlayer);
     ballMovement->updateFrame();
+    m_lineRenderer = std::make_shared<LineRenderer>(scene);
+    m_physicsManager = std::make_shared<PhysicsManager>();
+    m_playerRenderer = std::make_unique<PlayerRenderer>(scene, this, m_physicsManager);
+    m_scoreRenderer = std::make_shared<ScoreRenderer>(scene);
+    m_ballRenderer = std::make_shared<BallRenderer>(scene, m_lineRenderer, m_physicsManager);
+    m_scoreManager = std::make_shared<ScoreManager>(m_scoreRenderer);
+    m_ballMovement = std::make_shared<BallMovement>(m_ballRenderer, m_scoreManager, m_physicsManager, m_leftPlayer, m_rightPlayer);
 }
 
 void Renderer::resizeEvent(QResizeEvent* event) {
@@ -25,17 +32,17 @@ void Renderer::resizeEvent(QResizeEvent* event) {
     QRectF rect(QPointF(0, 0), QSizeF(size()));
     scene()->setSceneRect(rect);
 
-    if (lineRenderer)
-        lineRenderer->resizeEvent(event, rect);
-    if (playerRenderer)
-        playerRenderer->resizeEvent(event);
-    if (scoreRenderer)
-        scoreRenderer->resizeEvent(event);
-    if (ballRenderer)
-        ballRenderer->resizeEvent(event);
-    if (ballMovement) {
-        ballMovement->resizeEvent(event);
-        ballMovement->setBounds(rect);
+    if (m_lineRenderer)
+        m_lineRenderer->resizeEvent(event, rect);
+    if (m_playerRenderer)
+        m_playerRenderer->resizeEvent(event);
+    if (m_scoreRenderer)
+        m_scoreRenderer->resizeEvent(event);
+    if (m_ballRenderer)
+        m_ballRenderer->resizeEvent(event);
+    if (m_ballMovement) {
+        m_ballMovement->resizeEvent(event);
+        m_ballMovement->setBounds(rect);
     }
 
     fitInView(rect, Qt::IgnoreAspectRatio);
@@ -44,13 +51,24 @@ void Renderer::resizeEvent(QResizeEvent* event) {
         leftPlayer->setBounds(rect);
     if (rightPlayer)
         rightPlayer->setBounds(rect);
+    if (m_leftPlayer){
+        qreal allowedOut = m_leftPlayer->boundingRect().height();
+        QRectF extendedBounds = rect.adjusted(-allowedOut, -allowedOut, allowedOut, allowedOut);
+        m_leftPlayer->setBounds(extendedBounds);
+    }
+    if (m_rightPlayer) {
+        qreal allowedOut = m_rightPlayer->boundingRect().height();
+        QRectF extendedBounds = rect.adjusted(-allowedOut, -allowedOut, allowedOut, allowedOut);
+        m_rightPlayer->setBounds(extendedBounds);
+    }
+
 }
 
 void Renderer::keyPressEvent(QKeyEvent* event) {
-    if (leftPlayer)
-        leftPlayer->keyPressEvent(event);
-    if (rightPlayer)
-        rightPlayer->keyPressEvent(event);
+    if (m_leftPlayer)
+        m_leftPlayer->keyPressEvent(event);
+    if (m_rightPlayer)
+        m_rightPlayer->keyPressEvent(event);
 }
 
 void Renderer::keyReleaseEvent(QKeyEvent* event) {
@@ -58,9 +76,9 @@ void Renderer::keyReleaseEvent(QKeyEvent* event) {
 }
 
 void Renderer::setLeftPlayer(PlayerItem* player) {
-    leftPlayer = player;
+    m_leftPlayer = player;
 }
 
 void Renderer::setRightPlayer(PlayerItem* player) {
-    rightPlayer = player;
+    m_rightPlayer = player;
 }
