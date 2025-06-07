@@ -11,6 +11,7 @@ public:
     PhysicsManager();
     ~PhysicsManager();
     void createBallShape(const QGraphicsEllipseItem* ball);
+    void destroyBall();
     void createBoxShape(PlayerItem *player, bool isLeft);
 
     static void movePlayer(b2BodyId bodyId, float dy);
@@ -19,6 +20,7 @@ public:
     void reverseBallYDirection() const;
     void step(b2BodyId bodyId, QGraphicsItem *item) const;
     b2BodyId getBallId() const {return m_ballBodyId;}
+
 private:
     b2WorldId m_worldId{};
     b2BodyId m_ballBodyId{};

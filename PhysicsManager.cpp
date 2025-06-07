@@ -32,6 +32,13 @@ void PhysicsManager::createBallShape(const QGraphicsEllipseItem* ball){
     b2Shape_SetFriction(shapeId, 1.0f);
 }
 
+void PhysicsManager::destroyBall() {
+    if (b2Body_IsValid(m_ballBodyId)) {
+        b2DestroyBody(m_ballBodyId);
+        m_ballBodyId = b2_nullBodyId;
+    }
+}
+
 void PhysicsManager::createBoxShape(PlayerItem *player, bool isLeft) {
     const float halfWidthPixels = player->rect().width() / 2;
     const float halfHeightPixels = player->rect().height() / 2;
