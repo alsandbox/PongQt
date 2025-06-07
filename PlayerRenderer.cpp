@@ -36,7 +36,7 @@ void PlayerRenderer::resizeEvent(QResizeEvent *event) {
     m_physicsManager->createBoxShape(rightPlayer.get(), false);
 }
 
-void PlayerRenderer::displayPlayer(QGraphicsRectItem* player, const bool isLeft) const {
+void PlayerRenderer::displayPlayer(PlayerItem *player, const bool isLeft) const {
     const QPen pen(Qt::white);
     const QBrush brush(Qt::white);
     player->setPen(pen);
