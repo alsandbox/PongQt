@@ -1,26 +1,27 @@
 #include "PlayerRenderer.h"
+
 #include "PlayerItem.h"
 #include "Renderer.h"
-
-#include <QWidget>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QKeyEvent>
+#include <QWidget>
 
 
-PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer* renderer, const std::shared_ptr<PhysicsManager>& physicsManager)
+PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer *renderer,
+                               const std::shared_ptr<PhysicsManager> &physicsManager)
     : m_scene(scene), m_physicsManager(physicsManager) {
     leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene, physicsManager);
     rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene, physicsManager);
 
-    renderer = dynamic_cast<Renderer*>(m_scene->views().first());
+    renderer = dynamic_cast<Renderer *>(m_scene->views().first());
     if (renderer) {
         renderer->setLeftPlayer(leftPlayer.get());
         renderer->setRightPlayer(rightPlayer.get());
     }
 }
 
-void PlayerRenderer::resizeEvent(QResizeEvent* event) {
+void PlayerRenderer::resizeEvent(QResizeEvent *event) {
     if (leftPlayer && !leftPlayerAdded) {
         m_scene->addItem(leftPlayer.get());
         leftPlayerAdded = true;
@@ -46,8 +47,7 @@ void PlayerRenderer::displayPlayer(QGraphicsRectItem* player, const bool isLeft)
     const double width = rect.width() * 0.01;
     const double height = rect.height() * 0.1;
     const double yPos = (rect.height() - height) / 2;
-    const double xPos = isLeft ? rect.left() + margin: rect.right() - width - margin;
-
+    const double xPos = isLeft ? rect.left() + margin : rect.right() - width - margin;
     player->setRect(0, 0, width, height);
     player->setPos(xPos, yPos);
 }
