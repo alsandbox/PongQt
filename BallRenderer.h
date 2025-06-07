@@ -4,11 +4,13 @@
 
 #include "IBoundable.h"
 #include "LineRenderer.h"
+#include "PhysicsManager.h"
+
 
 class BallRenderer : public QObject, public QGraphicsEllipseItem, public IBoundable {
     Q_OBJECT
 public:
-    explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer);
+    explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer, const std::shared_ptr<PhysicsManager>& physicsManager);
     void spawnBall(QSize newSize) const;
     void resizeEvent(const QResizeEvent* event);
     void displayBall(QSize newSize) const;
@@ -21,6 +23,7 @@ private:
     QGraphicsScene* m_scene = nullptr;
     std::shared_ptr<LineRenderer> m_line = nullptr;
     std::unique_ptr<QGraphicsEllipseItem> ball  = nullptr;
+    std::shared_ptr<PhysicsManager> m_physicsManager = nullptr;
     QRectF m_bounds{};
     QRectF m_lineBounds{};
     QSize newSize{};
