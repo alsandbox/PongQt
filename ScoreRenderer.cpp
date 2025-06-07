@@ -21,8 +21,8 @@ ScoreRenderer::ScoreRenderer(QGraphicsScene* scene)
     updateText(ScoreSide::Right, "0");
 }
 
-void ScoreRenderer::updateText(ScoreSide side, const QString& text) const {
-    auto& score = (side == ScoreSide::Left) ? leftScoreItem : rightScoreItem;
+void ScoreRenderer::updateText(const ScoreSide side, const QString& text) const {
+    auto& score = side == ScoreSide::Left ? leftScoreItem : rightScoreItem;
     if (score.item) score.item->setPlainText(text);
 }
 

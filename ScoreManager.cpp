@@ -2,8 +2,8 @@
 
 ScoreManager::ScoreManager(const std::shared_ptr<ScoreRenderer> &scoreRenderer) : m_scoreRenderer(scoreRenderer) {}
 
-void ScoreManager::addPoint(ScoreSide side, int score) {
-    int& targetScore = (side == ScoreSide::Left) ? m_scoreLeft : m_scoreRight;
+void ScoreManager::addPoint(const ScoreSide side, const int score) {
+    int& targetScore = side == ScoreSide::Left ? m_scoreLeft : m_scoreRight;
 
     if (targetScore < m_maxScore)
         targetScore += score;
