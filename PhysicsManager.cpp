@@ -1,4 +1,7 @@
 #include "PhysicsManager.h"
+
+#include <iostream>
+
 #include "PlayerItem.h"
 #include <qpoint.h>
 
@@ -98,6 +101,11 @@ void PhysicsManager::resetBallPosition(const QPointF& pos) const {
 }
 
 void PhysicsManager::step(const b2BodyId bodyId, QGraphicsItem *item) const {
+    if (!b2Body_IsValid(bodyId)) {
+        std::cerr << "Error: Invalid body ID in PhysicsManager::step()\n";
+        return;
+    }
+
     constexpr int subStepCount = 4;
     constexpr float timeStep = 1.0f / 60.0f;
     b2World_Step(m_worldId, timeStep, subStepCount);
