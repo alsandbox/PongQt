@@ -8,9 +8,9 @@ class Renderer;
 
 class PlayerRenderer {
 public:
-    explicit PlayerRenderer(QGraphicsScene *scene, Renderer* renderer);
+    PlayerRenderer(QGraphicsScene *scene, Renderer* renderer, const std::shared_ptr<PhysicsManager>& physicsManager);
     void resizeEvent(QResizeEvent* event);
-    void displayPlayer(QGraphicsRectItem* player, bool isLeft) const;
+    void displayPlayer(PlayerItem* player, bool isLeft) const;
 
 private:
     std::unique_ptr<PlayerItem> rightPlayer = nullptr;
@@ -19,6 +19,7 @@ private:
     bool rightPlayerAdded = false;
     QGraphicsScene* m_scene = nullptr;
     const double margin = 10;
+    std::shared_ptr<PhysicsManager> m_physicsManager = nullptr;
 };
 
 

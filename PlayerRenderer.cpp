@@ -8,10 +8,10 @@
 #include <QKeyEvent>
 
 
-PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer* renderer)
-    : m_scene(scene) {
-    leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
-    rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
+PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer* renderer, const std::shared_ptr<PhysicsManager>& physicsManager)
+    : m_scene(scene), m_physicsManager(physicsManager) {
+    leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene, physicsManager);
+    rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene, physicsManager);
 
     renderer = dynamic_cast<Renderer*>(m_scene->views().first());
     if (renderer) {
@@ -30,7 +30,9 @@ void PlayerRenderer::resizeEvent(QResizeEvent* event) {
         rightPlayerAdded = true;
     }
     displayPlayer(leftPlayer.get(), true);
+    m_physicsManager->createBoxShape(leftPlayer.get(), true);
     displayPlayer(rightPlayer.get(), false);
+    m_physicsManager->createBoxShape(rightPlayer.get(), false);
 }
 
 void PlayerRenderer::displayPlayer(QGraphicsRectItem* player, const bool isLeft) const {
