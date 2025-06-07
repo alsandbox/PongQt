@@ -16,6 +16,7 @@ class Renderer final : public QGraphicsView {
 public:
     explicit Renderer(QGraphicsScene* scene, QWidget* parent = nullptr);
     void resizeEvent(QResizeEvent* event) override;
+    void showEvent(QShowEvent *event) override;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
     void setLeftPlayer(PlayerItem* player);

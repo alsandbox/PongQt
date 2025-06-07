@@ -53,6 +53,14 @@ void Renderer::resizeEvent(QResizeEvent* event) {
 
 }
 
+void Renderer::showEvent(QShowEvent *event) {
+    QGraphicsView::showEvent(event);
+    if (m_ballMovement) {
+        m_ballMovement->showEvent(event);
+        m_ballMovement->updateFrame();
+    }
+}
+
 void Renderer::keyPressEvent(QKeyEvent* event) {
     if (m_leftPlayer)
         m_leftPlayer->keyPressEvent(event);
