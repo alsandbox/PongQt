@@ -23,14 +23,6 @@ public:
     void setRightPlayer(PlayerItem* player);
 
 private:
-    std::shared_ptr<LineRenderer> lineRenderer;
-    std::unique_ptr<PlayerRenderer> playerRenderer;
-    std::shared_ptr<ScoreRenderer> scoreRenderer;
-    std::shared_ptr<BallRenderer> ballRenderer;
-    std::shared_ptr<BallMovement> ballMovement;
-    std::shared_ptr<ScoreManager> scoreManager;
-    PlayerItem* leftPlayer = nullptr;
-    PlayerItem* rightPlayer = nullptr;
     std::shared_ptr<LineRenderer> m_lineRenderer;
     std::unique_ptr<PlayerRenderer> m_playerRenderer;
     std::shared_ptr<ScoreRenderer> m_scoreRenderer;
