@@ -7,7 +7,7 @@
 #include "PhysicsManager.h"
 
 
-class BallRenderer : public QObject, public QGraphicsEllipseItem, public IBoundable {
+class BallRenderer final : public QObject, public QGraphicsEllipseItem, public IBoundable {
     Q_OBJECT
 public:
     explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer, const std::shared_ptr<PhysicsManager>& physicsManager);

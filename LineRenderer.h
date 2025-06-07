@@ -5,7 +5,7 @@
 #include "PlayerItem.h"
 
 
-class LineRenderer : public QGraphicsLineItem{
+class LineRenderer final : public QGraphicsLineItem{
     public:
     explicit LineRenderer(QGraphicsScene *scene);
     void resizeEvent(QResizeEvent* event, const QRectF& rect);

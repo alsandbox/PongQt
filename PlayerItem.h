@@ -5,7 +5,7 @@
 #include "IBoundable.h"
 
 
-class PlayerItem : public QGraphicsRectItem, public IBoundable {
+class PlayerItem final : public QGraphicsRectItem, public IBoundable {
 public:
     PlayerItem(Qt::Key upKey, Qt::Key downKey, QGraphicsScene *scene);
     void setBounds(const QRectF& bounds) override;

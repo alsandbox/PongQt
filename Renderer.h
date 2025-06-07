@@ -11,7 +11,7 @@
 
 class PlayerRenderer;
 
-class Renderer : public QGraphicsView {
+class Renderer final : public QGraphicsView {
     Q_OBJECT
 public:
     explicit Renderer(QGraphicsScene* scene, QWidget* parent = nullptr);
