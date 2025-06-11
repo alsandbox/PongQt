@@ -10,7 +10,6 @@
 
 PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer *renderer,
                                const std::shared_ptr<PhysicsManager> &physicsManager)
-    : m_scene(scene), m_physicsManager(physicsManager) {
     leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene, physicsManager);
     rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene, physicsManager);
 

@@ -4,7 +4,6 @@
 #include "BallMovement.h"
 #include "BallRenderer.h"
 #include "LineRenderer.h"
-#include "PhysicsManager.h"
 #include "PlayerItem.h"
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
@@ -31,7 +30,6 @@ private:
     std::shared_ptr<ScoreManager> m_scoreManager;
     PlayerItem* m_leftPlayer = nullptr;
     PlayerItem* m_rightPlayer = nullptr;
-    std::shared_ptr<PhysicsManager> m_physicsManager = nullptr;
 };
 
 #endif // RENDERER_H

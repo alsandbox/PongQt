@@ -33,8 +33,9 @@ add_executable(Pong main.cpp
         LineRenderer.h
         ScoreManager.cpp
         ScoreManager.h
-        PhysicsManager.cpp
-        PhysicsManager.h)
+        GameManager.cpp
+        GameManager.h
+)
 target_link_libraries(Pong
         PRIVATE box2d::box2d
         Qt::Core

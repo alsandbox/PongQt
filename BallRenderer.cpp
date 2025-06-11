@@ -4,7 +4,6 @@
 #include <QRandomGenerator>
 
 BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer, const std::shared_ptr<PhysicsManager>& physicsManager)
-    : m_scene(scene), m_line(lineRenderer), m_physicsManager(physicsManager){
     ball = std::make_unique<QGraphicsEllipseItem>();
     m_scene->addItem(ball.get());
 }
@@ -17,9 +16,6 @@ void BallRenderer::spawnBall(const QSize newSize) const {
     const int m_max = static_cast<int>(line.y2() - m_buffer) + 1;
     const int randomValue = QRandomGenerator::global()->bounded(m_min, m_max);
     ball->setPos(line.x1(), randomValue);
-
-    m_physicsManager->destroyBall();
-    m_physicsManager->createBallShape(ball.get());
 }
 
 void BallRenderer::setBounds(const QRectF& bounds) {
