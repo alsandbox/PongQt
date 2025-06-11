@@ -13,15 +13,12 @@ class PlayerRenderer;
 class Renderer final : public QGraphicsView {
     Q_OBJECT
 public:
-    explicit Renderer(QGraphicsScene* scene, QWidget* parent = nullptr);
-    void resizeEvent(QResizeEvent* event) override;
-    void showEvent(QShowEvent *event) override;
-    void keyPressEvent(QKeyEvent* event) override;
-    void keyReleaseEvent(QKeyEvent* event) override;
-    void setLeftPlayer(PlayerItem* player);
-    void setRightPlayer(PlayerItem* player);
+    explicit Renderer(QGraphicsScene *scene, QWidget *parent = nullptr);
+    void resizeEvent(QResizeEvent *event) override;
+    [[nodiscard]] double getMargin() const { return m_margin; };
 
 private:
+    std::shared_ptr<GameManager> m_gameManager;
     std::shared_ptr<LineRenderer> m_lineRenderer;
     std::unique_ptr<PlayerRenderer> m_playerRenderer;
     std::shared_ptr<ScoreRenderer> m_scoreRenderer;

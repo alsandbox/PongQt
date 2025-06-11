@@ -8,10 +8,10 @@
 #include <QWidget>
 
 
-PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, Renderer *renderer,
-                               const std::shared_ptr<PhysicsManager> &physicsManager)
-    leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene, physicsManager);
-    rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene, physicsManager);
+PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager)
+    : m_scene(scene), m_gameManager(gameManager){
+    m_leftPlayer = std::make_unique<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
+    m_rightPlayer = std::make_unique<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
 
     renderer = dynamic_cast<Renderer *>(m_scene->views().first());
     if (renderer) {
