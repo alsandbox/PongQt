@@ -10,8 +10,10 @@ public:
     PlayerItem(Qt::Key upKey, Qt::Key downKey, QGraphicsScene *scene);
     void setBounds(const QRectF& bounds) override;
     void keyPressEvent(QKeyEvent* event) override;
-    qreal getVerticalSpeed() const { return m_verticalSpeed; }
-
+    [[nodiscard]] const std::vector<double>& getPartitions() const {
+        return m_playerPartitions;
+    }
+    void setPlayerPartitions();
 private:
     Qt::Key m_upKey;
     Qt::Key m_downKey;
@@ -21,6 +23,7 @@ private:
     float m_speed = 10.0f;
     QPointF m_prevPos;
     qreal m_verticalSpeed;
+    std::vector<double> m_playerPartitions;
 };
 
 

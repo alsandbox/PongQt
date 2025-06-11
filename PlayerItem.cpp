@@ -27,8 +27,14 @@ void PlayerItem::keyPressEvent(QKeyEvent* event) {
     const QRectF itemRect = boundingRect().translated(newPos);
     if (m_bounds.contains(itemRect)) {
         setPos(newPos);
-        m_verticalSpeed = newPos.y() - m_prevPos.y();
-    } else {
-        m_verticalSpeed = 0;
+}
+
+void PlayerItem::setPlayerPartitions() {
+    m_playerPartitions.clear();
+    double part = 0;
+    for (int i = 0; i < 5 ; i++) {
+        part = i * rect().height() / 5;
+        m_playerPartitions.push_back(part);
+        std::cout << part << std::endl;
     }
 }
