@@ -21,8 +21,8 @@ class ScoreRenderer {
     void displayScore(const ScoreItem& score);
 
 private:
-    ScoreItem leftScoreItem { nullptr, 0.20 };
-    ScoreItem rightScoreItem { nullptr, 0.75 };
+    ScoreItem m_leftScoreItem { nullptr, 0.20 };
+    ScoreItem m_rightScoreItem { nullptr, 0.75 };
     QGraphicsScene* m_scene = nullptr;
     QFont m_font;
 };

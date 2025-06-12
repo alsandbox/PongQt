@@ -9,26 +9,26 @@ ScoreRenderer::ScoreRenderer(QGraphicsScene* scene)
     const QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 
     m_font = QFont(family);
-    leftScoreItem.item = std::make_unique<QGraphicsTextItem>();
-    rightScoreItem.item = std::make_unique<QGraphicsTextItem>();
+    m_leftScoreItem.item = std::make_unique<QGraphicsTextItem>();
+    m_rightScoreItem.item = std::make_unique<QGraphicsTextItem>();
 
-    m_scene->addItem(leftScoreItem.item.get());
-    m_scene->addItem(rightScoreItem.item.get());
-    leftScoreItem.added = true;
-    rightScoreItem.added = true;
+    m_scene->addItem(m_leftScoreItem.item.get());
+    m_scene->addItem(m_rightScoreItem.item.get());
+    m_leftScoreItem.added = true;
+    m_rightScoreItem.added = true;
 
     updateText(ScoreSide::Left, "0");
     updateText(ScoreSide::Right, "0");
 }
 
 void ScoreRenderer::updateText(const ScoreSide side, const QString& text) const {
-    auto& score = side == ScoreSide::Left ? leftScoreItem : rightScoreItem;
+    auto& score = side == ScoreSide::Left ? m_leftScoreItem : m_rightScoreItem;
     if (score.item) score.item->setPlainText(text);
 }
 
 void ScoreRenderer::resizeEvent(QResizeEvent* event) {
-    displayScore(leftScoreItem);
-    displayScore(rightScoreItem);
+    displayScore(ScoreSide::Left, m_leftScoreItem);
+    displayScore(ScoreSide::Right, m_rightScoreItem);
 }
 
 void ScoreRenderer::displayScore(const ScoreItem& score) {
