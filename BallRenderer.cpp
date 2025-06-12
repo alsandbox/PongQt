@@ -3,7 +3,8 @@
 #include <QGraphicsEllipseItem>
 #include <QRandomGenerator>
 
-BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer, const std::shared_ptr<PhysicsManager>& physicsManager)
+BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer)
+    : m_scene(scene), m_line(lineRenderer) {
     ball = std::make_unique<QGraphicsEllipseItem>();
     m_scene->addItem(ball.get());
 }
