@@ -13,7 +13,7 @@ void BallRenderer::spawnBall(const QSize newSize) const {
 
     const QLineF line = m_line->getLine()->line();
     const int m_min = static_cast<int>(line.y1() + m_buffer);
-    const int m_max = static_cast<int>(line.y2() - m_buffer) + 1;
+    const int m_max = static_cast<int>(line.y2() - m_buffer);
     const int randomValue = QRandomGenerator::global()->bounded(m_min, m_max);
     ball->setPos(line.x1(), randomValue);
 }
