@@ -33,7 +33,8 @@ void BallRenderer::displayBall(const QSize newSize) const {
 
     ball->setPen(pen);
     ball->setBrush(brush);
-    const int ballSize = std::min(newSize.width(), newSize.height()) / 30;
+    constexpr int scalingFactor = 35;
+    const int ballSize = std::min(newSize.width(), newSize.height()) / scalingFactor;
 
     const QPointF currentPos = ball->pos();
     ball->setRect(0, 0, ballSize, ballSize);
