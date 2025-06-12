@@ -15,6 +15,7 @@ public:
     BallMovement(const std::shared_ptr<BallRenderer> &ball, const std::shared_ptr<ScoreManager> &scoreManager, const PlayerItem *leftPlayer,
                  const PlayerItem *rightPlayer);
     void resizeEvent(const QResizeEvent* event);
+    void showEvent(QShowEvent *event);
     void moveBall();
     void setBounds(const QRectF& bounds) override;
     void detectPlayer();

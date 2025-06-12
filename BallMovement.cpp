@@ -20,6 +20,9 @@ void BallMovement::resizeEvent(const QResizeEvent* event) {
 }
 
 void BallMovement::setBounds(const QRectF& bounds) {
+void BallMovement::showEvent(QShowEvent *event) {
+    updateFrame();
+}
     m_bounds = bounds;
 }
 
