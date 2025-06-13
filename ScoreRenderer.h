@@ -1,9 +1,11 @@
 #ifndef SCORERENDERER_H
 #define SCORERENDERER_H
 
-#include <qfont.h>
 #include <QGraphicsTextItem>
 #include <QResizeEvent>
+#include <qfont.h>
+
+#include "IBoundable.h"
 
 enum class ScoreSide { Left, Right };
 
@@ -13,18 +15,22 @@ struct ScoreItem {
     bool added = false;
 };
 
-class ScoreRenderer {
+class ScoreRenderer : public IBoundable {
     public:
     explicit ScoreRenderer(QGraphicsScene *scene);
     void updateText(ScoreSide side, const QString& text) const;
     void resizeEvent(QResizeEvent* event);
-    void displayScore(const ScoreItem& score);
+    void setMargin(double margin);
+    void setBounds(const QRectF& bounds) override;
+    void displayScore(ScoreSide side, const ScoreItem &score);
 
 private:
     ScoreItem m_leftScoreItem { nullptr, 0.20 };
     ScoreItem m_rightScoreItem { nullptr, 0.75 };
     QGraphicsScene* m_scene = nullptr;
     QFont m_font;
+    double m_margin{};
+    QRectF m_bounds{};
 };
 
 

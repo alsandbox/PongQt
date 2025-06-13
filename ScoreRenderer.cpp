@@ -32,6 +32,14 @@ void ScoreRenderer::resizeEvent(QResizeEvent* event) {
 }
 
 void ScoreRenderer::displayScore(const ScoreItem& score) {
+void ScoreRenderer::setMargin(const double margin) {
+    m_margin = margin;
+}
+
+void ScoreRenderer::setBounds(const QRectF &bounds) {
+    m_bounds = bounds;
+}
+
     if (!score.item) return;
     score.item->setDefaultTextColor(Qt::white);
 
