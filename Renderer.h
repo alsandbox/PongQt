@@ -23,15 +23,17 @@ public:
     void showEvent(QShowEvent* event) override;
 
 private:
-    std::shared_ptr<GameManager> m_gameManager;
-    std::shared_ptr<LineRenderer> m_lineRenderer;
-    std::unique_ptr<PlayerRenderer> m_playerRenderer;
-    std::shared_ptr<ScoreRenderer> m_scoreRenderer;
-    std::shared_ptr<BallRenderer> m_ballRenderer;
-    std::shared_ptr<BallMovement> m_ballMovement;
-    std::shared_ptr<ScoreManager> m_scoreManager;
-    PlayerItem* m_leftPlayer = nullptr;
-    PlayerItem* m_rightPlayer = nullptr;
+    std::shared_ptr<QGraphicsRectItem> m_gameZone = nullptr;
+    std::shared_ptr<GameManager> m_gameManager = nullptr;
+    std::shared_ptr<LineRenderer> m_lineRenderer = nullptr;
+    std::shared_ptr<PlayerRenderer> m_playerRenderer = nullptr;
+    std::shared_ptr<ScoreRenderer> m_scoreRenderer = nullptr;
+    std::shared_ptr<BallRenderer> m_ballRenderer = nullptr;
+    std::shared_ptr<BallMovement> m_ballMovement = nullptr;
+    std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
+
+    std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
+    std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
 };
 
 #endif // RENDERER_H
