@@ -23,6 +23,7 @@ public:
     void showEvent(QShowEvent* event) override;
     static std::shared_ptr<QGraphicsRectItem> createGameZone();
     void updateGameZoneRect(qreal x, qreal y, qreal width, qreal height) const;
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     std::shared_ptr<QGraphicsRectItem> m_gameZone = nullptr;
