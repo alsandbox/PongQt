@@ -15,15 +15,10 @@ Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &ga
     setRenderHint(QPainter::Antialiasing);
     setResizeAnchor(AnchorViewCenter);
     fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
-    m_gameManager = std::make_shared<GameManager>(scene);
-    m_lineRenderer = std::make_shared<LineRenderer>(scene);
-    m_physicsManager = std::make_shared<PhysicsManager>();
-    m_playerRenderer = std::make_unique<PlayerRenderer>(scene, this, m_physicsManager);
-    m_scoreRenderer = std::make_shared<ScoreRenderer>(scene);
-    m_ballRenderer = std::make_shared<BallRenderer>(scene, m_lineRenderer, m_physicsManager);
-    m_playerRenderer = std::make_shared<PlayerRenderer>(scene, m_gameManager);
-    m_scoreManager = std::make_shared<ScoreManager>(m_scoreRenderer);
-    m_ballMovement = std::make_shared<BallMovement>(m_ballRenderer, m_scoreManager, m_physicsManager, m_leftPlayer, m_rightPlayer);
+    m_gameZone = createGameZone();
+    scene->addItem(m_gameZone.get());
+    m_rightPlayer = m_gameManager->getRightPlayer();
+    m_leftPlayer = m_gameManager->getLeftPlayer();
 }
 
 void Renderer::resizeEvent(QResizeEvent* event) {
@@ -32,11 +27,22 @@ void Renderer::resizeEvent(QResizeEvent* event) {
     const QRectF rect(QPointF(0, 0), QSizeF(size()));
     scene()->setSceneRect(rect);
 
-    if (m_lineRenderer)
+    constexpr double totalParts = 6.0;
+    const double margin = rect.width() / totalParts;
+    constexpr double gameZoneWidthRatio = 4.0;
+    updateGameZoneRect(rect.x() + margin, rect.y(), margin * gameZoneWidthRatio, rect.height());
+
+    if (m_lineRenderer) {
         m_lineRenderer->resizeEvent(event, rect);
     if (m_playerRenderer)
+    }
+    if (m_playerRenderer) {
+        m_playerRenderer->setBounds(m_gameZone->sceneBoundingRect());
         m_playerRenderer->resizeEvent(event);
     if (m_scoreRenderer)
+    if (m_scoreRenderer) {
+        m_scoreRenderer->setMargin(margin);
+        m_scoreRenderer->setBounds(m_gameZone->sceneBoundingRect());
         m_scoreRenderer->resizeEvent(event);
     if (m_ballRenderer)
         m_ballRenderer->resizeEvent(event);
@@ -62,6 +68,19 @@ void Renderer::showEvent(QShowEvent* event) {
         m_ballMovement->showEvent(event);
 }
 
+std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {
+    auto gameZone = std::make_shared<QGraphicsRectItem>(QRectF(0, 0, 1, 1));
+    QPen pen(Qt::red);
+    gameZone->setPen(pen);
+    //gameZone->setPen(Qt::NoPen);
+    gameZone->setBrush(Qt::NoBrush);
+    return gameZone;
+}
+
+void Renderer::updateGameZoneRect(const qreal x, const qreal y, const qreal width, const qreal height) const {
+    if (m_gameZone) {
+        m_gameZone->setRect(QRectF(x, y, width, height));
+    }
 }
 
 }

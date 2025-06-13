@@ -21,6 +21,8 @@ public:
     void resizeEvent(QResizeEvent *event) override;
     [[nodiscard]] double getMargin() const { return m_margin; };
     void showEvent(QShowEvent* event) override;
+    static std::shared_ptr<QGraphicsRectItem> createGameZone();
+    void updateGameZoneRect(qreal x, qreal y, qreal width, qreal height) const;
 
 private:
     std::shared_ptr<QGraphicsRectItem> m_gameZone = nullptr;
