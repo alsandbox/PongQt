@@ -57,6 +57,10 @@ void Renderer::resizeEvent(QResizeEvent* event) {
         QRectF extendedBounds = rect.adjusted(-allowedOut, -allowedOut, allowedOut, allowedOut);
         m_rightPlayer->setBounds(extendedBounds);
     }
+void Renderer::showEvent(QShowEvent* event) {
+    if (m_ballMovement)
+        m_ballMovement->showEvent(event);
+}
 
 }
 
