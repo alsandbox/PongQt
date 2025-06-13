@@ -8,12 +8,16 @@
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
-class PlayerRenderer;
-
 class Renderer final : public QGraphicsView {
     Q_OBJECT
 public:
-    explicit Renderer(QGraphicsScene *scene, QWidget *parent = nullptr);
+    explicit Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager,
+                      const std::shared_ptr<LineRenderer> &lineRenderer,
+                      const std::shared_ptr<PlayerRenderer> &playerRenderer,
+                      const std::shared_ptr<ScoreRenderer> &scoreRenderer,
+                      const std::shared_ptr<BallRenderer> &ballRenderer,
+                      const std::shared_ptr<ScoreManager> &scoreManager,
+                      const std::shared_ptr<BallMovement> &ballMovement, QWidget *parent);
     void resizeEvent(QResizeEvent *event) override;
     [[nodiscard]] double getMargin() const { return m_margin; };
 

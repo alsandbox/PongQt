@@ -35,6 +35,8 @@ add_executable(Pong main.cpp
         ScoreManager.h
         GameManager.cpp
         GameManager.h
+        RendererFactory.cpp
+        RendererFactory.h
 )
 target_link_libraries(Pong
         PRIVATE box2d::box2d
