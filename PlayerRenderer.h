@@ -17,7 +17,6 @@ private:
     std::shared_ptr<GameManager> m_gameManager = nullptr;
     QGraphicsScene* m_scene = nullptr;
     const double margin = 10;
-    std::shared_ptr<PhysicsManager> m_physicsManager = nullptr;
 };
 
 
