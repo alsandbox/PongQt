@@ -21,8 +21,6 @@ private:
     QRectF m_bounds;
     int m_moveStep = 3;
     float m_speed = 10.0f;
-    QPointF m_prevPos;
-    qreal m_verticalSpeed;
     std::vector<double> m_playerPartitions;
 };
 

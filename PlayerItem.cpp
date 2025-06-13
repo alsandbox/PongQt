@@ -15,9 +15,8 @@ void PlayerItem::setBounds(const QRectF& bounds) {
 }
 
 void PlayerItem::keyPressEvent(QKeyEvent* event) {
-    m_prevPos = pos();
-
-    QPointF newPos = m_prevPos;
+    const QPointF currentPos = pos();
+    QPointF newPos = currentPos;
 
     if (event->key() == m_upKey)
         newPos.ry() -= m_moveStep * m_speed;
@@ -25,7 +24,7 @@ void PlayerItem::keyPressEvent(QKeyEvent* event) {
         newPos.ry() += m_moveStep * m_speed;
 
     const QRectF itemRect = boundingRect().translated(newPos);
-    if (m_bounds.contains(itemRect)) {
+    if (m_bounds.contains(itemRect))
         setPos(newPos);
 }
 
