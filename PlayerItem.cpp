@@ -34,6 +34,5 @@ void PlayerItem::setPlayerPartitions() {
     for (int i = 0; i < 5 ; i++) {
         part = i * rect().height() / 5;
         m_playerPartitions.push_back(part);
-        std::cout << part << std::endl;
     }
 }
