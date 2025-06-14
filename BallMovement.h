@@ -12,9 +12,10 @@
 class BallMovement : public QObject, public IBoundable {
     Q_OBJECT
 public:
-    BallMovement(const std::shared_ptr<BallRenderer> &ball, const std::shared_ptr<ScoreManager> &scoreManager, const PlayerItem *leftPlayer,
-                 const PlayerItem *rightPlayer);
-    void resizeEvent(const QResizeEvent* event);
+    BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
+                 const std::shared_ptr<ScoreManager> &scoreManager,
+                 const std::shared_ptr<GameManager> &gameManager);
+    void resizeEvent(const QResizeEvent *event);
     void showEvent(QShowEvent *event);
     void moveBall();
     qreal addPlayerSpeed() const;
