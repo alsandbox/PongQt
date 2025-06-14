@@ -1,4 +1,5 @@
 #include "Renderer.h"
+
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
@@ -34,36 +35,39 @@ void Renderer::resizeEvent(QResizeEvent* event) {
 
     if (m_lineRenderer) {
         m_lineRenderer->resizeEvent(event, rect);
-    if (m_playerRenderer)
     }
     if (m_playerRenderer) {
         m_playerRenderer->setBounds(m_gameZone->sceneBoundingRect());
         m_playerRenderer->resizeEvent(event);
-    if (m_scoreRenderer)
+    }
     if (m_scoreRenderer) {
         m_scoreRenderer->setMargin(margin);
         m_scoreRenderer->setBounds(m_gameZone->sceneBoundingRect());
         m_scoreRenderer->resizeEvent(event);
-    if (m_ballRenderer)
+    }
+    if (m_ballRenderer) {
         m_ballRenderer->resizeEvent(event);
+    }
     if (m_ballMovement) {
         m_ballMovement->setBounds(rect);
         m_ballMovement->resizeEvent(event);
-        m_ballMovement->setBounds(rect);
     }
 
     fitInView(rect, Qt::IgnoreAspectRatio);
 
-    if (m_leftPlayer){
-        qreal allowedOut = m_leftPlayer->boundingRect().height();
-        QRectF extendedBounds = rect.adjusted(-allowedOut, -allowedOut, allowedOut, allowedOut);
-        m_leftPlayer->setBounds(extendedBounds);
+     if (m_leftPlayer){
+         const qreal allowedOut = m_leftPlayer->boundingRect().height() * 2;
+         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
+
+         m_leftPlayer->setBounds(extendedBounds);
     }
-    if (m_rightPlayer) {
-        qreal allowedOut = m_rightPlayer->boundingRect().height();
-        QRectF extendedBounds = rect.adjusted(-allowedOut, -allowedOut, allowedOut, allowedOut);
-        m_rightPlayer->setBounds(extendedBounds);
-    }
+     if (m_rightPlayer) {
+         const qreal allowedOut = m_rightPlayer->boundingRect().height();
+         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
+
+         m_rightPlayer->setBounds(extendedBounds);}
+}
+
 void Renderer::showEvent(QShowEvent* event) {
     if (m_ballMovement)
         m_ballMovement->showEvent(event);
