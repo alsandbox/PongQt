@@ -19,7 +19,6 @@ public:
                       const std::shared_ptr<ScoreManager> &scoreManager,
                       const std::shared_ptr<BallMovement> &ballMovement, QWidget *parent);
     void resizeEvent(QResizeEvent *event) override;
-    [[nodiscard]] double getMargin() const { return m_margin; };
     void showEvent(QShowEvent* event) override;
     static std::shared_ptr<QGraphicsRectItem> createGameZone();
     void updateGameZoneRect(qreal x, qreal y, qreal width, qreal height) const;
