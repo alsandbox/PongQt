@@ -47,6 +47,7 @@ void Renderer::resizeEvent(QResizeEvent* event) {
     if (m_ballRenderer)
         m_ballRenderer->resizeEvent(event);
     if (m_ballMovement) {
+        m_ballMovement->setBounds(rect);
         m_ballMovement->resizeEvent(event);
         m_ballMovement->setBounds(rect);
     }
