@@ -1,6 +1,5 @@
 #ifndef BALLRENDERER_H
 #define BALLRENDERER_H
-#include <QGraphicsScene>
 
 #include "IBoundable.h"
 #include "LineRenderer.h"
