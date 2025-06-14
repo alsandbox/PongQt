@@ -17,16 +17,15 @@ public:
     void resizeEvent(const QResizeEvent* event);
     void showEvent(QShowEvent *event);
     void moveBall();
-    void setBounds(const QRectF& bounds) override;
-    void detectPlayer();
-    bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
     qreal addPlayerSpeed() const;
+    void setBounds(const QRectF &bounds) override;
 
 public slots:
     void updateFrame();
 
-
 private:
+    void detectPlayer(const std::shared_ptr<PlayerItem> &player);
+    bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
     std::shared_ptr<BallRenderer> m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     QRectF m_bounds{};
