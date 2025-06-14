@@ -90,17 +90,8 @@ void BallMovement::detectPlayer() {
     }
 }
 
-qreal BallMovement::addPlayerSpeed() const {
-    qreal speed = 0;
-    if (m_ball->getBall()->collidesWithItem(m_leftPlayer)) {
-        speed = m_leftPlayer->getVerticalSpeed();
-    }
-    if (m_ball->getBall()->collidesWithItem(m_rightPlayer)) {
-        speed = m_rightPlayer->getVerticalSpeed();
     }
 
-    return speed;
-}
 
 void BallMovement::updateFrame() {
     connect(m_timer, &QTimer::timeout, this, &BallMovement::moveBall);

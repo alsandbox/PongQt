@@ -18,7 +18,6 @@ public:
     void resizeEvent(const QResizeEvent *event);
     void showEvent(QShowEvent *event);
     void moveBall();
-    qreal addPlayerSpeed() const;
     void setBounds(const QRectF &bounds) override;
 
 public slots:
