@@ -1,6 +1,7 @@
 #include "BallRenderer.h"
 
 #include <QGraphicsEllipseItem>
+#include <QGraphicsScene>
 #include <QRandomGenerator>
 
 BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer)
