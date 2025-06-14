@@ -75,9 +75,7 @@ void Renderer::showEvent(QShowEvent* event) {
 
 std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {
     auto gameZone = std::make_shared<QGraphicsRectItem>(QRectF(0, 0, 1, 1));
-    QPen pen(Qt::red);
-    gameZone->setPen(pen);
-    //gameZone->setPen(Qt::NoPen);
+    gameZone->setPen(Qt::NoPen);
     gameZone->setBrush(Qt::NoBrush);
     return gameZone;
 }
