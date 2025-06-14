@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include "BallMovement.h"
+#include "ScoreManager.h"
 #include "BallRenderer.h"
 #include "LineRenderer.h"
 #include "PlayerItem.h"
