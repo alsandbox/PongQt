@@ -19,7 +19,6 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
     m_timer = new QTimer(this);
 }
 
-void BallMovement::resizeEvent(const QResizeEvent* event) {
 void BallMovement::calculateDirectionVectors() {
     const std::vector<double> angleListRight = {240, 225, 180, 120, 135};
     const std::vector<double> angleListLeft = {300, 315,0,60, 45};
@@ -36,7 +35,13 @@ void BallMovement::calculateDirectionVectors() {
         m_directionsLeft.append(dir1.normalized());
     }
 }
+void BallMovement::resizeEvent(const QResizeEvent *event) {
     m_size = event->size();
+    if ((m_size.width() > event->oldSize().width() || m_size.width() < event->oldSize().width())
+        && (event->oldSize().width() > 0 && m_size.width() > 0)) {
+        const float scaleRatio = static_cast<float>(m_size.width()) / event->oldSize().width();
+        m_speed *= scaleRatio;
+    }
 }
 
 void BallMovement::setBounds(const QRectF& bounds) {
