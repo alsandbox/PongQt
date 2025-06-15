@@ -20,6 +20,22 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
 }
 
 void BallMovement::resizeEvent(const QResizeEvent* event) {
+void BallMovement::calculateDirectionVectors() {
+    const std::vector<double> angleListRight = {240, 225, 180, 120, 135};
+    const std::vector<double> angleListLeft = {300, 315,0,60, 45};
+
+    for (int i = 0; i < angleListRight.size(); ++i) {
+        const double rad1 = qDegreesToRadians(angleListRight[i]);
+        QVector2D dir1(qCos(rad1), qSin(rad1));
+        m_directionsRight.append(dir1.normalized());
+    }
+
+    for (int i = 0; i < angleListLeft.size(); ++i) {
+        const double rad1 = qDegreesToRadians(angleListLeft[i]);
+        QVector2D dir1(qCos(rad1), qSin(rad1));
+        m_directionsLeft.append(dir1.normalized());
+    }
+}
     m_size = event->size();
 }
 

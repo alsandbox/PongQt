@@ -26,6 +26,7 @@ public slots:
 private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);
     bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
+    void calculateDirectionVectors();
     std::shared_ptr<BallRenderer> m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     QRectF m_bounds{};
@@ -36,6 +37,8 @@ private:
     const PlayerItem* m_rightPlayer;
     QSize m_size;
     QVector2D m_velocity;
+    QList<QVector2D> m_directionsRight;
+    QList<QVector2D> m_directionsLeft;
     bool m_waitingToRespawn = false;
 };
 
