@@ -1,5 +1,7 @@
 #include "ScoreRenderer.h"
+
 #include <QFontDatabase>
+#include <qfontmetrics.h>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 
@@ -31,7 +33,6 @@ void ScoreRenderer::resizeEvent(QResizeEvent* event) {
     displayScore(ScoreSide::Right, m_rightScoreItem);
 }
 
-void ScoreRenderer::displayScore(const ScoreItem& score) {
 void ScoreRenderer::setMargin(const double margin) {
     m_margin = margin;
 }
@@ -40,13 +41,22 @@ void ScoreRenderer::setBounds(const QRectF &bounds) {
     m_bounds = bounds;
 }
 
+void ScoreRenderer::displayScore(const ScoreSide side, const ScoreItem& score) {
     if (!score.item) return;
     score.item->setDefaultTextColor(Qt::white);
-
 
     m_font.setPointSizeF(m_scene->sceneRect().height() / 10.0);
     score.item->setFont(m_font);
 
     const QRectF rect = m_scene->sceneRect();
-    score.item->setPos(rect.width() * score.scale, rect.height() * 0.05);
+    auto& scoreSide = side;
+
+    const QFontMetricsF metrics(m_font);
+    const qreal textWidth = metrics.boundingRect(score.item->toPlainText()).width();
+
+    if (scoreSide == ScoreSide::Left) {
+        score.item->setPos(m_bounds.center().x() - m_margin, rect.height() * 0.05);
+    } else {
+        score.item->setPos(m_bounds.center().x() + m_margin - textWidth, rect.height() * 0.05);
+    }
 }
