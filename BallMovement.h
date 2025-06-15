@@ -27,6 +27,8 @@ private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);
     bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
     void calculateDirectionVectors();
+
+    std::shared_ptr<GameManager> m_gameManager = nullptr;
     std::shared_ptr<BallRenderer> m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     QRectF m_bounds{};
