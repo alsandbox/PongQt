@@ -1,5 +1,6 @@
 #ifndef PLAYERITEM_H
 #define PLAYERITEM_H
+
 #include <QGraphicsRectItem>
 
 #include "IBoundable.h"
@@ -19,8 +20,8 @@ private:
     Qt::Key m_downKey;
     QGraphicsScene* m_scene = nullptr;
     QRectF m_bounds;
-    int m_moveStep = 3;
-    float m_speed = 10.0f;
+    float m_moveStep = 2;
+    float m_speed = 20.0f;
     std::vector<double> m_playerPartitions;
 };
 
