@@ -3,10 +3,11 @@
 
 #include "GameManager.h"
 
-class PlayerRenderer {
+class PlayerRenderer final : public IBoundable {
 public:
     PlayerRenderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager);
     void resizeEvent(QResizeEvent* event);
+    void setBounds(const QRectF& bounds) override;
     void displayPlayer(PlayerItem* player, bool isLeft) const;
 
 private:
@@ -16,7 +17,7 @@ private:
     bool m_leftPlayerAdded = false;
     bool m_rightPlayerAdded = false;
     QGraphicsScene* m_scene = nullptr;
-    const double margin = 10;
+    QRectF m_bounds{};
 };
 
 

@@ -27,6 +27,10 @@ void PlayerRenderer::resizeEvent(QResizeEvent *event) {
     m_physicsManager->createBoxShape(rightPlayer.get(), false);
 }
 
+void PlayerRenderer::setBounds(const QRectF &bounds) {
+    m_bounds = bounds;
+}
+
 void PlayerRenderer::displayPlayer(PlayerItem *player, const bool isLeft) const {
     const QPen pen(Qt::white);
     const QBrush brush(Qt::white);
