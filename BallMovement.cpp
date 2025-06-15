@@ -46,6 +46,11 @@ void BallMovement::showEvent(QShowEvent *event) {
     m_bounds = bounds;
 }
 
+QVector2D BallMovement::setNewAngle() {
+    m_index = QRandomGenerator::global()->bounded(m_directionsRight.size());
+    return m_directionsRight[m_index];
+}
+
 void BallMovement::moveBall() {
     const QPointF velocity = m_direction.toPointF() * m_speed;
 
