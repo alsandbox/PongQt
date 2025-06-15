@@ -35,6 +35,15 @@ void BallMovement::calculateDirectionVectors() {
         m_directionsLeft.append(dir1.normalized());
     }
 }
+
+void BallMovement::updateFrame() {
+    if (!m_timer->isActive()) {
+        connect(m_timer, &QTimer::timeout, this, &BallMovement::moveBall);
+        constexpr int frameIntervalMs = 16;
+        m_timer->start(frameIntervalMs);
+    }
+}
+
 void BallMovement::resizeEvent(const QResizeEvent *event) {
     m_size = event->size();
     if ((m_size.width() > event->oldSize().width() || m_size.width() < event->oldSize().width())
@@ -115,8 +124,4 @@ void BallMovement::detectPlayer() {
 
     }
 
-
-void BallMovement::updateFrame() {
-    connect(m_timer, &QTimer::timeout, this, &BallMovement::moveBall);
-    m_timer->start(16);
 }
