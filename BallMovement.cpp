@@ -12,7 +12,8 @@
 BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
                  const std::shared_ptr<ScoreManager> &scoreManager,
                  const std::shared_ptr<GameManager> &gameManager)
-    : m_ball(ballRenderer), m_scoreManager(scoreManager), m_gameManager(gameManager){
+    : m_gameManager(gameManager), m_ball(ballRenderer), m_scoreManager(scoreManager){
+    calculateDirectionVectors();
 
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
