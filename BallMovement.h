@@ -31,12 +31,12 @@ private:
     std::shared_ptr<GameManager> m_gameManager = nullptr;
     std::shared_ptr<BallRenderer> m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
+    std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
+    std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
     QRectF m_bounds{};
     QVector2D m_direction;
     qreal m_speed;
     QTimer* m_timer = nullptr;
-    const PlayerItem* m_leftPlayer;
-    const PlayerItem* m_rightPlayer;
     QSize m_size;
     QVector2D m_velocity;
     QList<QVector2D> m_directionsRight;
