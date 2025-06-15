@@ -35,6 +35,7 @@ private:
     const PlayerItem* m_leftPlayer;
     const PlayerItem* m_rightPlayer;
     QSize m_size;
+    QVector2D m_velocity;
     bool m_waitingToRespawn = false;
 };
 

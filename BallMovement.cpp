@@ -5,10 +5,7 @@
 
 #include "ScoreManager.h"
 
-    m_direction = QPointF(3, 5);
-    m_speed = 4.0;
-    const qreal length = std::sqrt(m_direction.x() * m_direction.x() + m_direction.y() * m_direction.y());
-    m_direction /= length;
+
 BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
                  const std::shared_ptr<ScoreManager> &scoreManager,
                  const std::shared_ptr<GameManager> &gameManager)
@@ -17,6 +14,8 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
 
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
+    m_direction = m_direction.normalized();
+    m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
     m_timer = new QTimer(this);
 }
 
