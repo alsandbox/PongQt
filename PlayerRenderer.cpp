@@ -35,12 +35,17 @@ void PlayerRenderer::displayPlayer(PlayerItem *player, const bool isLeft) const 
     player->setPen(pen);
     player->setBrush(brush);
 
-    const QRectF rect = m_scene->sceneRect();
+    constexpr double paddleWidthRatio = 0.015;
+    constexpr double paddleHeightRatio = 0.1;
+    const double width = m_bounds.width() * paddleWidthRatio;
+    const double height = m_bounds.height() * paddleHeightRatio;
 
-    const double width = rect.width() * 0.01;
-    const double height = rect.height() * 0.1;
-    const double yPos = (rect.height() - height) / 2;
-    const double xPos = isLeft ? rect.left() + margin : rect.right() - width - margin;
+    constexpr double half = 2.0;
+    const double yPos = (m_bounds.height() - height) / half;
+    const double xPos = isLeft
+        ? m_bounds.left()
+        : m_bounds.right() - width;
+
     player->setRect(0, 0, width, height);
     player->setPos(xPos, yPos);
 }
