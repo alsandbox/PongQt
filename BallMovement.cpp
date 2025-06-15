@@ -62,12 +62,9 @@ void BallMovement::moveBall() {
     QPointF newPos = m_ball->getBall()->pos();
     newPos += velocity;
 
-    const qreal ballBottom = m_ball->getBall()->boundingRect().translated(newPos).bottom();
-    const qreal ballTop = m_ball->getBall()->boundingRect().translated(newPos).top();
-    const qreal ballLeft = m_ball->getBall()->boundingRect().translated(newPos).left();
-    const qreal ballRight = m_ball->getBall()->boundingRect().translated(newPos).right();
 
     if (ballBottom > m_bounds.bottom() || ballTop <= 0) {
+    const QRectF ballBounds = m_ballItem->boundingRect().translated(newPos);
         m_direction.setY(-m_direction.y());
     }
 
