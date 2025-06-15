@@ -13,18 +13,16 @@ PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, const std::shared_ptr<Game
 }
 
 void PlayerRenderer::resizeEvent(QResizeEvent *event) {
-    if (leftPlayer && !leftPlayerAdded) {
-        m_scene->addItem(leftPlayer.get());
-        leftPlayerAdded = true;
+    if (m_leftPlayer && !m_leftPlayerAdded) {
+        m_scene->addItem(m_leftPlayer.get());
+        m_leftPlayerAdded = true;
     }
-    if (rightPlayer && !rightPlayerAdded) {
-        m_scene->addItem(rightPlayer.get());
-        rightPlayerAdded = true;
+    if (m_rightPlayer && !m_rightPlayerAdded) {
+        m_scene->addItem(m_rightPlayer.get());
+        m_rightPlayerAdded = true;
     }
-    displayPlayer(leftPlayer.get(), true);
-    m_physicsManager->createBoxShape(leftPlayer.get(), true);
-    displayPlayer(rightPlayer.get(), false);
-    m_physicsManager->createBoxShape(rightPlayer.get(), false);
+    displayPlayer(m_leftPlayer.get(), true);
+    displayPlayer(m_rightPlayer.get(), false);
 }
 
 void PlayerRenderer::setBounds(const QRectF &bounds) {
