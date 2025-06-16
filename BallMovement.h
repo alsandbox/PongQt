@@ -2,6 +2,7 @@
 #define BALLMOVEMENT_H
 
 #include <QObject>
+#include <QTimer>
 #include <memory>
 #include "BallRenderer.h"
 #include "IBoundable.h"
@@ -36,17 +37,25 @@ private:
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
+
     QRectF m_bounds{};
     QSize m_size{};
 
     QVector2D m_direction;
-    QTimer* m_timer = nullptr;
     QVector2D m_velocity;
     QList<QVector2D> m_directionsRight;
     QList<QVector2D> m_directionsLeft;
+
+    QTimer *m_timer = nullptr;
+
+    QGraphicsEllipseItem *m_ballItem = nullptr;
+
     bool m_waitingToRespawn = false;
-};
+    bool m_collidingWithLeft = false;
+    bool m_collidingWithRight = false;
 
     float m_speed = 4.0;
+    int m_index{};
+};
 
-#endif //BALLMOVEMENT_H
+#endif // BALLMOVEMENT_H
