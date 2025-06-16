@@ -92,14 +92,14 @@ void BallMovement::moveBall() {
         return;
     }
 
-    m_ball->getBall()->setPos(newPos);
     detectPlayer();
+    m_ballItem->setPos(newPos);
 }
 
 bool BallMovement::handleOutOfBounds(const qreal ballLeft, const qreal ballRight) {
     if (m_waitingToRespawn) return true;
 
-    const qreal buffer = m_ball->getBall()->boundingRect().width();
+    const qreal buffer = m_ballItem->boundingRect().width();
 
     if (ballRight < m_bounds.left() - buffer) {
         m_scoreManager->addPoint(ScoreSide::Right, 1);
