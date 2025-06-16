@@ -112,14 +112,24 @@ bool BallMovement::handleOutOfBounds(const qreal ballLeft, const qreal ballRight
     return false;
 }
 
-void BallMovement::detectPlayer() {
-    const qreal playerSpeed = addPlayerSpeed();
-    if (m_ball->getBall()->collidesWithItem(m_leftPlayer) || m_ball->getBall()->collidesWithItem(m_rightPlayer)) {
-        constexpr qreal factor = 0.3;
-        m_direction.setX(-m_direction.x());
-        m_direction.setY(m_direction.y() + playerSpeed * factor);
-        m_direction = m_direction.normalized();
-    }
+void BallMovement::scheduleRespawn() {
+    QPointer self(this);
+    constexpr int interval = 1000;
+
+    QTimer::singleShot(interval, [self, this] {
+        if (!self) return;
+        self->m_ball->spawnBall(self->m_size);
+
+        m_direction = setNewAngle();
+        if (QRandomGenerator::global()->bounded(2))
+            m_direction.setY(-m_direction.y());
+
+        calculateDirectionVelocity();
+        moveBall();
+        self->m_waitingToRespawn = false;
+    });
+}
+
 void BallMovement::calculateDirectionVelocity() {
     m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
     m_direction.normalize();

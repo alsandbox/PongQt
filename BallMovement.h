@@ -27,6 +27,7 @@ public slots:
 private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);
     bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
+    void scheduleRespawn();
     QVector2D setNewAngle();
     void calculateDirectionVectors();
 
