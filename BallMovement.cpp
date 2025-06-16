@@ -68,9 +68,9 @@ QVector2D BallMovement::setNewAngle() {
 void BallMovement::moveBall() {
     const QPointF velocity = m_direction.toPointF() * m_speed;
 
-    QPointF newPos = m_ball->getBall()->pos();
-    newPos += velocity;
+    m_ballItem = m_ball->getBall();
 
+    const QPointF newPos = m_ballItem->pos() + velocity;
 
     if (ballBottom > m_bounds.bottom() || ballTop <= 0) {
     const QRectF ballBounds = m_ballItem->boundingRect().translated(newPos);
