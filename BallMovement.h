@@ -38,7 +38,6 @@ private:
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
     QRectF m_bounds{};
     QVector2D m_direction;
-    qreal m_speed;
     QTimer* m_timer = nullptr;
     QSize m_size;
     QVector2D m_velocity;
@@ -47,6 +46,6 @@ private:
     bool m_waitingToRespawn = false;
 };
 
-
+    float m_speed = 4.0;
 
 #endif //BALLMOVEMENT_H
