@@ -8,9 +8,9 @@
 #include "IBoundable.h"
 #include "PlayerItem.h"
 #include "ScoreManager.h"
+#include "GameManager.h"
 
-
-class BallMovement : public QObject, public IBoundable {
+class BallMovement final : public QObject, public IBoundable {
     Q_OBJECT
 public:
     BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
