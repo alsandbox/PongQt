@@ -14,6 +14,10 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
 
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
+
+    m_direction = setNewAngle();
+    if (QRandomGenerator::global()->bounded(2))
+        m_direction.setY(-m_direction.y());
     m_direction = m_direction.normalized();
     m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
     m_timer = new QTimer(this);
