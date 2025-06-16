@@ -72,12 +72,13 @@ void BallMovement::moveBall() {
 
     const QPointF newPos = m_ballItem->pos() + velocity;
 
-    if (ballBottom > m_bounds.bottom() || ballTop <= 0) {
     const QRectF ballBounds = m_ballItem->boundingRect().translated(newPos);
+
+    if (ballBounds.bottom() > m_bounds.bottom() || ballBounds.top() <= 0) {
         m_direction.setY(-m_direction.y());
     }
 
-    if (handleOutOfBounds(ballLeft, ballRight)){
+    if (handleOutOfBounds(ballBounds.left(), ballBounds.right())) {
         return;
     }
 
