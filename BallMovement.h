@@ -37,9 +37,10 @@ private:
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
     QRectF m_bounds{};
+    QSize m_size{};
+
     QVector2D m_direction;
     QTimer* m_timer = nullptr;
-    QSize m_size;
     QVector2D m_velocity;
     QList<QVector2D> m_directionsRight;
     QList<QVector2D> m_directionsLeft;
