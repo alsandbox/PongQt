@@ -1,7 +1,10 @@
-#include <QTimer>
 #include "BallMovement.h"
-#include <cmath>
-#include <qcoreapplication.h>
+
+#include <QCoreApplication>
+#include <QDebug>
+#include <QPointer>
+#include <QRandomGenerator>
+#include <QtMath>
 
 #include "ScoreManager.h"
 
