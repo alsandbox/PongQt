@@ -96,7 +96,23 @@ void BallMovement::moveBall() {
         return;
     }
 
-    detectPlayer();
+    const bool collidesLeft = m_ballItem->collidesWithItem(m_leftPlayer.get());
+    const bool collidesRight = m_ballItem->collidesWithItem(m_rightPlayer.get());
+
+    if (collidesLeft && !m_collidingWithLeft) {
+        detectPlayer(m_leftPlayer);
+        m_collidingWithLeft = true;
+    } else if (!collidesLeft) {
+        m_collidingWithLeft = false;
+    }
+
+    if (collidesRight && !m_collidingWithRight) {
+        detectPlayer(m_rightPlayer);
+        m_collidingWithRight = true;
+    } else if (!collidesRight) {
+        m_collidingWithRight = false;
+    }
+
     m_ballItem->setPos(newPos);
 }
 
@@ -145,6 +161,34 @@ void BallMovement::calculateDirectionVelocity() {
     m_direction.normalize();
 }
 
+void BallMovement::detectPlayer(const std::shared_ptr<PlayerItem> &player) {
+    const QRectF ballRect = m_ballItem->sceneBoundingRect();
+    const QRectF playerRect = player->sceneBoundingRect();
+    const QRectF intersection = ballRect.intersected(playerRect);
+    const QPointF collisionPointInScene = intersection.center();
+    const QPointF collisionPointInPlayer = player->mapFromScene(collisionPointInScene);
+
+    const auto &parts = player->getPartitions();
+
+    m_index = -1;
+    const double y = collisionPointInPlayer.y();
+    for (int i = 0; i < parts.size() - 1; ++i) {
+        if (y >= parts[i] && y <= parts[i + 1]) {
+            m_index = i;
+            break;
+        }
     }
 
+    if (m_index == -1 && y >= parts.back()) {
+        m_index = parts.size() - 2;
+    }
+    if (m_index >= 0 && m_index < m_directionsRight.size()) {
+        if (player == m_leftPlayer) {
+            m_direction = m_directionsLeft[m_index];
+        }
+        else {
+            m_direction = m_directionsRight[m_index];
+        }
+         m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
+    }
 }
