@@ -19,6 +19,7 @@ public:
     void showEvent(QShowEvent *event);
     void moveBall();
     void setBounds(const QRectF &bounds) override;
+    void calculateDirectionVelocity();
 
 public slots:
     void updateFrame();

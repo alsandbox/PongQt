@@ -120,6 +120,9 @@ void BallMovement::detectPlayer() {
         m_direction.setY(m_direction.y() + playerSpeed * factor);
         m_direction = m_direction.normalized();
     }
+void BallMovement::calculateDirectionVelocity() {
+    m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
+    m_direction.normalize();
 }
 
     }
