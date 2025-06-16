@@ -53,10 +53,20 @@ void BallMovement::resizeEvent(const QResizeEvent *event) {
     }
 }
 
-void BallMovement::setBounds(const QRectF& bounds) {
 void BallMovement::showEvent(QShowEvent *event) {
+    m_ballItem = m_ball->getBall();
+    m_leftPlayer->setPlayerPartitions();
+    m_rightPlayer->setPlayerPartitions();
+
+    m_direction = setNewAngle();
+    if (QRandomGenerator::global()->bounded(2))
+        m_direction.setY(-m_direction.y());
+
+    calculateDirectionVelocity();
     updateFrame();
 }
+
+void BallMovement::setBounds(const QRectF &bounds) {
     m_bounds = bounds;
 }
 
