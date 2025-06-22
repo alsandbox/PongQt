@@ -15,9 +15,11 @@ void PlayerItem::setBounds(const QRectF& bounds) {
 }
 
 void PlayerItem::keyPressEvent(QKeyEvent* event) {
+    keysPressed.insert(event->key());
 
 }
 
+    keysPressed.remove(event->key());
 void PlayerItem::movePlayer() {
     const QPointF currentPos = pos();
     QPointF newPos = currentPos;
