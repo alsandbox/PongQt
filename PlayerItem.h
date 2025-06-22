@@ -24,7 +24,7 @@ private:
     QGraphicsScene* m_scene = nullptr;
     QRectF m_bounds;
     float m_moveStep = 2;
-    float m_speed = 20.0f;
+    float m_speed = 4.0f;
     std::vector<double> m_playerPartitions;
     QSet<int> keysPressed;
 };
