@@ -91,3 +91,8 @@ void Renderer::keyPressEvent(QKeyEvent *event) {
     m_gameManager->keyPressEvent(event);
 }
 
+void Renderer::keyReleaseEvent(QKeyEvent *event) {
+    QGraphicsView::keyReleaseEvent(event);
+    m_gameManager->keyReleaseEvent(event);
+}
+

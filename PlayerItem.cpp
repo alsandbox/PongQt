@@ -19,7 +19,10 @@ void PlayerItem::keyPressEvent(QKeyEvent* event) {
 
 }
 
+void PlayerItem::keyReleaseEvent(QKeyEvent *event) {
     keysPressed.remove(event->key());
+}
+
 void PlayerItem::movePlayer() {
     const QPointF currentPos = pos();
     QPointF newPos = currentPos;

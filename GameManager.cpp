@@ -11,3 +11,9 @@ void GameManager::keyPressEvent(QKeyEvent* event) {
     if (m_rightPlayer)
         m_rightPlayer->keyPressEvent(event);
 }
+void GameManager::keyReleaseEvent(QKeyEvent *event) {
+    if (m_leftPlayer)
+        m_leftPlayer->keyReleaseEvent(event);
+    if (m_rightPlayer)
+        m_rightPlayer->keyReleaseEvent(event);
+}

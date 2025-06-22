@@ -12,6 +12,7 @@ public:
     PlayerItem(Qt::Key upKey, Qt::Key downKey, QGraphicsScene *scene);
     void setBounds(const QRectF& bounds) override;
     void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
     void movePlayer();
     [[nodiscard]] const std::vector<double>& getPartitions() const {
         return m_playerPartitions;
