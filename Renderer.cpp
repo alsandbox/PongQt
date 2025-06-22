@@ -71,6 +71,14 @@ void Renderer::resizeEvent(QResizeEvent* event) {
 void Renderer::showEvent(QShowEvent* event) {
     if (m_ballMovement)
         m_ballMovement->showEvent(event);
+
+    if (m_gameManager && m_leftPlayer && m_rightPlayer) {
+        m_gameManager->updateFrame([this]() {
+            m_ballMovement->moveBall();
+            m_leftPlayer->movePlayer();
+            m_rightPlayer->movePlayer();
+        });
+    }
 }
 
 std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {

@@ -1,6 +1,8 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 #include <QGraphicsView>
+#include <QTimer>
+
 #include "PlayerItem.h"
 
 class GameManager : public QGraphicsView {
@@ -11,9 +13,14 @@ public:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
 
+public slots:
+    void updateFrame(const std::function<void()> &func);
+
 private:
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
+    QTimer *m_timer = nullptr;
+    std::function<void()> m_updateFunc;
 };
 
 

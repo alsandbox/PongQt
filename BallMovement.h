@@ -2,7 +2,6 @@
 #define BALLMOVEMENT_H
 
 #include <QObject>
-#include <QTimer>
 #include <memory>
 #include "BallRenderer.h"
 #include "IBoundable.h"
@@ -21,9 +20,6 @@ public:
     void moveBall();
     void setBounds(const QRectF &bounds) override;
     void calculateDirectionVelocity();
-
-public slots:
-    void updateFrame();
 
 private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);
@@ -54,7 +50,7 @@ private:
     bool m_collidingWithLeft = false;
     bool m_collidingWithRight = false;
 
-    float m_speed = 4.0;
+    float m_speed = 5.0;
     int m_index{};
 };
 

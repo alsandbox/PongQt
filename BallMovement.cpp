@@ -23,7 +23,6 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
         m_direction.setY(-m_direction.y());
     m_direction = m_direction.normalized();
     m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
-    m_timer = new QTimer(this);
 }
 
 void BallMovement::calculateDirectionVectors() {
@@ -40,14 +39,6 @@ void BallMovement::calculateDirectionVectors() {
         const double rad1 = qDegreesToRadians(angleListLeft[i]);
         QVector2D dir1(qCos(rad1), qSin(rad1));
         m_directionsLeft.append(dir1.normalized());
-    }
-}
-
-void BallMovement::updateFrame() {
-    if (!m_timer->isActive()) {
-        connect(m_timer, &QTimer::timeout, this, &BallMovement::moveBall);
-        constexpr int frameIntervalMs = 16;
-        m_timer->start(frameIntervalMs);
     }
 }
 
@@ -70,7 +61,6 @@ void BallMovement::showEvent(QShowEvent *event) {
         m_direction.setY(-m_direction.y());
 
     calculateDirectionVelocity();
-    updateFrame();
 }
 
 void BallMovement::setBounds(const QRectF &bounds) {
