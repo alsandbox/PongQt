@@ -5,7 +5,7 @@
 #include "LineRenderer.h"
 
 
-class BallRenderer final : public QObject, public QGraphicsEllipseItem, public IBoundable {
+class BallRenderer final : public QObject, public QGraphicsRectItem, public IBoundable {
     Q_OBJECT
 public:
     explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer);
@@ -13,14 +13,14 @@ public:
     void resizeEvent(const QResizeEvent* event);
     void displayBall(QSize newSize) const;
     void setBounds(const QRectF& bounds) override;
-    [[nodiscard]] QGraphicsEllipseItem* getBall() const {
+    [[nodiscard]] QGraphicsRectItem* getBall() const {
         return ball.get();
     }
 
 private:
     QGraphicsScene* m_scene = nullptr;
     std::shared_ptr<LineRenderer> m_line = nullptr;
-    std::unique_ptr<QGraphicsEllipseItem> ball  = nullptr;
+    std::unique_ptr<QGraphicsRectItem> ball  = nullptr;
     QRectF m_bounds{};
     QRectF m_lineBounds{};
     QSize newSize{};

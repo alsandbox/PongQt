@@ -44,7 +44,7 @@ private:
 
     QTimer *m_timer = nullptr;
 
-    QGraphicsEllipseItem *m_ballItem = nullptr;
+    QGraphicsRectItem *m_ballItem = nullptr;
 
     bool m_waitingToRespawn = false;
     bool m_collidingWithLeft = false;

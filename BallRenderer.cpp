@@ -6,7 +6,7 @@
 
 BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer)
     : m_scene(scene), m_line(lineRenderer) {
-    ball = std::make_unique<QGraphicsEllipseItem>();
+    ball = std::make_unique<QGraphicsRectItem>();
     m_scene->addItem(ball.get());
 }
 
@@ -35,7 +35,7 @@ void BallRenderer::displayBall(const QSize newSize) const {
 
     ball->setPen(pen);
     ball->setBrush(brush);
-    constexpr int scalingFactor = 35;
+    constexpr int scalingFactor = 40;
     const int ballSize = std::min(newSize.width(), newSize.height()) / scalingFactor;
 
     const QPointF currentPos = ball->pos();
