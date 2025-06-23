@@ -19,7 +19,7 @@ public:
     void showEvent(QShowEvent *event);
     void moveBall();
     void setBounds(const QRectF &bounds) override;
-    void calculateDirectionVelocity();
+
 
 private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);
@@ -27,6 +27,7 @@ private:
     void scheduleRespawn();
     QVector2D setNewAngle();
     void calculateDirectionVectors();
+    void calculateDirectionVelocity();
 
     std::shared_ptr<GameManager> m_gameManager = nullptr;
     std::shared_ptr<BallRenderer> m_ball = nullptr;
