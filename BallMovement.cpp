@@ -133,7 +133,7 @@ void BallMovement::scheduleRespawn() {
 
     QTimer::singleShot(interval, [self, this] {
         if (!self) return;
-        self->m_ball->spawnBall(self->m_size);
+        self->m_ball->spawnBall();
 
         m_direction = setNewAngle();
         if (QRandomGenerator::global()->bounded(2))

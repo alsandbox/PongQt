@@ -10,8 +10,8 @@ BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRend
     m_scene->addItem(ball.get());
 }
 
-void BallRenderer::spawnBall(const QSize newSize) const {
-    displayBall(newSize);
+void BallRenderer::spawnBall() const {
+    displayBall();
 
     const QLineF line = m_line->getLine()->line();
     const int m_min = static_cast<int>(line.y1() + m_buffer);
@@ -25,19 +25,23 @@ void BallRenderer::setBounds(const QRectF& bounds) {
 }
 
 void BallRenderer::resizeEvent(const QResizeEvent* event) {
-    newSize = event->size();
-    spawnBall(newSize);
+    m_size = event->size();
 }
 
-void BallRenderer::displayBall(const QSize newSize) const {
+void BallRenderer::showEvent(QShowEvent *event) {
+    spawnBall();
+}
+
+void BallRenderer::displayBall() const {
     const QPen pen(Qt::white);
     const QBrush brush(Qt::white);
 
     ball->setPen(pen);
     ball->setBrush(brush);
-    constexpr int scalingFactor = 40;
-    const int ballSize = std::min(newSize.width(), newSize.height()) / scalingFactor;
 
+    constexpr int scalingFactor = 40;
+
+    const int ballSize = std::min(m_size.width(), m_size.height()) / scalingFactor;
     const QPointF currentPos = ball->pos();
     ball->setRect(0, 0, ballSize, ballSize);
     ball->setPos(currentPos);

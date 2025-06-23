@@ -92,6 +92,9 @@ void Renderer::showEvent(QShowEvent* event) {
             m_rightPlayer->movePlayer();
         });
     }
+
+    m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
+    m_ballRenderer->showEvent(event);
 }
 
 std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {
