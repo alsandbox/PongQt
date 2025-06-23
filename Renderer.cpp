@@ -27,6 +27,7 @@ void Renderer::resizeEvent(QResizeEvent* event) {
 
     const QRectF rect(QPointF(0, 0), QSizeF(size()));
     scene()->setSceneRect(rect);
+    fitInView(rect, Qt::IgnoreAspectRatio);
 
     constexpr double totalParts = 6.0;
     const double margin = rect.width() / totalParts;
