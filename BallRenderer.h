@@ -7,28 +7,28 @@
 
 class BallRenderer final : public QObject, public QGraphicsRectItem, public IBoundable {
     Q_OBJECT
+
 public:
     explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer);
     void spawnBall() const;
-    void resizeEvent(const QResizeEvent* event);
-    void showEvent(QShowEvent* event);
+    void resizeEvent(const QResizeEvent *event);
+    void showEvent(QShowEvent *event);
     void displayBall() const;
-    void setBounds(const QRectF& bounds) override;
-    [[nodiscard]] QGraphicsRectItem* getBall() const {
+    void setBounds(const QRectF &bounds) override;
+
+    [[nodiscard]] QGraphicsRectItem *getBall() const {
         return ball.get();
     }
 
 private:
-    QGraphicsScene* m_scene = nullptr;
+    QGraphicsScene *m_scene = nullptr;
     std::shared_ptr<LineRenderer> m_line = nullptr;
-    std::unique_ptr<QGraphicsRectItem> ball  = nullptr;
+    std::unique_ptr<QGraphicsRectItem> ball = nullptr;
     QRectF m_bounds{};
     QRectF m_lineBounds{};
-    QSize newSize{};
+    QSize m_size{};
     int m_buffer = 50;
-     QSize  m_size{};
 };
-
 
 
 #endif //BALLRENDERER_H

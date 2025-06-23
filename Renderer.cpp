@@ -4,13 +4,16 @@
 #include "ScoreRenderer.h"
 
 Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager,
-    const std::shared_ptr<LineRenderer> &lineRenderer, const std::shared_ptr<PlayerRenderer> &playerRenderer,
-    const std::shared_ptr<ScoreRenderer> &scoreRenderer, const std::shared_ptr<BallRenderer> &ballRenderer,
-    const std::shared_ptr<ScoreManager> &scoreManager, const std::shared_ptr<BallMovement> &ballMovement,
-    QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager), m_lineRenderer(lineRenderer),
-                       m_playerRenderer(playerRenderer), m_scoreRenderer(scoreRenderer), m_ballRenderer(ballRenderer),
-                       m_ballMovement(ballMovement), m_scoreManager(scoreManager)
-{
+                   const std::shared_ptr<LineRenderer> &lineRenderer,
+                   const std::shared_ptr<PlayerRenderer> &playerRenderer,
+                   const std::shared_ptr<ScoreRenderer> &scoreRenderer,
+                   const std::shared_ptr<BallRenderer> &ballRenderer,
+                   const std::shared_ptr<ScoreManager> &scoreManager, const std::shared_ptr<BallMovement> &ballMovement,
+                   QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
+                                      m_lineRenderer(lineRenderer),
+                                      m_playerRenderer(playerRenderer), m_scoreRenderer(scoreRenderer),
+                                      m_ballRenderer(ballRenderer),
+                                      m_ballMovement(ballMovement), m_scoreManager(scoreManager) {
     setScene(scene);
     setBackgroundBrush(Qt::black);
     setRenderHint(QPainter::Antialiasing);
@@ -22,7 +25,7 @@ Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &ga
     m_leftPlayer = m_gameManager->getLeftPlayer();
 }
 
-void Renderer::resizeEvent(QResizeEvent* event) {
+void Renderer::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
 
     const QRectF rect(QPointF(0, 0), QSizeF(size()));
@@ -84,7 +87,7 @@ void Renderer::resizeEvent(QResizeEvent* event) {
     }
 }
 
-void Renderer::showEvent(QShowEvent* event) {
+void Renderer::showEvent(QShowEvent *event) {
     if (m_ballMovement)
         m_ballMovement->showEvent(event);
 
@@ -123,4 +126,3 @@ void Renderer::keyReleaseEvent(QKeyEvent *event) {
     QGraphicsView::keyReleaseEvent(event);
     m_gameManager->keyReleaseEvent(event);
 }
-

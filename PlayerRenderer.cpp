@@ -1,13 +1,13 @@
 #include "PlayerRenderer.h"
 
-#include "PlayerItem.h"
 #include <QGraphicsView>
 #include <QWidget>
 #include "GameManager.h"
+#include "PlayerItem.h"
 
 
 PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager)
-    : m_gameManager(gameManager), m_scene(scene){
+    : m_gameManager(gameManager), m_scene(scene) {
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
 }
@@ -37,14 +37,15 @@ void PlayerRenderer::displayPlayer(PlayerItem *player, const bool isLeft) const 
 
     constexpr double paddleWidthRatio = 0.015;
     constexpr double paddleHeightRatio = 0.1;
+
     const double width = m_bounds.width() * paddleWidthRatio;
     const double height = m_bounds.height() * paddleHeightRatio;
 
     constexpr double half = 2.0;
     const double yPos = (m_bounds.height() - height) / half;
     const double xPos = isLeft
-        ? m_bounds.left()
-        : m_bounds.right() - width;
+                            ? m_bounds.left()
+                            : m_bounds.right() - width;
 
     player->setRect(0, 0, width, height);
     player->setPos(xPos, yPos);
