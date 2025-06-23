@@ -42,13 +42,9 @@ void BallMovement::calculateDirectionVectors() {
     }
 }
 
-void BallMovement::resizeEvent(const QResizeEvent *event) {
-    m_size = event->size();
-    if ((m_size.width() > event->oldSize().width() || m_size.width() < event->oldSize().width())
-        && (event->oldSize().width() > 0 && m_size.width() > 0)) {
-        const float scaleRatio = static_cast<float>(m_size.width()) / event->oldSize().width();
-        m_speed *= scaleRatio;
-    }
+
+void BallMovement::resizeEvent(const QResizeEvent *event, const float scaleRatio) {
+    m_speed *= scaleRatio;
 }
 
 void BallMovement::showEvent(QShowEvent *event) {

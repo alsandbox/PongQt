@@ -14,9 +14,12 @@ void PlayerItem::setBounds(const QRectF& bounds) {
     m_bounds = bounds;
 }
 
+void PlayerItem::resizeEvent(const QResizeEvent *event, const float scaleRatio) {
+    m_speed *= scaleRatio;
+}
+
 void PlayerItem::keyPressEvent(QKeyEvent* event) {
     keysPressed.insert(event->key());
-
 }
 
 void PlayerItem::keyReleaseEvent(QKeyEvent *event) {

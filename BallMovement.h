@@ -15,7 +15,7 @@ public:
     BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
                  const std::shared_ptr<ScoreManager> &scoreManager,
                  const std::shared_ptr<GameManager> &gameManager);
-    void resizeEvent(const QResizeEvent *event);
+    void resizeEvent(const QResizeEvent *event, float scaleRatio);
     void showEvent(QShowEvent *event);
     void moveBall();
     void setBounds(const QRectF &bounds) override;

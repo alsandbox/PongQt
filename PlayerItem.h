@@ -2,6 +2,7 @@
 #define PLAYERITEM_H
 
 #include <QGraphicsRectItem>
+#include <QResizeEvent>
 #include <qset.h>
 
 #include "IBoundable.h"
@@ -10,6 +11,7 @@
 class PlayerItem final : public QGraphicsRectItem, public IBoundable {
 public:
     PlayerItem(Qt::Key upKey, Qt::Key downKey, QGraphicsScene *scene);
+    void resizeEvent(const QResizeEvent *event, const float scaleRatio);
     void setBounds(const QRectF& bounds) override;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;

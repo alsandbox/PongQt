@@ -13,6 +13,8 @@ public:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
 
+    float changeSpeedAfterResize(const QSize &size, const QSize &oldSize);
+
 public slots:
     void updateFrame(const std::function<void()> &func);
 

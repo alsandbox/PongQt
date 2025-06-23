@@ -23,6 +23,14 @@ void GameManager::keyReleaseEvent(QKeyEvent *event) {
         m_rightPlayer->keyReleaseEvent(event);
 }
 
+float GameManager::changeSpeedAfterResize(const QSize& size, const QSize& oldSize) {
+    float scaleRatio = 1.0f;
+    if (size.width() != oldSize.width() && oldSize.width() > 0 && size.width() > 0) {
+        scaleRatio = static_cast<float>(size.width()) / oldSize.width();
+    }
+    return scaleRatio;
+}
+
 void GameManager::updateFrame(const std::function<void()> &func) {
     m_updateFunc = func;
     if (!m_timer->isActive()) {

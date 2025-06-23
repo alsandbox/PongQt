@@ -48,24 +48,37 @@ void Renderer::resizeEvent(QResizeEvent* event) {
     if (m_ballRenderer) {
         m_ballRenderer->resizeEvent(event);
     }
+
+    m_gameManager ? void() : throw std::runtime_error("GameManager is null");
+
+    const QSize size = event->size();
+    const QSize oldSize = event->oldSize();
+    const float scaleRatio = m_gameManager->changeSpeedAfterResize(size, oldSize);
+
     if (m_ballMovement) {
         m_ballMovement->setBounds(rect);
-        m_ballMovement->resizeEvent(event);
+
+        if (scaleRatio != 1.0f)
+            m_ballMovement->resizeEvent(event, scaleRatio);
     }
 
-    fitInView(rect, Qt::IgnoreAspectRatio);
+    if (m_leftPlayer){
+        const qreal allowedOut = m_leftPlayer->boundingRect().height() * 2;
+        const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
 
-     if (m_leftPlayer){
-         const qreal allowedOut = m_leftPlayer->boundingRect().height() * 2;
-         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
-
-         m_leftPlayer->setBounds(extendedBounds);
+        m_leftPlayer->setBounds(extendedBounds);
+        if (scaleRatio != 1.0f)
+            m_leftPlayer->resizeEvent(event, scaleRatio);
     }
-     if (m_rightPlayer) {
-         const qreal allowedOut = m_rightPlayer->boundingRect().height();
-         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
 
-         m_rightPlayer->setBounds(extendedBounds);}
+    if (m_rightPlayer) {
+        const qreal allowedOut = m_rightPlayer->boundingRect().height();
+        const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
+
+        m_rightPlayer->setBounds(extendedBounds);
+        if (scaleRatio != 1.0f)
+            m_rightPlayer->resizeEvent(event, scaleRatio);
+    }
 }
 
 void Renderer::showEvent(QShowEvent* event) {
