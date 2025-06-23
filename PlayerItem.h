@@ -11,7 +11,7 @@
 class PlayerItem final : public QGraphicsRectItem, public IBoundable {
 public:
     PlayerItem(Qt::Key upKey, Qt::Key downKey, QGraphicsScene *scene);
-    void resizeEvent(const QResizeEvent *event, const float scaleRatio);
+    void resizeEvent(const QResizeEvent *event, float scaleRatio);
     void setBounds(const QRectF& bounds) override;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
