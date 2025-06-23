@@ -49,6 +49,7 @@ private:
 
     float m_speed = 6.0;
     int m_index{};
+    int m_maxRandomBound = 2;
 };
 
 #endif // BALLMOVEMENT_H

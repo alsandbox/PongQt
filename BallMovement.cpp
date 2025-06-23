@@ -19,7 +19,7 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
     m_leftPlayer = m_gameManager->getLeftPlayer();
 
     m_direction = setNewAngle();
-    if (QRandomGenerator::global()->bounded(2))
+    if (QRandomGenerator::global()->bounded(m_maxRandomBound))
         m_direction.setY(-m_direction.y());
     m_direction = m_direction.normalized();
     m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
@@ -42,7 +42,6 @@ void BallMovement::calculateDirectionVectors() {
     }
 }
 
-
 void BallMovement::resizeEvent(const QResizeEvent *event, const float scaleRatio) {
     m_speed *= scaleRatio;
 }
@@ -53,7 +52,7 @@ void BallMovement::showEvent(QShowEvent *event) {
     m_rightPlayer->setPlayerPartitions();
 
     m_direction = setNewAngle();
-    if (QRandomGenerator::global()->bounded(2))
+    if (QRandomGenerator::global()->bounded(m_maxRandomBound))
         m_direction.setY(-m_direction.y());
 
     calculateDirectionVelocity();
@@ -136,7 +135,7 @@ void BallMovement::scheduleRespawn() {
         self->m_ball->spawnBall();
 
         m_direction = setNewAngle();
-        if (QRandomGenerator::global()->bounded(2))
+        if (QRandomGenerator::global()->bounded(m_maxRandomBound))
             m_direction.setY(-m_direction.y());
 
         calculateDirectionVelocity();
@@ -160,16 +159,19 @@ void BallMovement::detectPlayer(const std::shared_ptr<PlayerItem> &player) {
     const auto &parts = player->getPartitions();
 
     m_index = -1;
+    constexpr int offset = 1;
     const double y = collisionPointInPlayer.y();
-    for (int i = 0; i < parts.size() - 1; ++i) {
-        if (y >= parts[i] && y <= parts[i + 1]) {
+    for (int i = 0; i < parts.size() - offset; ++i) {
+        if (y >= parts[i] && y <= parts[i + offset]) {
             m_index = i;
             break;
         }
     }
 
-    if (m_index == -1 && y >= parts.back()) {
-        m_index = parts.size() - 2;
+    constexpr int invalidIndex = -1;
+    if (m_index == invalidIndex && y >= parts.back()) {
+        constexpr int indexOffset = 2;
+        m_index = parts.size() - indexOffset;
     }
     if (m_index >= 0 && m_index < m_directionsRight.size()) {
         if (player == m_leftPlayer) {

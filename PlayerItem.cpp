@@ -42,9 +42,12 @@ void PlayerItem::movePlayer() {
 
 void PlayerItem::setPlayerPartitions() {
     m_playerPartitions.clear();
+
     double part = 0;
-    for (int i = 0; i < 5 ; i++) {
-        part = i * rect().height() / 5;
+    constexpr int size = 5;
+
+    for (int i = 0; i < size ; i++) {
+        part = i * rect().height() / size;
         m_playerPartitions.push_back(part);
     }
 }

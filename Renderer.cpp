@@ -63,12 +63,14 @@ void Renderer::resizeEvent(QResizeEvent* event) {
             m_ballMovement->resizeEvent(event, scaleRatio);
     }
 
-    if (m_leftPlayer){
-        const qreal allowedOut = m_leftPlayer->boundingRect().height() * 2;
+    constexpr float defaultScaleRatio = 1.0f;
+    if (m_leftPlayer) {
+        constexpr int doubleHeight = 2;
+        const qreal allowedOut = m_leftPlayer->boundingRect().height() * doubleHeight;
         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
 
         m_leftPlayer->setBounds(extendedBounds);
-        if (scaleRatio != 1.0f)
+        if (scaleRatio != defaultScaleRatio)
             m_leftPlayer->resizeEvent(event, scaleRatio);
     }
 
@@ -77,7 +79,7 @@ void Renderer::resizeEvent(QResizeEvent* event) {
         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
 
         m_rightPlayer->setBounds(extendedBounds);
-        if (scaleRatio != 1.0f)
+        if (scaleRatio != defaultScaleRatio)
             m_rightPlayer->resizeEvent(event, scaleRatio);
     }
 }
@@ -99,7 +101,8 @@ void Renderer::showEvent(QShowEvent* event) {
 }
 
 std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {
-    auto gameZone = std::make_shared<QGraphicsRectItem>(QRectF(0, 0, 1, 1));
+    constexpr int size = 1;
+    auto gameZone = std::make_shared<QGraphicsRectItem>(QRectF(0, 0, size, size));
     gameZone->setPen(Qt::NoPen);
     gameZone->setBrush(Qt::NoBrush);
     return gameZone;
