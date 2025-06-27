@@ -7,12 +7,11 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 
-find_package(Qt5 COMPONENTS
+find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
         REQUIRED)
-find_package(box2d CONFIG REQUIRED)
 
 add_executable(Pong main.cpp
         Renderer.cpp
@@ -39,7 +38,6 @@ add_executable(Pong main.cpp
         RendererFactory.h
 )
 target_link_libraries(Pong
-        PRIVATE box2d::box2d
         Qt::Core
         Qt::Gui
         Qt::Widgets
