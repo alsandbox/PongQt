@@ -48,7 +48,8 @@ private:
     bool m_collidingWithLeft = false;
     bool m_collidingWithRight = false;
 
-    float m_speed = 6.0;
+    float m_baseSpeed = 300.0;
+    float m_speed;
     int m_index{};
     int m_maxRandomBound = 2;
 };

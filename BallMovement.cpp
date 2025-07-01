@@ -14,7 +14,7 @@ BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
                  const std::shared_ptr<GameManager> &gameManager)
     : m_gameManager(gameManager), m_ball(ballRenderer), m_scoreManager(scoreManager){
     calculateDirectionVectors();
-
+    m_speed = m_baseSpeed;
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
 
@@ -43,7 +43,7 @@ void BallMovement::calculateDirectionVectors() {
 }
 
 void BallMovement::resizeEvent(const QResizeEvent *event, const float scaleRatio) {
-    m_speed *= scaleRatio;
+    m_speed = m_baseSpeed * scaleRatio;
 }
 
 void BallMovement::showEvent(QShowEvent *event) {

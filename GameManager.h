@@ -23,6 +23,8 @@ private:
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
     QTimer *m_timer = nullptr;
     std::function<void()> m_updateFunc;
+    bool m_isInitSize = false;
+    int m_initialWidth = 0;
 };
 
 

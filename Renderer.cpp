@@ -56,14 +56,11 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     m_gameManager ? void() : throw std::runtime_error("GameManager is null");
 
     const QSize size = event->size();
-    const QSize oldSize = event->oldSize();
-    const float scaleRatio = m_gameManager->changeSpeedAfterResize(size, oldSize);
+    const float scaleRatio = m_gameManager->changeSpeedAfterResize(size);
 
     if (m_ballMovement) {
         m_ballMovement->setBounds(rect);
-
-        if (scaleRatio != 1.0f)
-            m_ballMovement->resizeEvent(event, scaleRatio);
+        m_ballMovement->resizeEvent(event, scaleRatio);
     }
 
     constexpr float defaultScaleRatio = 1.0f;
