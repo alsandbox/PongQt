@@ -3,24 +3,28 @@
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
+
 Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager,
                    const std::shared_ptr<LineRenderer> &lineRenderer,
                    const std::shared_ptr<PlayerRenderer> &playerRenderer,
                    const std::shared_ptr<ScoreRenderer> &scoreRenderer,
                    const std::shared_ptr<BallRenderer> &ballRenderer,
-                   const std::shared_ptr<ScoreManager> &scoreManager, const std::shared_ptr<BallMovement> &ballMovement,
+                   const std::shared_ptr<ScoreManager> &scoreManager,
+                   const std::shared_ptr<BallMovement> &ballMovement,
                    QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
                                       m_lineRenderer(lineRenderer),
                                       m_playerRenderer(playerRenderer), m_scoreRenderer(scoreRenderer),
                                       m_ballRenderer(ballRenderer),
                                       m_ballMovement(ballMovement), m_scoreManager(scoreManager) {
-    setScene(scene);
     setBackgroundBrush(Qt::black);
     setRenderHint(QPainter::Antialiasing);
     setResizeAnchor(AnchorViewCenter);
     fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+    setViewportUpdateMode(FullViewportUpdate);
+
     m_gameZone = createGameZone();
     scene->addItem(m_gameZone.get());
+
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
 
@@ -70,9 +74,10 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     }
 
     constexpr float defaultScaleRatio = 1.0f;
+    constexpr int verticalMarginFactor = 2.0f;
     if (m_leftPlayer) {
-        constexpr int doubleHeight = 2;
-        const qreal allowedOut = m_leftPlayer->boundingRect().height() * doubleHeight;
+
+        const qreal allowedOut = m_leftPlayer->boundingRect().height() * verticalMarginFactor;
         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
 
         m_leftPlayer->setBounds(extendedBounds);
@@ -81,7 +86,7 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     }
 
     if (m_rightPlayer) {
-        const qreal allowedOut = m_rightPlayer->boundingRect().height();
+        const qreal allowedOut = m_rightPlayer->boundingRect().height() * verticalMarginFactor;
         const QRectF extendedBounds = rect.adjusted(0, -allowedOut, 0, allowedOut);
 
         m_rightPlayer->setBounds(extendedBounds);
@@ -120,6 +125,7 @@ std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {
     auto gameZone = std::make_shared<QGraphicsRectItem>(QRectF(0, 0, size, size));
     gameZone->setPen(Qt::NoPen);
     gameZone->setBrush(Qt::NoBrush);
+
     return gameZone;
 }
 
