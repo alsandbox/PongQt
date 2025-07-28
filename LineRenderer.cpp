@@ -10,13 +10,14 @@ void LineRenderer::resizeEvent(QResizeEvent* event, const QRectF& rect) {
 }
 
 void LineRenderer::displayLine(const QRectF &rect) {
+    constexpr qreal half = 2;
     if (!lineItem) {
         QPen pen(Qt::white);
         constexpr qreal penWidth = 2;
         pen.setWidth(penWidth);
         pen.setStyle(Qt::DashLine);
-        lineItem = m_scene->addLine(QLineF(rect.width() / 2, 0, rect.width() / 2, rect.height()), pen);
+        lineItem = m_scene->addLine(QLineF(rect.width() / half, 0, rect.width() / half, rect.height()), pen);
     } else {
-        lineItem->setLine(QLineF(rect.width() / 2, 0, rect.width() / 2, rect.height()));
+        lineItem->setLine(QLineF(rect.width() / half, 0, rect.width() / half, rect.height()));
     }
 }

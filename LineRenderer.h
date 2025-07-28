@@ -1,6 +1,5 @@
 #ifndef LINERENDERER_H
 #define LINERENDERER_H
-#include <QResizeEvent>
 
 #include "PlayerItem.h"
 
