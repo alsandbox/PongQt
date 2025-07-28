@@ -26,14 +26,17 @@ void PlayerItem::keyReleaseEvent(QKeyEvent *event) {
     keysPressed.remove(event->key());
 }
 
-void PlayerItem::movePlayer() {
+void PlayerItem::movePlayer(qint64 deltaMs) {
     const QPointF currentPos = pos();
     QPointF newPos = currentPos;
 
+    const double timeFactor = deltaMs / 1000.0;
+    const double step = m_moveStep * m_speed * timeFactor;
+
     if (keysPressed.contains(m_upKey))
-        newPos.ry() -= m_moveStep * m_speed;
+        newPos.ry() -= step;
     else if (keysPressed.contains(m_downKey))
-        newPos.ry() += m_moveStep * m_speed;
+        newPos.ry() += step;
 
     const QRectF itemRect = boundingRect().translated(newPos);
     if (m_bounds.contains(itemRect))

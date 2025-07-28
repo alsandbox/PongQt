@@ -15,7 +15,7 @@ public:
     void setBounds(const QRectF& bounds) override;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
-    void movePlayer();
+    void movePlayer(qint64 deltaMs);
     [[nodiscard]] const std::vector<double>& getPartitions() const {
         return m_playerPartitions;
     }
@@ -26,7 +26,7 @@ private:
     QGraphicsScene* m_scene = nullptr;
     QRectF m_bounds;
     float m_moveStep = 2;
-    float m_speed = 4.0f;
+    float m_speed = 200.0f;
     std::vector<double> m_playerPartitions;
     QSet<int> keysPressed;
 };
