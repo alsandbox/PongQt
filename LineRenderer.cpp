@@ -21,3 +21,11 @@ void LineRenderer::displayLine(const QRectF &rect) {
         lineItem->setLine(QLineF(rect.width() / half, 0, rect.width() / half, rect.height()));
     }
 }
+
+void LineRenderer::eraseLine() {
+    if (lineItem) {
+        m_scene->removeItem(lineItem);
+        delete lineItem;
+        lineItem = nullptr;
+    }
+}

@@ -14,6 +14,9 @@ class LineRenderer final : public QGraphicsLineItem{
 
     private:
     void displayLine(const QRectF &rect);
+
+    void eraseLine();
+
     QGraphicsLineItem* lineItem = nullptr;
     QGraphicsScene* m_scene = nullptr;
 };
