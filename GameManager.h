@@ -12,17 +12,18 @@ public:
     std::shared_ptr<PlayerItem>  getRightPlayer(){ return m_rightPlayer; }
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
-
     float changeSpeedAfterResize(const QSize &size, const QSize &oldSize);
+    [[nodiscard]] QTimer* getTimer() const { return m_timer.get(); }
 
 public slots:
-    void updateFrame(const std::function<void()> &func);
+    void updateFrame(std::function<void(qint64)> updateFunc);
 
 private:
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
-    QTimer *m_timer = nullptr;
-    std::function<void()> m_updateFunc;
+    std::unique_ptr<QTimer> m_timer = nullptr;
+    qint64 m_lastUpdate = 0;
+    std::function<void(qint64)> m_updateFunc;
     bool m_isInitSize = false;
     int m_initialWidth = 0;
 };

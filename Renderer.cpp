@@ -89,11 +89,16 @@ void Renderer::showEvent(QShowEvent *event) {
         m_ballMovement->showEvent(event);
 
     if (m_gameManager && m_leftPlayer && m_rightPlayer) {
-        m_gameManager->updateFrame([this]() {
-            m_ballMovement->moveBall();
-            m_leftPlayer->movePlayer();
-            m_rightPlayer->movePlayer();
-        });
+        if (!m_gameManager->getTimer()->isActive()) {
+                m_gameManager->updateFrame([this](const qint64 deltaMs) {
+                if (m_gamePaused)
+                    return;
+
+                m_ballMovement->moveBall(deltaMs);
+                m_leftPlayer->movePlayer(deltaMs);
+                m_rightPlayer->movePlayer(deltaMs);
+            });
+        }
     }
 
     m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");

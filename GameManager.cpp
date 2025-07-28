@@ -3,10 +3,7 @@
 GameManager::GameManager(QGraphicsScene* scene) {
     m_leftPlayer = std::make_shared<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
     m_rightPlayer = std::make_shared<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
-    m_timer = new QTimer(this);
-    connect(m_timer, &QTimer::timeout, this, [this]() {
-    if (m_updateFunc) m_updateFunc();
-});
+    m_timer = std::make_unique<QTimer>(this);
 }
 
 void GameManager::keyPressEvent(QKeyEvent* event) {
@@ -38,11 +35,18 @@ float GameManager::changeSpeedAfterResize(const QSize& size) {
     return scaleRatio;
 }
 
-void GameManager::updateFrame(const std::function<void()> &func) {
-    m_updateFunc = func;
-    if (!m_timer->isActive()) {
-        constexpr int frameIntervalMs = 16;
-        m_timer->start(frameIntervalMs);
+void GameManager::updateFrame(std::function<void(qint64)> updateFunc) {
+    m_updateFunc = std::move(updateFunc);
+
+    if (!m_timer->isActive() && !isGameOver) {
+        m_timer->start();
+        m_lastUpdate = QDateTime::currentMSecsSinceEpoch();
+        connect(m_timer.get(), &QTimer::timeout, this, [this]() {
+            const auto now = QDateTime::currentMSecsSinceEpoch();
+            const qint64 delta = now - m_lastUpdate;
+            m_lastUpdate = now;
+            m_updateFunc(delta);
+        });
     }
 }
 
