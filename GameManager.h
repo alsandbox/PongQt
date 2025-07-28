@@ -12,8 +12,8 @@ public:
     std::shared_ptr<PlayerItem>  getRightPlayer(){ return m_rightPlayer; }
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
-    float changeSpeedAfterResize(const QSize &size, const QSize &oldSize);
     [[nodiscard]] QTimer* getTimer() const { return m_timer.get(); }
+    float changeSpeedAfterResize(const QSize &size);
 
 public slots:
     void updateFrame(std::function<void(qint64)> updateFunc);
