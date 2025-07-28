@@ -23,10 +23,16 @@ Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &ga
     scene->addItem(m_gameZone.get());
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();
+
+    m_resizeTimer.setSingleShot(true);
+    connect(&m_resizeTimer, &QTimer::timeout, this, &Renderer::handleResizeFinished);
 }
 
 void Renderer::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
+
+    m_gamePaused = true;
+    m_resizeTimer.start(50);
 
     const QRectF rect(QPointF(0, 0), QSizeF(size()));
     scene()->setSceneRect(rect);
@@ -82,6 +88,10 @@ void Renderer::resizeEvent(QResizeEvent *event) {
         if (scaleRatio != defaultScaleRatio)
             m_rightPlayer->resizeEvent(event, scaleRatio);
     }
+}
+
+void Renderer::handleResizeFinished() {
+    m_gamePaused = false;
 }
 
 void Renderer::showEvent(QShowEvent *event) {

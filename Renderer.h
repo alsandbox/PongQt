@@ -25,6 +25,7 @@ public:
     void updateGameZoneRect(qreal x, qreal y, qreal width, qreal height) const;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
+    void handleResizeFinished();
 
 private:
     std::shared_ptr<QGraphicsRectItem> m_gameZone = nullptr;
@@ -38,6 +39,9 @@ private:
 
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
+
+    QTimer m_resizeTimer;
+    bool m_gamePaused = false;
 };
 
 #endif // RENDERER_H
