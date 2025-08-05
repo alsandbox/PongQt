@@ -1,16 +1,13 @@
 #include "ScoreRenderer.h"
 
-#include <QFontDatabase>
 #include <qfontmetrics.h>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 
+#include "fonts/FontConfig.h"
+
 ScoreRenderer::ScoreRenderer(QGraphicsScene* scene)
     : m_scene(scene) {
-    const int id = QFontDatabase::addApplicationFont("../fonts/bit5x3.ttf");
-    const QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-
-    m_font = QFont(family);
     m_leftScoreItem.item = std::make_unique<QGraphicsTextItem>();
     m_rightScoreItem.item = std::make_unique<QGraphicsTextItem>();
 
@@ -46,12 +43,15 @@ void ScoreRenderer::displayScore(const ScoreSide side, const ScoreItem& score) {
     score.item->setDefaultTextColor(Qt::white);
 
     m_font.setPointSizeF(m_scene->sceneRect().height() / 10.0);
-    score.item->setFont(m_font);
+    FontConfig::init();
+    QFont customFont = FontConfig::font;
+    customFont.setPointSize(32);
+    score.item->setFont(customFont);
 
     const QRectF rect = m_scene->sceneRect();
     auto& scoreSide = side;
 
-    const QFontMetricsF metrics(m_font);
+    const QFontMetricsF metrics(FontConfig::font);
     const qreal textWidth = metrics.boundingRect(score.item->toPlainText()).width();
 
     if (scoreSide == ScoreSide::Left) {
