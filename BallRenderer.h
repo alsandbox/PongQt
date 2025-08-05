@@ -10,12 +10,13 @@ class BallRenderer final : public QObject, public QGraphicsRectItem, public IBou
 
 public:
     explicit BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer);
+    void setBounds(const QRectF &bounds) override;
     void spawnBall() const;
     void resizeEvent(const QResizeEvent *event);
     void showEvent(QShowEvent *event);
     void displayBall() const;
-    void setBounds(const QRectF &bounds) override;
 
+    void eraseBall();
     [[nodiscard]] QGraphicsRectItem *getBall() const {
         return ball.get();
     }

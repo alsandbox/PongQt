@@ -6,7 +6,9 @@ LineRenderer::LineRenderer(QGraphicsScene *scene) : m_scene(scene) {
 }
 
 void LineRenderer::resizeEvent(QResizeEvent* event, const QRectF& rect) {
-    displayLine(rect);
+    if (!lineItem) {
+         displayLine(rect);
+    }
 }
 
 void LineRenderer::displayLine(const QRectF &rect) {

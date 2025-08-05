@@ -8,16 +8,17 @@ BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRend
     : m_scene(scene), m_line(lineRenderer) {
     ball = std::make_unique<QGraphicsRectItem>();
     m_scene->addItem(ball.get());
+    ball->setCacheMode(DeviceCoordinateCache);
 }
 
 void BallRenderer::spawnBall() const {
-    displayBall();
-
-    const QLineF line = m_line->getLine()->line();
-    const int m_min = static_cast<int>(line.y1() + m_buffer);
-    const int m_max = static_cast<int>(line.y2() - m_buffer);
-    const int randomValue = QRandomGenerator::global()->bounded(m_min, m_max);
-    ball->setPos(line.x1(), randomValue);
+    if (m_line->getLine() && ball){
+        const QLineF line = m_line->getLine()->line();
+        const int m_min = static_cast<int>(line.y1() + m_buffer);
+        const int m_max = static_cast<int>(line.y2() - m_buffer);
+        const int randomValue = QRandomGenerator::global()->bounded(m_min, m_max);
+        ball->setPos(line.x1(), randomValue);
+    }
 }
 
 void BallRenderer::setBounds(const QRectF& bounds) {
@@ -26,6 +27,9 @@ void BallRenderer::setBounds(const QRectF& bounds) {
 
 void BallRenderer::resizeEvent(const QResizeEvent* event) {
     m_size = event->size();
+    if (ball) {
+       displayBall();
+    }
 }
 
 void BallRenderer::showEvent(QShowEvent *event) {
@@ -42,7 +46,14 @@ void BallRenderer::displayBall() const {
     constexpr int scalingFactor = 40;
 
     const int ballSize = std::min(m_size.width(), m_size.height()) / scalingFactor;
-    const QPointF currentPos = ball->pos();
     ball->setRect(0, 0, ballSize, ballSize);
-    ball->setPos(currentPos);
 }
+
+void BallRenderer::eraseBall() {
+    if (ball) {
+        m_scene->removeItem(ball.get());
+        ball = nullptr;
+    }
+}
+
+

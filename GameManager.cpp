@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 GameManager::GameManager(QGraphicsScene* scene) {
+#include <QDateTime>
     m_leftPlayer = std::make_shared<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
     m_rightPlayer = std::make_shared<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
     m_timer = std::make_unique<QTimer>(this);
@@ -50,3 +51,10 @@ void GameManager::updateFrame(std::function<void(qint64)> updateFunc) {
     }
 }
 
+void GameManager::stopFrame() {
+    if (m_timer->isActive()) {
+        isGameOver = true;
+        m_timer->stop();
+        m_gameOverScreen->removeElements();
+    }
+}

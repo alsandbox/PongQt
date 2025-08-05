@@ -10,7 +10,7 @@ Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &ga
                    const std::shared_ptr<ScoreRenderer> &scoreRenderer,
                    const std::shared_ptr<BallRenderer> &ballRenderer,
                    const std::shared_ptr<ScoreManager> &scoreManager,
-                   const std::shared_ptr<BallMovement> &ballMovement,
+                   const std::shared_ptr<BallMovement> &ballMovement, const std::shared_ptr<GameOverScreen> &gameOverScreen,
                    QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
                                       m_lineRenderer(lineRenderer),
                                       m_playerRenderer(playerRenderer), m_scoreRenderer(scoreRenderer),
@@ -47,7 +47,7 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     constexpr double gameZoneWidthRatio = 4.0;
     updateGameZoneRect(rect.x() + margin, rect.y(), margin * gameZoneWidthRatio, rect.height());
 
-    if (m_lineRenderer) {
+    if (m_lineRenderer && !m_gameManager->getGameOver()) {
         m_lineRenderer->resizeEvent(event, rect);
     }
     if (m_playerRenderer) {
@@ -59,7 +59,7 @@ void Renderer::resizeEvent(QResizeEvent *event) {
         m_scoreRenderer->setBounds(m_gameZone->sceneBoundingRect());
         m_scoreRenderer->resizeEvent(event);
     }
-    if (m_ballRenderer) {
+    if (m_ballRenderer && !m_gameManager->getGameOver()){
         m_ballRenderer->resizeEvent(event);
     }
 

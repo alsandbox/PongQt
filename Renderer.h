@@ -4,6 +4,7 @@
 #include "BallMovement.h"
 #include "ScoreManager.h"
 #include "BallRenderer.h"
+#include "GameOverScreen.h"
 #include "LineRenderer.h"
 #include "PlayerItem.h"
 #include "PlayerRenderer.h"
@@ -18,7 +19,8 @@ public:
                       const std::shared_ptr<ScoreRenderer> &scoreRenderer,
                       const std::shared_ptr<BallRenderer> &ballRenderer,
                       const std::shared_ptr<ScoreManager> &scoreManager,
-                      const std::shared_ptr<BallMovement> &ballMovement, QWidget *parent);
+                      const std::shared_ptr<BallMovement> &ballMovement, const std::shared_ptr<GameOverScreen> &gameOverScreen,
+                      QWidget *parent);
     void resizeEvent(QResizeEvent *event) override;
     void showEvent(QShowEvent* event) override;
     static std::shared_ptr<QGraphicsRectItem> createGameZone();
@@ -36,6 +38,7 @@ private:
     std::shared_ptr<BallRenderer> m_ballRenderer = nullptr;
     std::shared_ptr<BallMovement> m_ballMovement = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
+    std::shared_ptr<GameOverScreen> m_gameOverScreen = nullptr;
 
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;

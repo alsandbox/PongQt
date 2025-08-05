@@ -11,11 +11,10 @@ class LineRenderer final : public QGraphicsLineItem{
     [[nodiscard]] QGraphicsLineItem* getLine() const {
         return lineItem;
     }
+    void eraseLine();
 
     private:
     void displayLine(const QRectF &rect);
-
-    void eraseLine();
 
     QGraphicsLineItem* lineItem = nullptr;
     QGraphicsScene* m_scene = nullptr;
