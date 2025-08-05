@@ -1,7 +1,8 @@
 #include "GameManager.h"
-
-GameManager::GameManager(QGraphicsScene* scene) {
 #include <QDateTime>
+
+
+GameManager::GameManager(QGraphicsScene* scene, const std::shared_ptr<GameOverScreen> &gameOverScreen): m_gameOverScreen(gameOverScreen) {
     m_leftPlayer = std::make_shared<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
     m_rightPlayer = std::make_shared<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
     m_timer = std::make_unique<QTimer>(this);
