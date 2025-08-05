@@ -36,6 +36,10 @@ add_executable(Pong main.cpp
         GameManager.h
         RendererFactory.cpp
         RendererFactory.h
+        GameOverScreen.cpp
+        GameOverScreen.h
+        fonts/FontConfig.cpp
+        fonts/FontConfig.h
 )
 target_link_libraries(Pong
         Qt::Core
