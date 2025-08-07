@@ -10,16 +10,14 @@ class GameOverScreen : public QGraphicsView {
 public:
     GameOverScreen(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer,
                    const std::shared_ptr<BallRenderer> &ballRenderer);
-    void removeElements();
-    void addRestartButton();
+
+    void removeElements() const;
+    void addButtons();
 
 private:
-    std::shared_ptr<LineRenderer> m_lineRenderer;
-    std::shared_ptr<BallRenderer> m_ballRenderer;
-    QGraphicsProxyWidget *m_pushButton;
-    QGraphicsScene *m_scene;
-    QPushButton* button;
-    QString style;
+    static void onRestartButtonPressed();
+    static void onExitButtonPressed();
+
     std::shared_ptr<LineRenderer> m_lineRenderer = nullptr;
     std::shared_ptr<BallRenderer> m_ballRenderer = nullptr;
     QGraphicsProxyWidget *m_restartPushButton = nullptr;
