@@ -20,6 +20,14 @@ private:
     QGraphicsScene *m_scene;
     QPushButton* button;
     QString style;
+    std::shared_ptr<LineRenderer> m_lineRenderer = nullptr;
+    std::shared_ptr<BallRenderer> m_ballRenderer = nullptr;
+    QGraphicsProxyWidget *m_restartPushButton = nullptr;
+    QGraphicsProxyWidget *m_exitPushButton = nullptr;
+    QGraphicsScene *m_scene = nullptr;
+    QPushButton *m_restartButton = nullptr;
+    QPushButton *m_exitButton = nullptr;
+    QString m_style;
 };
 
 
