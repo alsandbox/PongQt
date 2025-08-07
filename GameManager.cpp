@@ -57,5 +57,6 @@ void GameManager::stopFrame() {
         isGameOver = true;
         m_timer->stop();
         m_gameOverScreen->removeElements();
+        m_gameOverScreen->addButtons();
     }
 }
