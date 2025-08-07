@@ -8,10 +8,8 @@
 
 GameOverScreen::GameOverScreen(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer,
                                const std::shared_ptr<BallRenderer> &ballRenderer) : m_lineRenderer(lineRenderer),
-                                                                                    m_ballRenderer(ballRenderer), m_scene(scene) {
-    QFile file("../button_style.qss");
-    file.open(QFile::ReadOnly);
-    m_style = QLatin1String(file.readAll());
+                                                                                    m_ballRenderer(ballRenderer),
+                                                                                    m_scene(scene){
 }
 
 void GameOverScreen::removeElements() const {
@@ -59,8 +57,4 @@ void GameOverScreen::addButtons()  {
 
 void GameOverScreen::onRestartButtonPressed() {
 
-}
-
-void GameOverScreen::onExitButtonPressed() {
-    QCoreApplication::exit(0);
 }
