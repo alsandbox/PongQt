@@ -111,15 +111,23 @@ bool BallMovement::handleOutOfBounds(const qreal ballLeft, const qreal ballRight
 
     if (ballRight < m_bounds.left() - buffer) {
         m_scoreManager->addPoint(ScoreSide::Right, 1);
-        m_waitingToRespawn = true;
-        scheduleRespawn();
+
+        if (!m_gameManager->getGameOver()) {
+            m_waitingToRespawn = true;
+            scheduleRespawn();
+        }
+
         return true;
     }
 
     if (ballLeft > m_bounds.right() + buffer) {
         m_scoreManager->addPoint(ScoreSide::Left, 1);
-        m_waitingToRespawn = true;
-        scheduleRespawn();
+
+        if (!m_gameManager->getGameOver()) {
+            m_waitingToRespawn = true;
+            scheduleRespawn();
+        }
+
         return true;
     }
 
