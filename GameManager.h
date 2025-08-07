@@ -17,7 +17,7 @@ public:
     float changeSpeedAfterResize(const QSize &size);
 
     void setGameOver(const bool gameOver){ isGameOver = gameOver;};
-    bool getGameOver(){ return isGameOver; }
+    bool getGameOver() const { return isGameOver; }
 
 public slots:
     void updateFrame(std::function<void(qint64)> updateFunc);
