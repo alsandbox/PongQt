@@ -5,7 +5,13 @@ QPushButton {
 }
 
 QPushButton:hover {
-    color: red;
+    color: #cfcfcf;
+    background-color: transparent;
+    border: none;
+}
+
+QPushButton:pressed {
+    color: #8c8c8c;
     background-color: transparent;
     border: none;
 }
