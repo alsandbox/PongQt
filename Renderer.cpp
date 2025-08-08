@@ -102,11 +102,11 @@ void Renderer::handleResizeFinished() {
     m_gamePaused = false;
 }
 
-void Renderer::showEvent(QShowEvent *event) {
-    if (m_ballMovement)
-        m_ballMovement->showEvent(event);
+void Renderer::onStartGame() const {
+    m_gameManager ? void() : throw std::runtime_error("GameManager is null");
+    m_gameManager->setGameStart(true);
 
-    if (m_gameManager && m_leftPlayer && m_rightPlayer) {
+    if (m_leftPlayer && m_rightPlayer) {
         if (!m_gameManager->getTimer()->isActive()) {
                 m_gameManager->updateFrame([this](const qint64 deltaMs) {
                 if (m_gamePaused)
@@ -118,6 +118,14 @@ void Renderer::showEvent(QShowEvent *event) {
             });
         }
     }
+}
+
+void Renderer::showEvent(QShowEvent *event) {
+    m_gameStartScreen ? void() : throw std::runtime_error("GameStartScreen is null");
+    m_gameStartScreen->showEvent(event);
+
+    if (m_ballMovement)
+        m_ballMovement->showEvent(event);
 
     m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
     m_ballRenderer->showEvent(event);

@@ -32,6 +32,9 @@ public:
     void keyReleaseEvent(QKeyEvent *event) override;
     void handleResizeFinished();
 
+public slots:
+    void onStartGame() const;
+
 private:
     std::shared_ptr<QGraphicsRectItem> m_gameZone;
     GameManager* m_gameManager = nullptr;
