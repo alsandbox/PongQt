@@ -42,6 +42,8 @@ add_executable(Pong main.cpp
         fonts/FontConfig.h
         ScreenBase.cpp
         ScreenBase.h
+        GameStartScreen.cpp
+        GameStartScreen.h
 )
 target_link_libraries(Pong
         Qt::Core
