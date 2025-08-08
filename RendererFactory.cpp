@@ -1,16 +1,27 @@
 #include "RendererFactory.h"
 
 #include "GameOverScreen.h"
+#include "GameStartScreen.h"
 
-std::shared_ptr<Renderer> RendererFactory::createRenderer(QGraphicsScene* scene, QWidget* parent) {
-    auto lineRenderer = std::make_shared<LineRenderer>(scene);
-    auto ballRenderer = std::make_shared<BallRenderer>(scene, lineRenderer);
-    auto gameOverScreen = std::make_shared<GameOverScreen>(scene, lineRenderer, ballRenderer);
-    auto gameManager = std::make_shared<GameManager>(scene, gameOverScreen);
+Renderer *RendererFactory::createRenderer(QGraphicsScene *scene, QWidget *parent) {
+    const auto gameStartScreen = new GameStartScreen(scene);
+    const auto lineRenderer = new LineRenderer(scene);
+    const auto ballRenderer = new BallRenderer(scene, lineRenderer);
+    const auto gameOverScreen = new GameOverScreen(scene, lineRenderer, ballRenderer);
+
+    auto gameManager = new GameManager(scene, gameOverScreen);
     auto scoreRenderer = std::make_shared<ScoreRenderer>(scene);
-    auto playerRenderer = std::make_shared<PlayerRenderer>(scene, gameManager);
-    auto scoreManager = std::make_shared<ScoreManager>(scoreRenderer, gameManager);
-    auto ballMovement = std::make_shared<BallMovement>(ballRenderer, scoreManager, gameManager);
+    const auto playerRenderer = std::make_shared<PlayerRenderer>(scene, gameManager);
+    const auto scoreManager = std::make_shared<ScoreManager>(scoreRenderer, gameManager);
+    const auto ballMovement = new BallMovement(ballRenderer, scoreManager, gameManager);
 
-    return std::make_shared<Renderer>(scene, gameManager, lineRenderer, playerRenderer, scoreRenderer, ballRenderer, scoreManager, ballMovement,gameOverScreen, parent);
+    const auto renderer = new Renderer(scene, gameManager, lineRenderer, playerRenderer,
+                                       scoreRenderer, ballRenderer, scoreManager,
+                                       ballMovement, gameOverScreen, gameStartScreen, parent);
+
+    QObject::connect(gameStartScreen, &GameStartScreen::startButtonPressed,
+                     renderer, &Renderer::onStartGame);
+
+    return renderer;
+
 }

@@ -5,13 +5,13 @@
 
 class PlayerRenderer final : public IBoundable {
 public:
-    PlayerRenderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager);
+    PlayerRenderer(QGraphicsScene *scene, GameManager* gameManager);
     void resizeEvent(QResizeEvent* event);
     void setBounds(const QRectF& bounds) override;
     void displayPlayer(PlayerItem* player, bool isLeft) const;
 
 private:
-    std::shared_ptr<GameManager> m_gameManager = nullptr;
+    GameManager* m_gameManager = nullptr;
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
     bool m_leftPlayerAdded = false;

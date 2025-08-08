@@ -2,7 +2,7 @@
 
 
 ScoreManager::ScoreManager(const std::shared_ptr<ScoreRenderer> &scoreRenderer,
-                           const std::shared_ptr<GameManager> &gameManager) : m_scoreRenderer(scoreRenderer),
+                           GameManager* gameManager) : m_scoreRenderer(scoreRenderer),
                                                                               m_gameManager(gameManager) {
 }
 

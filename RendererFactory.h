@@ -5,7 +5,7 @@
 
 class RendererFactory {
 public:
-    static std::shared_ptr<Renderer> createRenderer(QGraphicsScene* scene, QWidget* parent = nullptr);
+    static Renderer *createRenderer(QGraphicsScene *scene, QWidget *parent = nullptr);
 };
 
 

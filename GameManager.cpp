@@ -2,10 +2,10 @@
 #include <QDateTime>
 
 
-GameManager::GameManager(QGraphicsScene* scene, const std::shared_ptr<GameOverScreen> &gameOverScreen): m_gameOverScreen(gameOverScreen) {
+GameManager::GameManager(QGraphicsScene* scene, GameOverScreen* gameOverScreen): m_gameOverScreen(gameOverScreen) {
     m_leftPlayer = std::make_shared<PlayerItem>(Qt::Key_W, Qt::Key_S, scene);
     m_rightPlayer = std::make_shared<PlayerItem>(Qt::Key_Up, Qt::Key_Down, scene);
-    m_timer = std::make_unique<QTimer>(this);
+    m_timer = new QTimer(this);
 }
 
 void GameManager::keyPressEvent(QKeyEvent* event) {
@@ -43,7 +43,7 @@ void GameManager::updateFrame(std::function<void(qint64)> updateFunc) {
     if (!m_timer->isActive() && !isGameOver) {
         m_timer->start();
         m_lastUpdate = QDateTime::currentMSecsSinceEpoch();
-        connect(m_timer.get(), &QTimer::timeout, this, [this]() {
+        connect(m_timer, &QTimer::timeout, this, [this]() {
             const auto now = QDateTime::currentMSecsSinceEpoch();
             const qint64 delta = now - m_lastUpdate;
             m_lastUpdate = now;

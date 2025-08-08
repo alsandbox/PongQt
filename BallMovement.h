@@ -12,9 +12,9 @@
 class BallMovement final : public QObject, public IBoundable {
     Q_OBJECT
 public:
-    BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
+    BallMovement(BallRenderer* ballRenderer,
                  const std::shared_ptr<ScoreManager> &scoreManager,
-                 const std::shared_ptr<GameManager> &gameManager);
+                 GameManager* gameManager);
     void resizeEvent(const QResizeEvent *event, float scaleRatio);
     void showEvent(QShowEvent *event);
     void moveBall();
@@ -29,8 +29,8 @@ private:
     void calculateDirectionVectors();
     void calculateDirectionVelocity();
 
-    std::shared_ptr<GameManager> m_gameManager = nullptr;
-    std::shared_ptr<BallRenderer> m_ball = nullptr;
+    GameManager* m_gameManager = nullptr;
+    BallRenderer* m_ball = nullptr;
     std::shared_ptr<ScoreManager> m_scoreManager = nullptr;
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;

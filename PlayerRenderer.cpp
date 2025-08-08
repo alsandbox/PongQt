@@ -6,7 +6,7 @@
 #include "PlayerItem.h"
 
 
-PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager)
+PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, GameManager* gameManager)
     : m_gameManager(gameManager), m_scene(scene) {
     m_rightPlayer = m_gameManager->getRightPlayer();
     m_leftPlayer = m_gameManager->getLeftPlayer();

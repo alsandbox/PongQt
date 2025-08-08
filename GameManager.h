@@ -8,12 +8,12 @@
 
 class GameManager : public QGraphicsView {
 public:
-    explicit GameManager(QGraphicsScene *scene, const std::shared_ptr<GameOverScreen> &gameOverScreen);
+    explicit GameManager(QGraphicsScene *scene, GameOverScreen* gameOverScreen);
     std::shared_ptr<PlayerItem> getLeftPlayer(){ return m_leftPlayer; }
     std::shared_ptr<PlayerItem>  getRightPlayer(){ return m_rightPlayer; }
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
-    [[nodiscard]] QTimer* getTimer() const { return m_timer.get(); }
+    [[nodiscard]] QTimer* getTimer() const { return m_timer; }
     float changeSpeedAfterResize(const QSize &size);
 
     void setGameOver(const bool gameOver){ isGameOver = gameOver;};
@@ -24,10 +24,10 @@ public slots:
     void stopFrame();
 
 private:
-    std::shared_ptr<GameOverScreen> m_gameOverScreen = nullptr;
+    GameOverScreen* m_gameOverScreen = nullptr;
     std::shared_ptr<PlayerItem> m_rightPlayer = nullptr;
     std::shared_ptr<PlayerItem> m_leftPlayer = nullptr;
-    std::unique_ptr<QTimer> m_timer = nullptr;
+    QTimer* m_timer = nullptr;
     qint64 m_lastUpdate = 0;
     std::function<void(qint64)> m_updateFunc;
     bool m_isInitSize = false;

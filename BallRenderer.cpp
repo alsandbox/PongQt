@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 #include <QRandomGenerator>
 
-BallRenderer::BallRenderer(QGraphicsScene *scene, const std::shared_ptr<LineRenderer> &lineRenderer)
+BallRenderer::BallRenderer(QGraphicsScene *scene, LineRenderer* lineRenderer)
     : m_scene(scene), m_line(lineRenderer) {
     ball = std::make_unique<QGraphicsRectItem>();
     m_scene->addItem(ball.get());

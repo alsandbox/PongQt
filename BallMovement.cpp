@@ -9,9 +9,9 @@
 #include "ScoreManager.h"
 
 
-BallMovement::BallMovement(const std::shared_ptr<BallRenderer> &ballRenderer,
+BallMovement::BallMovement(BallRenderer* ballRenderer,
                  const std::shared_ptr<ScoreManager> &scoreManager,
-                 const std::shared_ptr<GameManager> &gameManager)
+                 GameManager* gameManager)
     : m_gameManager(gameManager), m_ball(ballRenderer), m_scoreManager(scoreManager){
     calculateDirectionVectors();
     m_speed = m_baseSpeed;

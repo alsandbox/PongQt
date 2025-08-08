@@ -4,18 +4,21 @@
 #include "ScoreRenderer.h"
 
 
-Renderer::Renderer(QGraphicsScene *scene, const std::shared_ptr<GameManager> &gameManager,
-                   const std::shared_ptr<LineRenderer> &lineRenderer,
-                   const std::shared_ptr<PlayerRenderer> &playerRenderer,
-                   const std::shared_ptr<ScoreRenderer> &scoreRenderer,
-                   const std::shared_ptr<BallRenderer> &ballRenderer,
-                   const std::shared_ptr<ScoreManager> &scoreManager,
-                   const std::shared_ptr<BallMovement> &ballMovement, const std::shared_ptr<GameOverScreen> &gameOverScreen,
-                   QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
+Renderer::Renderer(QGraphicsScene *scene, GameManager* gameManager,
+             LineRenderer* lineRenderer,
+             const std::shared_ptr<PlayerRenderer> &playerRenderer,
+             const std::shared_ptr<ScoreRenderer> &scoreRenderer,
+             BallRenderer* ballRenderer,
+             const std::shared_ptr<ScoreManager> &scoreManager,
+             BallMovement* ballMovement,
+             GameOverScreen* gameOverScreen,
+             GameStartScreen* gameStartScreen,
+             QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
                                       m_lineRenderer(lineRenderer),
                                       m_playerRenderer(playerRenderer), m_scoreRenderer(scoreRenderer),
                                       m_ballRenderer(ballRenderer),
-                                      m_ballMovement(ballMovement), m_scoreManager(scoreManager) {
+                                      m_ballMovement(ballMovement), m_scoreManager(scoreManager),
+                                      m_gameOverScreen(gameOverScreen), m_gameStartScreen(gameStartScreen) {
     setBackgroundBrush(Qt::black);
     setRenderHint(QPainter::Antialiasing);
     setResizeAnchor(AnchorViewCenter);
