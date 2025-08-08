@@ -1,6 +1,5 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
-#include <QGraphicsView>
 #include <QTimer>
 
 #include "GameOverScreen.h"
@@ -16,8 +15,10 @@ public:
     [[nodiscard]] QTimer* getTimer() const { return m_timer; }
     float changeSpeedAfterResize(const QSize &size);
 
-    void setGameOver(const bool gameOver){ isGameOver = gameOver;};
+    void setGameOver(const bool gameOver){ isGameOver = gameOver;}
     bool getGameOver() const { return isGameOver; }
+    void setGameStart(const bool gameStart){ isGameStart = gameStart; }
+    bool getGameStart() const { return isGameStart; }
 
 public slots:
     void updateFrame(std::function<void(qint64)> updateFunc);
@@ -33,6 +34,7 @@ private:
     bool m_isInitSize = false;
     int m_initialWidth = 0;
     bool isGameOver = false;
+    bool isGameStart = false;
 };
 
 
