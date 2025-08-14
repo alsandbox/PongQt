@@ -11,7 +11,8 @@ class LineRenderer final : public QGraphicsLineItem{
     [[nodiscard]] QGraphicsLineItem* getLine() const {
         return lineItem;
     }
-    void eraseLine();
+    void hideLine() const;
+    void displayLine(const QRectF &rect);
 
     private:
     void displayLine(const QRectF &rect);

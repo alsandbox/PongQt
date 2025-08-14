@@ -24,10 +24,8 @@ void LineRenderer::displayLine(const QRectF &rect) {
     }
 }
 
-void LineRenderer::eraseLine() {
+void LineRenderer::hideLine() const {
     if (lineItem) {
-        m_scene->removeItem(lineItem);
-        delete lineItem;
-        lineItem = nullptr;
+        lineItem->hide();
     }
 }

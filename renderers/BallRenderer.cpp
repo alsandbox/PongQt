@@ -49,10 +49,9 @@ void BallRenderer::displayBall() const {
     ball->setRect(0, 0, ballSize, ballSize);
 }
 
-void BallRenderer::eraseBall() {
+void BallRenderer::hideBall() const {
     if (ball) {
-        m_scene->removeItem(ball.get());
-        ball = nullptr;
+        ball->hide();
     }
 }
 
