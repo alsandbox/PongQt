@@ -19,10 +19,10 @@ class ScoreRenderer : public IBoundable {
     public:
     explicit ScoreRenderer(QGraphicsScene *scene);
     void updateText(ScoreSide side, const QString& text) const;
-    void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event) const;
     void setMargin(double margin);
     void setBounds(const QRectF& bounds) override;
-    void displayScore(ScoreSide side, const ScoreItem &score);
+    void displayScore(ScoreSide side, const ScoreItem &score) const;
 
 private:
     ScoreItem m_leftScoreItem { nullptr, 0.20 };

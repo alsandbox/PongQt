@@ -25,7 +25,7 @@ void ScoreRenderer::updateText(const ScoreSide side, const QString& text) const 
     if (score.item) score.item->setPlainText(text);
 }
 
-void ScoreRenderer::resizeEvent(QResizeEvent* event) {
+void ScoreRenderer::resizeEvent(QResizeEvent* event) const {
     displayScore(ScoreSide::Left, m_leftScoreItem);
     displayScore(ScoreSide::Right, m_rightScoreItem);
 }
@@ -38,7 +38,7 @@ void ScoreRenderer::setBounds(const QRectF &bounds) {
     m_bounds = bounds;
 }
 
-void ScoreRenderer::displayScore(const ScoreSide side, const ScoreItem& score) {
+void ScoreRenderer::displayScore(const ScoreSide side, const ScoreItem& score) const {
     if (!score.item) return;
     score.item->setDefaultTextColor(Qt::white);
 
