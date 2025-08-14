@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 
-#include "fonts/FontConfig.h"
+#include "../fonts/FontConfig.h"
 
 ScoreRenderer::ScoreRenderer(QGraphicsScene* scene)
     : m_scene(scene) {

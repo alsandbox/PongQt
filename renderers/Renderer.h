@@ -1,13 +1,13 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "BallMovement.h"
-#include "ScoreManager.h"
+#include "../BallMovement.h"
+#include "../managers/ScoreManager.h"
 #include "BallRenderer.h"
-#include "GameOverScreen.h"
-#include "GameStartScreen.h"
+#include "../screens/GameOverScreen.h"
+#include "../screens/GameStartScreen.h"
 #include "LineRenderer.h"
-#include "PlayerItem.h"
+#include "../PlayerItem.h"
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 

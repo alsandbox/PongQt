@@ -1,9 +1,7 @@
 #include "PlayerRenderer.h"
 
-#include <QGraphicsView>
-#include <QWidget>
-#include "GameManager.h"
-#include "PlayerItem.h"
+#include "../managers/GameManager.h"
+#include "../PlayerItem.h"
 
 
 PlayerRenderer::PlayerRenderer(QGraphicsScene *scene, GameManager* gameManager)

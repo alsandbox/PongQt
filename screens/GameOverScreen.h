@@ -1,7 +1,7 @@
 ﻿#ifndef GAMEOVERSCREEN_H
 #define GAMEOVERSCREEN_H
-#include "BallRenderer.h"
-#include "LineRenderer.h"
+#include "../renderers/BallRenderer.h"
+#include "../renderers/LineRenderer.h"
 #include "ScreenBase.h"
 
 

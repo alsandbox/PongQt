@@ -14,36 +14,36 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(Pong main.cpp
-        Renderer.cpp
-        Renderer.h
-        ScoreRenderer.cpp
-        ScoreRenderer.h
-        PlayerRenderer.cpp
-        PlayerRenderer.h
-        BallRenderer.cpp
-        BallRenderer.h
+        renderers/Renderer.cpp
+        renderers/Renderer.h
+        renderers/ScoreRenderer.cpp
+        renderers/ScoreRenderer.h
+        renderers/PlayerRenderer.cpp
+        renderers/PlayerRenderer.h
+        renderers/BallRenderer.cpp
+        renderers/BallRenderer.h
         PlayerItem.cpp
         PlayerItem.h
         BallMovement.cpp
         BallMovement.h
         IBoundable.cpp
         IBoundable.h
-        LineRenderer.cpp
-        LineRenderer.h
-        ScoreManager.cpp
-        ScoreManager.h
-        GameManager.cpp
-        GameManager.h
-        RendererFactory.cpp
-        RendererFactory.h
-        GameOverScreen.cpp
-        GameOverScreen.h
+        renderers/LineRenderer.cpp
+        renderers/LineRenderer.h
+        managers/ScoreManager.cpp
+        managers/ScoreManager.h
+        managers/GameManager.cpp
+        managers/GameManager.h
+        renderers/RendererFactory.cpp
+        renderers/RendererFactory.h
+        screens/GameOverScreen.cpp
+        screens/GameOverScreen.h
         fonts/FontConfig.cpp
         fonts/FontConfig.h
-        ScreenBase.cpp
-        ScreenBase.h
-        GameStartScreen.cpp
-        GameStartScreen.h
+        screens/ScreenBase.cpp
+        screens/ScreenBase.h
+        screens/GameStartScreen.cpp
+        screens/GameStartScreen.h
 )
 target_link_libraries(Pong
         Qt::Core

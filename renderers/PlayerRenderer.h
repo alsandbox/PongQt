@@ -1,7 +1,7 @@
 #ifndef PLAYERRENDERER_H
 #define PLAYERRENDERER_H
 
-#include "GameManager.h"
+#include "../managers/GameManager.h"
 
 class PlayerRenderer final : public IBoundable {
 public:

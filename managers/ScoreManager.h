@@ -1,7 +1,7 @@
 #ifndef SCOREMANAGER_H
 #define SCOREMANAGER_H
 #include "GameManager.h"
-#include "ScoreRenderer.h"
+#include "../renderers/ScoreRenderer.h"
 
 
 class ScoreManager {

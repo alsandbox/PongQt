@@ -22,7 +22,6 @@ void GameManager::keyReleaseEvent(QKeyEvent *event) {
         m_rightPlayer->keyReleaseEvent(event);
 }
 
-
 float GameManager::changeSpeedAfterResize(const QSize& size) {
     if (!m_isInitSize) {
         m_initialWidth  = size.width();

@@ -6,7 +6,7 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
-#include "ScoreManager.h"
+#include "managers/ScoreManager.h"
 
 
 BallMovement::BallMovement(BallRenderer* ballRenderer,

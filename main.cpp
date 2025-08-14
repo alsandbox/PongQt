@@ -1,6 +1,6 @@
 #include <QApplication>
-#include "Renderer.h"
-#include "RendererFactory.h"
+#include "renderers/Renderer.h"
+#include "renderers/RendererFactory.h"
 
 
 int main(int argc, char* argv[]) {

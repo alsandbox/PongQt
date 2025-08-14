@@ -3,11 +3,11 @@
 
 #include <QObject>
 #include <memory>
-#include "BallRenderer.h"
+#include "renderers/BallRenderer.h"
 #include "IBoundable.h"
 #include "PlayerItem.h"
-#include "ScoreManager.h"
-#include "GameManager.h"
+#include "managers/ScoreManager.h"
+#include "managers/GameManager.h"
 
 class BallMovement final : public QObject, public IBoundable {
     Q_OBJECT

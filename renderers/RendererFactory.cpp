@@ -1,7 +1,7 @@
 #include "RendererFactory.h"
 
-#include "GameOverScreen.h"
-#include "GameStartScreen.h"
+#include "../screens/GameOverScreen.h"
+#include "../screens/GameStartScreen.h"
 
 Renderer *RendererFactory::createRenderer(QGraphicsScene *scene, QWidget *parent) {
     const auto gameStartScreen = new GameStartScreen(scene);
@@ -23,5 +23,4 @@ Renderer *RendererFactory::createRenderer(QGraphicsScene *scene, QWidget *parent
                      renderer, &Renderer::onStartGame);
 
     return renderer;
-
 }

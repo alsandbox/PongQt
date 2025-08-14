@@ -2,8 +2,8 @@
 #define GAMEMANAGER_H
 #include <QTimer>
 
-#include "GameOverScreen.h"
-#include "PlayerItem.h"
+#include "../screens/GameOverScreen.h"
+#include "../PlayerItem.h"
 
 class GameManager : public QGraphicsView {
 public:
