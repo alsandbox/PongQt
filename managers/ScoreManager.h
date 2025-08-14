@@ -8,6 +8,7 @@ class ScoreManager {
     public:
     ScoreManager(const std::shared_ptr<ScoreRenderer> &scoreRenderer, GameManager* gameManager);
     void addPoint(ScoreSide side, int score);
+    void resetScore();
 
 private:
     std::shared_ptr<ScoreRenderer> m_scoreRenderer;

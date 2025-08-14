@@ -3,7 +3,7 @@
 
 ScoreManager::ScoreManager(const std::shared_ptr<ScoreRenderer> &scoreRenderer,
                            GameManager* gameManager) : m_scoreRenderer(scoreRenderer),
-                                                                              m_gameManager(gameManager) {
+                                                       m_gameManager(gameManager) {
 }
 
 void ScoreManager::addPoint(const ScoreSide side, const int score) {
@@ -17,4 +17,12 @@ void ScoreManager::addPoint(const ScoreSide side, const int score) {
     }
 
     m_scoreRenderer->updateText(side, QString::number(targetScore));
+}
+
+void ScoreManager::resetScore() {
+    m_scoreLeft = 0;
+    m_scoreRenderer->updateText(ScoreSide::Left, QString::number(0));
+
+    m_scoreRight = 0;
+    m_scoreRenderer->updateText(ScoreSide::Right, QString::number(0));
 }
