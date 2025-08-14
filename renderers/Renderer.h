@@ -26,11 +26,9 @@ public:
              QWidget *parent);
     void resizeEvent(QResizeEvent *event) override;
     void showEvent(QShowEvent* event) override;
-    static std::shared_ptr<QGraphicsRectItem> createGameZone();
-    void updateGameZoneRect(qreal x, qreal y, qreal width, qreal height) const;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
-    void handleResizeFinished();
+
 
 public slots:
     void onStartGame() const;
@@ -38,6 +36,10 @@ public slots:
 
 private:
     void updateGame() const;
+    static std::shared_ptr<QGraphicsRectItem> createGameZone();
+    void updateGameZoneRect(qreal x, qreal y, qreal width, qreal height) const;
+    void handleResizeFinished();
+
     std::shared_ptr<QGraphicsRectItem> m_gameZone;
     GameManager* m_gameManager = nullptr;
     LineRenderer* m_lineRenderer = nullptr;
