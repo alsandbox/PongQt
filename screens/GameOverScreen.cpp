@@ -23,13 +23,20 @@ void GameOverScreen::addButtons()  {
         m_layout->addItem(m_restartProxyButton);
         connect(m_restartButton, &QPushButton::pressed, this, &GameOverScreen::onRestartButtonPressed);
     }
+    else {
+        m_restartProxyButton->show();
+    }
 
-    createExitButton();
-    if (m_exitProxyButton) {
+    if (!m_exitProxyButton) {
+        createExitButton();
+
         m_buttons.append(m_exitButton);
         m_proxyButtons.append(m_exitProxyButton);
         m_layout->addItem(m_exitProxyButton);
         connect(m_exitButton, &QPushButton::pressed, this, &GameOverScreen::onExitButtonPressed);
+    }
+    else {
+        m_exitProxyButton->show();
     }
 
     m_layout->setAlignment(m_restartProxyButton, Qt::AlignHCenter);
@@ -40,7 +47,12 @@ void GameOverScreen::addButtons()  {
 }
 
 void GameOverScreen::onRestartButtonPressed() {
+    m_lineRenderer->setVisible(true);
+    m_ballRenderer->setVisible(true);
 
+    m_restartProxyButton->hide();
+    m_exitProxyButton->hide();
+    emit startButtonPressed();
 }
 
 void GameOverScreen::updateLayout(const QSize &size) {

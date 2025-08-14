@@ -21,6 +21,7 @@ Renderer *RendererFactory::createRenderer(QGraphicsScene *scene, QWidget *parent
 
     QObject::connect(gameStartScreen, &GameStartScreen::startButtonPressed,
                      renderer, &Renderer::onStartGame);
-
+    QObject::connect(gameOverScreen, &GameOverScreen::startButtonPressed,
+                     renderer, &Renderer::onRestartGame);
     return renderer;
 }

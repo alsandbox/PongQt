@@ -113,6 +113,26 @@ void Renderer::onStartGame() const {
     m_gameManager ? void() : throw std::runtime_error("GameManager is null");
     m_gameManager->setGameStart(true);
 
+    m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
+    m_ballRenderer->spawnBall();
+
+    m_lineRenderer->setVisible(true);
+
+    updateGame();
+}
+
+void Renderer::onRestartGame() const {
+    m_gameManager ? void() : throw std::runtime_error("GameManager is null");
+    m_gameManager->setGameOver(false);
+
+    m_scoreManager ? void() : throw std::runtime_error("ScoreManager is null");
+    m_scoreManager->resetScore();
+
+    m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
+    m_ballRenderer->spawnBall();
+
+    m_ballMovement ? void() : throw std::runtime_error("BallMovement is null");
+    m_ballMovement->setUpDirection();
 
     updateGame();
 }
@@ -120,6 +140,8 @@ void Renderer::onStartGame() const {
 void Renderer::showEvent(QShowEvent *event) {
     m_gameStartScreen ? void() : throw std::runtime_error("GameStartScreen is null");
     m_gameStartScreen->showEvent(event);
+
+    m_lineRenderer->setVisible(false);
 
     if (m_ballMovement)
         m_ballMovement->showEvent(event);

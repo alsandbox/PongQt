@@ -32,10 +32,6 @@ void BallRenderer::resizeEvent(const QResizeEvent* event) {
     }
 }
 
-void BallRenderer::showEvent(QShowEvent *event) {
-    spawnBall();
-}
-
 void BallRenderer::displayBall() const {
     const QPen pen(Qt::white);
     const QBrush brush(Qt::white);

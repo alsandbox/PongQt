@@ -34,6 +34,7 @@ public:
 
 public slots:
     void onStartGame() const;
+    void onRestartGame() const;
 
 private:
     void updateGame() const;

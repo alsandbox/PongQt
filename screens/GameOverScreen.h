@@ -16,7 +16,7 @@ public:
     void updateLayout(const QSize &size) override;
 
 private:
-    static void onRestartButtonPressed();
+    void onRestartButtonPressed();
 
     LineRenderer *m_lineRenderer = nullptr;
     BallRenderer *m_ballRenderer = nullptr;
