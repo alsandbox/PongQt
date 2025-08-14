@@ -6,11 +6,15 @@
 
 
 class ScreenBase : public QGraphicsView {
+    Q_OBJECT
 public:
     explicit ScreenBase(QGraphicsScene *scene);
     virtual void removeElements() = 0;
     void resizeEvent(QResizeEvent *event) override;
     void updateButton(QPushButton *&pushButton, QGraphicsProxyWidget *&button);
+
+    signals:
+    void startButtonPressed();
 
 protected:
     void createSpecifiedButton(QPushButton *&pushButton, QGraphicsProxyWidget *&button, const QString &title) const;

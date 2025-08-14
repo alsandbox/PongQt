@@ -14,9 +14,6 @@ public:
     void removeElements() override;
     void showEvent(QShowEvent* event) override;
 
-    signals:
-        void startButtonPressed();
-
 private:
     void onStartButtonPressed();
 
