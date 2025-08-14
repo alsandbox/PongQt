@@ -42,10 +42,11 @@ void ScoreRenderer::displayScore(const ScoreSide side, const ScoreItem& score) c
     if (!score.item) return;
     score.item->setDefaultTextColor(Qt::white);
 
-    m_font.setPointSizeF(m_scene->sceneRect().height() / 10.0);
     FontConfig::init();
     QFont customFont = FontConfig::font;
-    customFont.setPointSize(32);
+
+    constexpr double scaleFactor = 10.0;
+    customFont.setPointSize(m_scene->sceneRect().height() / scaleFactor);
     score.item->setFont(customFont);
 
     const QRectF rect = m_scene->sceneRect();
