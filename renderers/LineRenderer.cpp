@@ -5,12 +5,6 @@
 LineRenderer::LineRenderer(QGraphicsScene *scene) : m_scene(scene) {
 }
 
-void LineRenderer::resizeEvent(QResizeEvent* event, const QRectF& rect) {
-    if (!lineItem) {
-         displayLine(rect);
-    }
-}
-
 void LineRenderer::displayLine(const QRectF &rect) {
     constexpr qreal half = 2;
     if (!lineItem) {

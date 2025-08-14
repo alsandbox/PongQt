@@ -58,7 +58,7 @@ void Renderer::resizeEvent(QResizeEvent *event) {
 
 
     if (m_lineRenderer && !m_gameManager->getGameOver()) {
-        m_lineRenderer->resizeEvent(event, rect);
+        m_lineRenderer->displayLine(rect);
     }
     if (m_playerRenderer) {
         m_playerRenderer->setBounds(m_gameZone->sceneBoundingRect());

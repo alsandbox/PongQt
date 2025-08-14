@@ -7,7 +7,6 @@
 class LineRenderer final : public QGraphicsLineItem{
     public:
     explicit LineRenderer(QGraphicsScene *scene);
-    void resizeEvent(QResizeEvent* event, const QRectF& rect);
     [[nodiscard]] QGraphicsLineItem* getLine() const {
         return lineItem;
     }
@@ -15,8 +14,6 @@ class LineRenderer final : public QGraphicsLineItem{
     void displayLine(const QRectF &rect);
 
     private:
-    void displayLine(const QRectF &rect);
-
     QGraphicsLineItem* lineItem = nullptr;
     QGraphicsScene* m_scene = nullptr;
 };
