@@ -113,18 +113,8 @@ void Renderer::onStartGame() const {
     m_gameManager ? void() : throw std::runtime_error("GameManager is null");
     m_gameManager->setGameStart(true);
 
-    if (m_leftPlayer && m_rightPlayer) {
-        if (!m_gameManager->getTimer()->isActive()) {
-                m_gameManager->updateFrame([this](const qint64 deltaMs) {
-                if (m_gamePaused)
-                    return;
 
-                m_ballMovement->moveBall(deltaMs);
-                m_leftPlayer->movePlayer(deltaMs);
-                m_rightPlayer->movePlayer(deltaMs);
-            });
-        }
-    }
+    updateGame();
 }
 
 void Renderer::showEvent(QShowEvent *event) {
@@ -136,6 +126,21 @@ void Renderer::showEvent(QShowEvent *event) {
 
     m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
     m_ballRenderer->showEvent(event);
+}
+
+void Renderer::updateGame() const {
+    if (m_leftPlayer && m_rightPlayer) {
+        if (!m_gameManager->getTimer()->isActive()) {
+            m_gameManager->updateFrame([this](const qint64 deltaMs) {
+            if (m_gamePaused)
+                return;
+
+            m_ballMovement->moveBall(deltaMs);
+            m_leftPlayer->movePlayer(deltaMs);
+            m_rightPlayer->movePlayer(deltaMs);
+        });
+        }
+    }
 }
 
 std::shared_ptr<QGraphicsRectItem> Renderer::createGameZone() {

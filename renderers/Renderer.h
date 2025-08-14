@@ -36,6 +36,7 @@ public slots:
     void onStartGame() const;
 
 private:
+    void updateGame() const;
     std::shared_ptr<QGraphicsRectItem> m_gameZone;
     GameManager* m_gameManager = nullptr;
     LineRenderer* m_lineRenderer = nullptr;
