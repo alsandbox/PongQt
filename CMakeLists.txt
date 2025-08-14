@@ -14,6 +14,7 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(Pong main.cpp
+        icon.qrc
         renderers/Renderer.cpp
         renderers/Renderer.h
         renderers/ScoreRenderer.cpp

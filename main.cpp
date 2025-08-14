@@ -4,7 +4,9 @@
 
 
 int main(int argc, char* argv[]) {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    app.setWindowIcon(QIcon(":/icon"));
+
     QGraphicsScene scene(0, 0, 200, 100);
 
     const auto renderer = RendererFactory::createRenderer(&scene);
