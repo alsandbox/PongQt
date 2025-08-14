@@ -22,8 +22,13 @@ void LineRenderer::displayLine(const QRectF &rect) {
     }
 }
 
-void LineRenderer::hideLine() const {
-    if (lineItem) {
+void LineRenderer::setVisible(const bool visible) const {
+    lineItem ? void() : throw std::runtime_error("Line Item is null");
+
+    if (!visible) {
         lineItem->hide();
+    }
+    else {
+        lineItem->show();
     }
 }

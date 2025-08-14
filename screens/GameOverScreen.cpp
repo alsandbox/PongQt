@@ -9,8 +9,8 @@ GameOverScreen::GameOverScreen(QGraphicsScene *scene, LineRenderer* lineRenderer
 }
 
 void GameOverScreen::removeElements() {
-    m_lineRenderer->hideLine();
-    m_ballRenderer->hideBall();
+    m_lineRenderer->setVisible(false);
+    m_ballRenderer->setVisible(false);
 }
 
 void GameOverScreen::addButtons()  {

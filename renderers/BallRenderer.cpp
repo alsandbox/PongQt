@@ -49,9 +49,14 @@ void BallRenderer::displayBall() const {
     ball->setRect(0, 0, ballSize, ballSize);
 }
 
-void BallRenderer::hideBall() const {
-    if (ball) {
+void BallRenderer::setVisible(const bool visible) const {
+    ball ? void() : throw std::runtime_error("Ball is null");
+
+    if (!visible) {
         ball->hide();
+    }
+    else {
+        ball->show();
     }
 }
 

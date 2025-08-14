@@ -16,7 +16,7 @@ public:
     void showEvent(QShowEvent *event);
     void displayBall() const;
 
-    void hideBall() const;
+    void setVisible(bool visible) const;
     [[nodiscard]] QGraphicsRectItem *getBall() const {
         return ball.get();
     }

@@ -10,7 +10,7 @@ class LineRenderer final : public QGraphicsLineItem{
     [[nodiscard]] QGraphicsLineItem* getLine() const {
         return lineItem;
     }
-    void hideLine() const;
+    void setVisible(bool visible) const;
     void displayLine(const QRectF &rect);
 
     private:
