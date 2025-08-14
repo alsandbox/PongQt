@@ -154,6 +154,10 @@ void Renderer::updateGameZoneRect(const qreal x, const qreal y, const qreal widt
 }
 
 void Renderer::keyPressEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Escape) {
+        QApplication::quit();
+        return;
+    }
     QGraphicsView::keyPressEvent(event);
     m_gameManager->keyPressEvent(event);
 }
