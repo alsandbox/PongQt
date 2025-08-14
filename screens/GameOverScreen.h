@@ -20,7 +20,7 @@ private:
 
     LineRenderer *m_lineRenderer = nullptr;
     BallRenderer *m_ballRenderer = nullptr;
-    QGraphicsProxyWidget *m_restartPushButton = nullptr;
+    QGraphicsProxyWidget *m_restartProxyButton = nullptr;
     QPushButton *m_restartButton = nullptr;
 };
 
