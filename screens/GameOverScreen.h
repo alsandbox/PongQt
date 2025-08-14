@@ -6,11 +6,14 @@
 
 
 class GameOverScreen final : public ScreenBase {
+    Q_OBJECT
+
 public:
     GameOverScreen(QGraphicsScene *scene, LineRenderer *lineRenderer, BallRenderer *ballRenderer);
 
     void removeElements() override;
     void addButtons() override;
+    void updateLayout(const QSize &size) override;
 
 private:
     static void onRestartButtonPressed();

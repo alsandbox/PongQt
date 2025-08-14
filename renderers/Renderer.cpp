@@ -50,6 +50,13 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     constexpr double gameZoneWidthRatio = 4.0;
     updateGameZoneRect(rect.x() + margin, rect.y(), margin * gameZoneWidthRatio, rect.height());
 
+    m_gameStartScreen ? void() : throw std::runtime_error("Game Start Screen is null");
+    m_gameStartScreen->updateLayout(event->size());
+
+    m_gameOverScreen ? void() : throw std::runtime_error("Game Start Screen is null");
+    m_gameOverScreen->updateLayout(event->size());
+
+
     if (m_lineRenderer && !m_gameManager->getGameOver()) {
         m_lineRenderer->resizeEvent(event, rect);
     }
