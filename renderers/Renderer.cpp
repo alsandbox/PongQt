@@ -5,15 +5,15 @@
 
 
 Renderer::Renderer(QGraphicsScene *scene, GameManager* gameManager,
-             LineRenderer* lineRenderer,
-             const std::shared_ptr<PlayerRenderer> &playerRenderer,
-             const std::shared_ptr<ScoreRenderer> &scoreRenderer,
-             BallRenderer* ballRenderer,
-             const std::shared_ptr<ScoreManager> &scoreManager,
-             BallMovement* ballMovement,
-             GameOverScreen* gameOverScreen,
-             GameStartScreen* gameStartScreen,
-             QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
+                   LineRenderer* lineRenderer,
+                   const std::shared_ptr<PlayerRenderer> &playerRenderer,
+                   const std::shared_ptr<ScoreRenderer> &scoreRenderer,
+                   BallRenderer* ballRenderer,
+                   const std::shared_ptr<ScoreManager> &scoreManager,
+                   BallMovement* ballMovement,
+                   GameOverScreen* gameOverScreen,
+                   GameStartScreen* gameStartScreen,
+                   QWidget *parent) : QGraphicsView(scene, parent), m_gameManager(gameManager),
                                       m_lineRenderer(lineRenderer),
                                       m_playerRenderer(playerRenderer), m_scoreRenderer(scoreRenderer),
                                       m_ballRenderer(ballRenderer),
@@ -48,6 +48,7 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     constexpr double totalParts = 6.0;
     const double margin = rect.width() / totalParts;
     constexpr double gameZoneWidthRatio = 4.0;
+
     updateGameZoneRect(rect.x() + margin, rect.y(), margin * gameZoneWidthRatio, rect.height());
 
     m_gameStartScreen ? void() : throw std::runtime_error("Game Start Screen is null");
