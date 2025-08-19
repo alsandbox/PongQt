@@ -38,10 +38,10 @@ private:
 
     QRectF m_bounds{};
 
-    QVector2D m_direction;
-    QVector2D m_velocity;
-    QList<QVector2D> m_directionsRight;
-    QList<QVector2D> m_directionsLeft;
+    QVector2D m_direction{};
+    QVector2D m_velocity{};
+    QList<QVector2D> m_directionsRight{};
+    QList<QVector2D> m_directionsLeft{};
 
     QGraphicsRectItem *m_ballItem = nullptr;
 
@@ -50,7 +50,7 @@ private:
     bool m_collidingWithRight = false;
 
     float m_baseSpeed = 300.0;
-    float m_speed;
+    float m_speed{};
     int m_index{};
     int m_maxRandomBound = 2;
 };
