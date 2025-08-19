@@ -48,9 +48,13 @@ void BallMovement::resizeEvent(const QResizeEvent *event, const float scaleRatio
 
 void BallMovement::showEvent(QShowEvent *event) {
     m_ballItem = m_ball->getBall();
+
     m_leftPlayer->setPlayerPartitions();
     m_rightPlayer->setPlayerPartitions();
+    setUpDirection();
+}
 
+void BallMovement::setUpDirection() {
     m_direction = setNewAngle();
     if (QRandomGenerator::global()->bounded(m_maxRandomBound))
         m_direction.setY(-m_direction.y());

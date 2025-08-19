@@ -18,6 +18,7 @@ public:
     void resizeEvent(const QResizeEvent *event, float scaleRatio);
     void showEvent(QShowEvent *event);
     void moveBall();
+    void setUpDirection();
     void setBounds(const QRectF &bounds) override;
 
 
