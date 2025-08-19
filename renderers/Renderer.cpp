@@ -25,7 +25,7 @@ Renderer::Renderer(QGraphicsScene *scene, GameManager* gameManager,
     setRenderHint(QPainter::Antialiasing);
     setResizeAnchor(AnchorViewCenter);
     fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
-    setViewportUpdateMode(FullViewportUpdate);
+    setViewportUpdateMode(BoundingRectViewportUpdate);
 
     m_gameZone = createGameZone();
     scene->addItem(m_gameZone.get());
