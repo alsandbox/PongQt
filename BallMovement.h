@@ -17,10 +17,9 @@ public:
                  GameManager* gameManager);
     void resizeEvent(const QResizeEvent *event, float scaleRatio);
     void showEvent(QShowEvent *event);
-    void moveBall();
     void setUpDirection();
+    void moveBall(qint64 deltaMs);
     void setBounds(const QRectF &bounds) override;
-
 
 private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);
@@ -29,6 +28,7 @@ private:
     QVector2D setNewAngle();
     void calculateDirectionVectors();
     void calculateDirectionVelocity();
+    bool setPositionAfterResize(const QResizeEvent *event);
 
     GameManager* m_gameManager = nullptr;
     BallRenderer* m_ball = nullptr;

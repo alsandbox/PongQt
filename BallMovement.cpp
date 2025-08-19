@@ -42,7 +42,32 @@ void BallMovement::calculateDirectionVectors() {
     }
 }
 
+bool BallMovement::setPositionAfterResize(const QResizeEvent *event) {
+    const int oldWidth = event->oldSize().width();
+    const int oldHeight = event->oldSize().height();
+    const int newWidth = event->size().width();
+    const int newHeight = event->size().height();
+
+    if (oldWidth <= 0 || oldHeight <= 0) return true;
+
+    const QPointF relativePos(
+        m_position.x() / oldWidth,
+        m_position.y() / oldHeight
+    );
+
+    m_position = QPointF(
+        relativePos.x() * newWidth,
+        relativePos.y() * newHeight
+    );
+
+    if (m_ballItem)
+        m_ballItem->setPos(m_position);
+    return false;
+}
+
 void BallMovement::resizeEvent(const QResizeEvent *event, const float scaleRatio) {
+    if (setPositionAfterResize(event)) return;
+
     m_speed = m_baseSpeed * scaleRatio;
 }
 
