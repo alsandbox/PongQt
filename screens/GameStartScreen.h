@@ -3,7 +3,7 @@
 #include "ScreenBase.h"
 #include <QGraphicsProxyWidget>
 
-class GameStartScreen : public ScreenBase {
+class GameStartScreen final : public ScreenBase {
     Q_OBJECT
 public:
     explicit GameStartScreen(QGraphicsScene *scene);
