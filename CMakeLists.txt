@@ -52,3 +52,9 @@ target_link_libraries(Pong
         Qt::Widgets
 )
 
+add_custom_command(TARGET Pong POST_BUILD
+        COMMAND "C:/Qt/6.9.1/mingw_64/bin/windeployqt.exe"
+        "$<TARGET_FILE:Pong>"
+)
+
+set_target_properties(Pong PROPERTIES WIN32_EXECUTABLE TRUE)
