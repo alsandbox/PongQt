@@ -53,6 +53,8 @@ private:
     float m_speed{};
     int m_index{};
     int m_maxRandomBound = 2;
+    QPointF m_position{};
+    QPointF m_relativePos{};
 };
 
 #endif // BALLMOVEMENT_H

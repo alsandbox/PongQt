@@ -71,17 +71,24 @@ QVector2D BallMovement::setNewAngle() {
     return m_directionsRight[m_index];
 }
 
-void BallMovement::moveBall() {
-    const QPointF velocity = m_direction.toPointF() * m_speed;
+void BallMovement::moveBall(const qint64 deltaMs) {
+    m_position = m_ballItem->pos();
+    float deltaSec = deltaMs / 1000.0f;
+    deltaSec = qMin(deltaSec, 0.05f);
 
-    m_ballItem = m_ball->getBall();
+    const QPointF velocity = m_direction.toPointF() * m_speed * deltaSec;
+    m_position += velocity;
 
-    const QPointF newPos = m_ballItem->pos() + velocity;
+    const QRectF ballBounds = m_ballItem->boundingRect().translated(m_position);
 
-    const QRectF ballBounds = m_ballItem->boundingRect().translated(newPos);
+    if (ballBounds.top() < m_bounds.top()) {
+        m_direction.setY(qAbs(m_direction.y()));
+        m_position.setY(m_bounds.top() - m_ballItem->boundingRect().top());
+    }
 
-    if (ballBounds.bottom() > m_bounds.bottom() || ballBounds.top() <= 0) {
-        m_direction.setY(-m_direction.y());
+    if (ballBounds.bottom() > m_bounds.bottom()) {
+        m_direction.setY(-qAbs(m_direction.y()));
+        m_position.setY(m_bounds.bottom() - m_ballItem->boundingRect().bottom());
     }
 
     if (handleOutOfBounds(ballBounds.left(), ballBounds.right())) {
@@ -105,7 +112,7 @@ void BallMovement::moveBall() {
         m_collidingWithRight = false;
     }
 
-    m_ballItem->setPos(newPos);
+    m_ballItem->setPos(m_position);
 }
 
 bool BallMovement::handleOutOfBounds(const qreal ballLeft, const qreal ballRight) {
@@ -151,14 +158,14 @@ void BallMovement::scheduleRespawn() {
             m_direction.setY(-m_direction.y());
 
         calculateDirectionVelocity();
-        moveBall();
+        m_position = m_ballItem->pos();
         self->m_waitingToRespawn = false;
     });
 }
 
 void BallMovement::calculateDirectionVelocity() {
-    m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
     m_direction.normalize();
+    m_velocity = {m_direction.x() * m_speed, m_direction.y() * m_speed};
 }
 
 void BallMovement::detectPlayer(const std::shared_ptr<PlayerItem> &player) {
