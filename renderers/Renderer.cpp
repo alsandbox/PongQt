@@ -44,8 +44,10 @@ void Renderer::resizeEvent(QResizeEvent *event) {
     m_resizeTimer.start(50);
 
     const QRectF rect(QPointF(0, 0), QSizeF(size()));
-    scene()->setSceneRect(rect);
+    if (rect.width() > 0 && rect.height() > 0) {
     fitInView(rect, Qt::IgnoreAspectRatio);
+    scene()->setSceneRect(rect);
+}
 
     constexpr double totalParts = 6.0;
     const double margin = rect.width() / totalParts;
