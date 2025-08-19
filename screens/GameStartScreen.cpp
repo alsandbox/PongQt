@@ -76,6 +76,7 @@ void GameStartScreen::showEvent(QShowEvent *event) {
 }
 
 void GameStartScreen::onStartButtonPressed() {
-    emit startButtonPressed();
     removeElements();
+    emit startButtonPressed();
+
 }
