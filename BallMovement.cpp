@@ -208,6 +208,10 @@ void BallMovement::detectPlayer(const std::shared_ptr<PlayerItem> &player) {
             m_index = i;
             break;
         }
+
+        if (y < 0) {
+            m_index = 0;
+        }
     }
 
     constexpr int invalidIndex = -1;
