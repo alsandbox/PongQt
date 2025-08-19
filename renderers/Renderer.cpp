@@ -145,9 +145,6 @@ void Renderer::showEvent(QShowEvent *event) {
 
     if (m_ballMovement)
         m_ballMovement->showEvent(event);
-
-    m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
-    m_ballRenderer->showEvent(event);
 }
 
 void Renderer::updateGame() const {
