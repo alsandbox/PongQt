@@ -1,7 +1,6 @@
 #ifndef BALLMOVEMENT_H
 #define BALLMOVEMENT_H
 
-#include <QObject>
 #include <memory>
 #include "renderers/BallRenderer.h"
 #include "IBoundable.h"
