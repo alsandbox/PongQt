@@ -19,6 +19,7 @@ public:
     void setUpDirection();
     void moveBall(qint64 deltaMs);
     void setBounds(const QRectF &bounds) override;
+    void setPositionFromRenderer(const QPointF &pos);
 
 private:
     void detectPlayer(const std::shared_ptr<PlayerItem> &player);

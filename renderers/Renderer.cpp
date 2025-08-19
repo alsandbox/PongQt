@@ -121,6 +121,9 @@ void Renderer::onStartGame() const {
     m_ballRenderer ? void() : throw std::runtime_error("BallRenderer is null");
     m_ballRenderer->spawnBall();
 
+    m_ballMovement ? void() : throw std::runtime_error("Ball Movement is null");
+    m_ballMovement->setPositionFromRenderer(m_ballRenderer->getBall()->pos());
+
     m_lineRenderer->setVisible(true);
 
     updateGame();

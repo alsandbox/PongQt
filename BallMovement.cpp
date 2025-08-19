@@ -63,6 +63,12 @@ bool BallMovement::setPositionAfterResize(const QResizeEvent *event) {
     return false;
 }
 
+void BallMovement::setPositionFromRenderer(const QPointF& pos) {
+    m_position = pos;
+    if (m_ballItem)
+        m_ballItem->setPos(m_position);
+}
+
 void BallMovement::resizeEvent(const QResizeEvent *event, const float scaleRatio) {
     if (setPositionAfterResize(event)) return;
 
