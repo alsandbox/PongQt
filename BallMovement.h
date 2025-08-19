@@ -25,6 +25,8 @@ private:
     bool handleOutOfBounds(qreal ballLeft, qreal ballRight);
     void scheduleRespawn();
     QVector2D setNewAngle();
+    bool handleBounds();
+    void handlePlayerCollision();
     void calculateDirectionVectors();
     void calculateDirectionVelocity();
     bool setPositionAfterResize(const QResizeEvent *event);

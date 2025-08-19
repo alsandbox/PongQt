@@ -94,14 +94,7 @@ QVector2D BallMovement::setNewAngle() {
     return m_directionsRight[m_index];
 }
 
-void BallMovement::moveBall(const qint64 deltaMs) {
-    m_position = m_ballItem->pos();
-    float deltaSec = deltaMs / 1000.0f;
-    deltaSec = qMin(deltaSec, 0.05f);
-
-    const QPointF velocity = m_direction.toPointF() * m_speed * deltaSec;
-    m_position += velocity;
-
+bool BallMovement::handleBounds() {
     const QRectF ballBounds = m_ballItem->boundingRect().translated(m_position);
 
     if (ballBounds.top() < m_bounds.top()) {
@@ -115,9 +108,12 @@ void BallMovement::moveBall(const qint64 deltaMs) {
     }
 
     if (handleOutOfBounds(ballBounds.left(), ballBounds.right())) {
-        return;
+        return true;
     }
+    return false;
+}
 
+void BallMovement::handlePlayerCollision() {
     const bool collidesLeft = m_ballItem->collidesWithItem(m_leftPlayer.get());
     const bool collidesRight = m_ballItem->collidesWithItem(m_rightPlayer.get());
 
@@ -134,6 +130,18 @@ void BallMovement::moveBall(const qint64 deltaMs) {
     } else if (!collidesRight) {
         m_collidingWithRight = false;
     }
+}
+
+void BallMovement::moveBall(const qint64 deltaMs) {
+    float deltaSec = deltaMs / 1000.0f;
+   deltaSec = qMin(deltaSec, 0.05f);
+
+    const QPointF velocity = m_direction.toPointF() * m_speed;
+    m_position += velocity * deltaSec;
+
+    if (handleBounds()) return;
+
+    handlePlayerCollision();
 
     m_ballItem->setPos(m_position);
 }
