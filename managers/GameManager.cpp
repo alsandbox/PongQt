@@ -40,7 +40,9 @@ void GameManager::updateFrame(std::function<void(qint64)> updateFunc) {
     m_updateFunc = std::move(updateFunc);
 
     if (!m_timer->isActive() && !isGameOver) {
-        m_timer->start();
+        constexpr int frameIntervalMs = 16;
+        m_timer->start(frameIntervalMs);
+
         m_lastUpdate = QDateTime::currentMSecsSinceEpoch();
         connect(m_timer, &QTimer::timeout, this, [this]() {
             const auto now = QDateTime::currentMSecsSinceEpoch();
