@@ -8,7 +8,6 @@ BallRenderer::BallRenderer(QGraphicsScene *scene, LineRenderer* lineRenderer)
     : m_scene(scene), m_line(lineRenderer) {
     ball = std::make_unique<QGraphicsRectItem>();
     m_scene->addItem(ball.get());
-    ball->setCacheMode(DeviceCoordinateCache);
 }
 
 void BallRenderer::spawnBall() const {
