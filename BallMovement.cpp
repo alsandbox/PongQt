@@ -1,7 +1,5 @@
 #include "BallMovement.h"
 
-#include <QCoreApplication>
-#include <QDebug>
 #include <QPointer>
 #include <QRandomGenerator>
 #include <QtMath>
@@ -10,8 +8,8 @@
 
 
 BallMovement::BallMovement(BallRenderer* ballRenderer,
-                 const std::shared_ptr<ScoreManager> &scoreManager,
-                 GameManager* gameManager)
+                           const std::shared_ptr<ScoreManager> &scoreManager,
+                           GameManager* gameManager)
     : m_gameManager(gameManager), m_ball(ballRenderer), m_scoreManager(scoreManager){
     calculateDirectionVectors();
     m_speed = m_baseSpeed;
