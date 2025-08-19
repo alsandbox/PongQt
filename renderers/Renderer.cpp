@@ -1,5 +1,7 @@
 #include "Renderer.h"
 
+#include <QApplication>
+
 #include "PlayerRenderer.h"
 #include "ScoreRenderer.h"
 
