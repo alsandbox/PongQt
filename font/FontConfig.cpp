@@ -11,7 +11,8 @@ void FontConfig::init() {
     int id = QFontDatabase::addApplicationFont(":/font/bit5x3.ttf");
     if (id != -1) {
         const QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-        font = QFont(family, 14, QFont::Bold);
+        constexpr int pointSize = 14;
+        font = QFont(family, pointSize, QFont::Bold);
     } else {
         qWarning() << "Font load failed.";
     }
