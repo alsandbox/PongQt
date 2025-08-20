@@ -13,8 +13,13 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
+qt_add_resources(RESOURCES
+        icon/icon.qrc
+        font/font.qrc
+        style/style.qrc)
+
 add_executable(Pong main.cpp
-        icon.qrc
+        ${RESOURCES}
         renderers/Renderer.cpp
         renderers/Renderer.h
         renderers/ScoreRenderer.cpp

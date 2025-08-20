@@ -8,7 +8,7 @@ void FontConfig::init() {
     static bool initialized = false;
     if (initialized) return;
 
-    int id = QFontDatabase::addApplicationFont("../fonts/bit5x3.ttf");
+    int id = QFontDatabase::addApplicationFont(":/font/bit5x3.ttf");
     if (id != -1) {
         const QString family = QFontDatabase::applicationFontFamilies(id).at(0);
         font = QFont(family, 14, QFont::Bold);

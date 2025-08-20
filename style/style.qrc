@@ -1,0 +1,5 @@
+﻿<RCC>
+    <qresource prefix="/style">
+        <file>button_style.qss</file>
+    </qresource>
+</RCC>

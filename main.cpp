@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
-    app.setWindowIcon(QIcon(":/icon"));
+    QApplication::setWindowIcon(QIcon(":/icon/pong.png"));
 
     QGraphicsScene scene(0, 0, 200, 100);
 

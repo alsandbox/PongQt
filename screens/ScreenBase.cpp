@@ -8,7 +8,7 @@
 
 
 ScreenBase::ScreenBase(QGraphicsScene *scene) : m_scene(scene) {
-    QFile file("../style/button_style.qss");
+    QFile file(":/style/button_style.qss");
     file.open(QFile::ReadOnly);
     m_style = QLatin1String(file.readAll());
 
