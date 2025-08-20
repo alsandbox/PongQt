@@ -19,3 +19,4 @@ You can also close the game at any moment using the Esc key.
 ## Gifs
 
 ## Build
+[Pong v1.0.0 (Windows)](https://github.com/alsandbox/PongQt/releases/tag/v1.0.0)
