@@ -28,12 +28,12 @@ add_executable(Pong main.cpp
         renderers/PlayerRenderer.h
         renderers/BallRenderer.cpp
         renderers/BallRenderer.h
-        PlayerItem.cpp
-        PlayerItem.h
-        BallMovement.cpp
-        BallMovement.h
-        IBoundable.cpp
-        IBoundable.h
+        gameplay/PlayerItem.cpp
+        gameplay/PlayerItem.h
+        gameplay/BallMovement.cpp
+        gameplay/BallMovement.h
+        renderers/IBoundable.cpp
+        renderers/IBoundable.h
         renderers/LineRenderer.cpp
         renderers/LineRenderer.h
         managers/ScoreManager.cpp

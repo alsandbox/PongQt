@@ -5,7 +5,7 @@
 #include <QResizeEvent>
 #include <qfont.h>
 
-#include "../IBoundable.h"
+#include "IBoundable.h"
 
 enum class ScoreSide { Left, Right };
 

@@ -1,7 +1,7 @@
 #ifndef BALLRENDERER_H
 #define BALLRENDERER_H
 
-#include "../IBoundable.h"
+#include "IBoundable.h"
 #include "LineRenderer.h"
 
 

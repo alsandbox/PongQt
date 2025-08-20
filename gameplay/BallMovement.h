@@ -2,11 +2,11 @@
 #define BALLMOVEMENT_H
 
 #include <memory>
-#include "renderers/BallRenderer.h"
-#include "IBoundable.h"
+#include "../renderers/BallRenderer.h"
+#include "../renderers/IBoundable.h"
 #include "PlayerItem.h"
-#include "managers/ScoreManager.h"
-#include "managers/GameManager.h"
+#include "../managers/ScoreManager.h"
+#include "../managers/GameManager.h"
 
 class BallMovement final : public QObject, public IBoundable {
     Q_OBJECT

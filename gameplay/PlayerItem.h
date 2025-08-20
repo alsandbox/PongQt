@@ -5,7 +5,7 @@
 #include <QResizeEvent>
 #include <qset.h>
 
-#include "IBoundable.h"
+#include "../renderers/IBoundable.h"
 
 
 class PlayerItem final : public QGraphicsRectItem, public IBoundable {

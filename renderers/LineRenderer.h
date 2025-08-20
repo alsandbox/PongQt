@@ -1,7 +1,7 @@
 #ifndef LINERENDERER_H
 #define LINERENDERER_H
 
-#include "../PlayerItem.h"
+#include "../gameplay/PlayerItem.h"
 
 
 class LineRenderer final : public QGraphicsLineItem{

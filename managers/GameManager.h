@@ -3,7 +3,7 @@
 #include <QTimer>
 
 #include "../screens/GameOverScreen.h"
-#include "../PlayerItem.h"
+#include "../gameplay/PlayerItem.h"
 
 class GameManager : public QGraphicsView {
 public:
