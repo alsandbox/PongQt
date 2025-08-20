@@ -17,6 +17,14 @@ You can also close the game at any moment using the Esc key.
 - Game state management supports start, restart, and game-over logic
 
 ## Gifs
+### Start screen
+![Start screen](./gifs/startscreen.gif)
+
+### Gameplay
+![Gameplay](./gifs/gameplay.gif)
+
+### End screen
+![End screen](./gifs/endscreen.gif)
 
 ## Build
 [Pong v1.0.0 (Windows)](https://github.com/alsandbox/PongQt/releases/tag/v1.0.0)
