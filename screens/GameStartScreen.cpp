@@ -1,6 +1,6 @@
 ﻿#include "GameStartScreen.h"
 
-#include "../fonts/FontConfig.h"
+#include "../font/FontConfig.h"
 
 GameStartScreen::GameStartScreen(QGraphicsScene *scene)
     : ScreenBase(scene) {

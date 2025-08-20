@@ -44,8 +44,8 @@ add_executable(Pong main.cpp
         renderers/RendererFactory.h
         screens/GameOverScreen.cpp
         screens/GameOverScreen.h
-        fonts/FontConfig.cpp
-        fonts/FontConfig.h
+        font/FontConfig.cpp
+        font/FontConfig.h
         screens/ScreenBase.cpp
         screens/ScreenBase.h
         screens/GameStartScreen.cpp

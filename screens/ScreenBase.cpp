@@ -4,7 +4,7 @@
 #include <QFile>
 #include <QGraphicsProxyWidget>
 
-#include "../fonts/FontConfig.h"
+#include "../font/FontConfig.h"
 
 
 ScreenBase::ScreenBase(QGraphicsScene *scene) : m_scene(scene) {
